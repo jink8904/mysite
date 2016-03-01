@@ -1,0 +1,160 @@
+
+body {
+    background-color: #3E3E3E
+}
+
+#content {
+    /*background-color: rgba(0, 2, 0, 0.6);*/
+    height: 100%;
+    padding-bottom: 70px;
+    padding-top: 110px;
+}
+
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+/*tomado de bootstrap 2.3.2*/
+select {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 220px;
+    border-radius: 4px;
+}
+
+select, input[type="file"] {
+    height: 30px;
+    line-height: 30px;
+}
+
+input, select {
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+}
+
+select {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: #555;
+    display: block;
+    font-size: 14px;
+    height: 34px;
+    line-height: 1.42857;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}
+
+.form-control:focus {
+  border-color: #66afe9;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6) !important;
+  outline: 0 none;
+}
+
+.dynatable-per-page-select {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 220px;
+}
+
+table {
+    border-radius: 4px;
+    margin-bottom: 15px !important;
+}
+
+.panel-title {
+    text-align: center;
+}
+
+.btn-modals {
+    text-align: right;
+}
+
+.modal-footer {
+    border-top: 1px solid #e5e5e5;
+    padding: 15px 0 0 15px;
+}
+
+.modal-footer1 {
+    border-top: 1px solid #e5e5e5;
+    padding: 15px 0 0 15px;
+}
+
+.confirm-del .modal-dialog {
+    width: -moz-max-content;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    padding-left: 0 !important;
+}
+
+#navbar-footer {
+
+}
+
+.footer {
+    background-color: #263238;
+    bottom: 0 !important;
+    left: 0;
+    padding: 5px;
+    position: fixed;
+    right: 0;
+    transform: translate3d(0px, 0px, 0px);
+    z-index: 1030;
+}
+
+.footer > div :first-child {
+    margin-left: 0;
+}
+
+.footer > div > div {
+    border: 1px solid #e5e5e5;
+    color: #e5e5e5;
+    float: left;
+    margin-left: 1.2%;
+    padding: 10px;
+    width: 19%;
+}
+
+.nav-table {
+    margin: 7px 20px;
+}
+
+.nav-panel {
+    margin: 7px 20px;
+}
+
+.form-productos-inv {
+    background-color: #ffffff;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 20px 20px 12px;
+}
+
+.footer-form {
+    text-align: right;
+}
+
+fieldset.scheduler-border {
+  border: 1px groove #ddd !important;
+  box-shadow: 0 0 0 0 #000;
+  margin: 0 0 1.5em !important;
+  padding: 10px 0 0 10px;
+}
+
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width: auto;
+    padding: 0 10px;
+    border-bottom: none;
+    margin-bottom: 0px;
+}

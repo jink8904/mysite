@@ -1,0 +1,59 @@
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title" id="empresa-form-title">Lista de empresas</h5>
+
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+    </div>
+    <div class="nav-table" id="navtb-empresa">
+        <!-- Button trigger modal -->
+        {% csrf_token %}
+        <button class="btn btn-primary" data-toggle="modal" data-target="#form-empresa" table="tabla-empresa"
+                accion="add">
+            Nuevo
+        </button>
+        <button class="btn btn-primary disabled" data-toggle="modal" data-target="#form-empresa"
+                table="tabla-empresa" accion="mod">
+            Editar
+        </button>
+        <button class="btn btn-primary disabled" data-toggle="modal"
+                table="tabla-empresa" accion="del">
+            Eliminar
+        </button>
+        <button class="btn btn-primary disabled" id="sel-empresa" table="tabla-empresa">
+            Seleccionar empresa
+        </button>
+    </div>
+
+
+    <div class="panel-body" style="display: block;">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered" id="tabla-empresa" select="true">
+                <thead class="bg-primary-600">
+                <tr>
+                    <th class="hidden">id</th>
+                    <th>Nombre</th>
+                    <th>RUC</th>
+                    <th>A&ntilde;o inicio</th>
+                    <th>Direcci&oacute;n</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for empresa in empresa_list %}
+                    <tr>
+                        <td name="id" class="hidden">{{ empresa.id }}</td>
+                        <td name="nombre">{{ empresa.nombre }}</td>
+                        <td name="ruc">{{ empresa.ruc }}</td>
+                        <td name="anno_inicio">{{ empresa.anno_inicio }}</td>
+                        <td name="direccion">{{ empresa.direccion }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

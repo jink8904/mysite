@@ -1,0 +1,46 @@
+<div class="panel panel-flat col-md-12">
+    <div class="panel-heading">
+        <h5 class="panel-title" id="producto-form-title">Lista de ventas</h5>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered" id="tabla-reg-ventas" select="true">
+                <thead class="bg-primary-600">
+                <tr>
+                    <th class="hidden">Id</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Serie</th>
+                    <th>N&uacute;mero</th>
+                    <th>RUC/DNI</th>
+                    <th>Val. Exp</th>
+                    <th>Base imp</th>
+                    <th>Exonerada</th>
+                    <th>Inafecta</th>
+                    <th>ISC</th>
+                    <th>IGV</th>
+                    <th>B. Imp. A</th>
+                    <th>IGV A</th>
+                    <th>Otros trib.</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+{#                {% for venta in venta_list %}#}
+{#                    <tr>#}
+{#                        <td class="hidden" name="id">{{ venta.id }}</td>#}
+{#                        <td name="fecha">{{ venta.fecha }}</td>#}
+{#                        <td name="tipo">{{ venta.tipo_comprobante }}</td>#}
+{#                        <td name="serie">{{ venta.serie }}</td>#}
+{#                        <td name="numero">{{ venta.numero }}</td>#}
+{#                        <td name="denominacion">{{ venta.cliente }}</td>#}
+{#                        <td name="subtotal">{{ venta.subtotal }}</td>#}
+{#                        <td name="igv">{{ venta.igv }}</td>#}
+{#                        <td name="total">{{ venta.total }}</td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

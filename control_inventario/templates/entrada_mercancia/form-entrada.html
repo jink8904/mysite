@@ -1,0 +1,214 @@
+{#Datos del comprobante y el proveedor#}
+<div class="col-md-12">
+    <fieldset class="scheduler-border col-md-12" id="datos-comprobante-entrada">
+        <legend class="scheduler-border">Datos del comprobante y el proveedor</legend>
+        <input type="text" name="id" value="" class="hidden">
+        {#Tipo de comprobante#}
+        <div class="form-group col-md-3">
+            <label>Tipo de comprobante:</label>
+
+            <div>
+                <select name="tipo-comprobante">
+                    <option></option>
+                    {% for tipo_comprobante in comprobante_list %}
+                        <option value="{{ tipo_comprobante.id }}">{{ tipo_comprobante.denominacion }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            {#Fecha#}
+            <label>Fecha:</label>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                <input type="text" name="fecha" class="form-control pickadate picker__input picker__input--active"
+                       value="2016-02-21">
+            </div>
+        </div>
+        {#Serie#}
+        <div class="form-group col-md-3">
+            <label>Serie:</label>
+
+            <div>
+                <input type="text" name="serie" class="form-control">
+            </div>
+        </div>
+        {#Numero#}
+        <div class="form-group col-md-3">
+            <label>N&uacute;mero:</label>
+
+            <div>
+                <input type="text" name="numero" class="form-control">
+            </div>
+        </div>
+        {#Identificador#}
+        <div class="form-group col-md-6">
+            <label>N&uacute;mero de identificaci&oacute;n del proveedor:</label>
+
+            <div>
+                <select name="identificador">
+                    <option></option>
+                    {% for proveedor in proveedor_list %}
+                        <option value="{{ proveedor.id }}">{{ proveedor.identificador }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        {#Nombre#}
+        <div class="form-group col-md-6">
+            <label>Nombre:</label>
+
+            <div>
+                <select name="nombre" maxlength="30">
+                    <option></option>
+                    {% for proveedor in proveedor_list %}
+                        <option value="{{ proveedor.id }}">{{ proveedor.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<div class="col-md-6">
+    {#Datos del producto#}
+    <fieldset class="scheduler-border col-md-12" id="datos-producto-entrada">
+        <legend class="scheduler-border">Datos del producto</legend>
+        <input type="text" name="id" value="" class="hidden">
+        {#Codigo#}
+        <div class="form-group col-md-8">
+            <label>Codigo:</label>
+
+            <div>
+                <select name="codigo">
+                    <option></option>
+                    {% for producto in producto_list %}
+                        <option value="{{ producto.id }}" stock="{{ producto.stock }}">{{ producto.codigo }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            {#Stock#}
+            <label>Stock:</label>
+
+            <div>
+                <input type="text" name="stock" class="form-control" readonly>
+            </div>
+        </div>
+        {#Producto#}
+        <div class="form-group col-md-12">
+            <label>Producto:</label>
+
+            <div>
+                <select name="producto">
+                    <option value="0"></option>
+                    {% for producto in producto_list %}
+                        <option value="{{ producto.id }}" stock="{{ producto.stock }}">{{ producto.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        {#Tipo de opreacion#}
+        <div class="form-group col-md-6">
+            <label>Tipo de operaci&oacute;n:</label>
+
+            <div>
+                <select name="tipo-operacion">
+                    <option value="0"></option>
+                    {% for operacion in tipo_operacion_list %}
+                        <option value="{{ operacion.id }}">{{ operacion.denominacion }}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        </div>
+        {#IGV#}
+        <div class="form-group col-md-3">
+            <label>IGV:</label>
+
+            <div class="input-group col-md-12">
+                <span class="input-group-addon">
+                    <div class="checker">
+                        <span class=""><input type="checkbox" name="igv-checkbox" class="styled"></span>
+                    </div>
+                </span>
+                <input type="text" name="igv" class="form-control" value="18" readonly>
+            </div>
+        </div>
+        {#Cantidad#}
+        <div class="form-group col-md-3">
+            <label>Cantidad:</label>
+
+            <div>
+                <input type="text" name="cantidad" class="form-control">
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+{#Importes unitarios#}
+<div class="col-md-3">
+    <fieldset class="scheduler-border col-md-12" id="importes-unitarios-entrada">
+        <legend class="scheduler-border">Importes unitarios</legend>
+        <input type="text" name="id" value="" class="hidden">
+        {#Valor unitario#}
+        <div class="form-group col-md-7">
+            <label>Valor unitario:</label>
+
+            <div>
+                <input type="text" name="valor-unitario" class="form-control">
+            </div>
+        </div>
+        <div class="form-group col-md-5">
+            {#IGV#}
+            <label>IGV:</label>
+
+            <div>
+                <input type="text" name="igv-unitario" class="form-control" readonly>
+            </div>
+        </div>
+        {#Precio unitario#}
+        <div class="form-group col-md-12">
+            <label>Precio unitario:</label>
+
+            <div>
+                <input type="text" name="precio-unitario" class="form-control" readonly>
+            </div>
+        </div>
+    </fieldset>
+    <button class="btn btn-primary col-md-12" type="submit" id="add-detalle-compra">Ingresar detalle</button>
+</div>
+
+{#Importes totales#}
+<div class="col-md-3">
+    <fieldset class="scheduler-border col-md-12" id="importes-totales-entrada">
+        <legend class="scheduler-border">Importes totales</legend>
+        <input type="text" name="id" value="" class="hidden">
+        {#Valor de compra#}
+        <div class="form-group col-md-7">
+            <label>Valor de compra:</label>
+
+            <div>
+                <input type="text" name="valor-compra" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="form-group col-md-5">
+            {#IGV#}
+            <label>IGV:</label>
+
+            <div>
+                <input type="text" name="igv-total" class="form-control" readonly>
+            </div>
+        </div>
+        {#Precio compra#}
+        <div class="form-group col-md-12">
+            <label>Precio de compra:</label>
+
+            <div>
+                <input type="text" name="precio-compra" class="form-control" readonly>
+            </div>
+        </div>
+    </fieldset>
+    <button class="btn btn-primary col-md-12" type="submit" id="del-detalle-compra">Eliminar detalle</button>
+</div>

@@ -1,0 +1,26 @@
+<form class="form-horizontal" enctype="multipart/form-data" method="post" action="" table="tabla-categoria">
+    {% csrf_token %}
+    <input type="text" name="id" value="" class="hidden">
+    <input type="text" name="id_empresa" value="" class="hidden">
+    {#Codigo#}
+    <div class="form-group">
+        <label class="control-label col-lg-2">C&oacute;digo:</label>
+
+        <div class="col-lg-4">
+            <input type="text" name="codigo" id="id_codigo" class="form-control">
+        </div>
+        {#Denominacion#}
+        <label class="control-label col-lg-2">Denominaci&oacute;n:</label>
+
+        <div class="col-lg-4">
+            <input type="text" name="denominacion" id="id_denominacion" class="form-control">
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">
+            Cerrar
+        </button>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+    </div>
+</form>

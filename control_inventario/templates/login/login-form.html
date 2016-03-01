@@ -1,0 +1,35 @@
+{% extends "layout/base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <div class="row" id="pwd-container">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <section class="login-form">
+                <form method="post" action="" role="login">
+                    {% csrf_token %}
+{#                    <img src="{% static "images/index1.jpg"%}" class="img-responsive" alt=""/>#}
+                    <input type="text" name="username" placeholder="Usuario" required class="form-control input-lg"/>
+
+                    <input type="password" class="form-control input-lg" name="password" placeholder="Password"
+                           name="id_password" required=""/>
+
+
+                    <div class="pwstrength_viewport_progress"></div>
+
+
+                    <button type="submit" name="sign-in" class="btn btn-lg btn-primary btn-block">Sign in</button>
+                    <div>
+                        <a href="#">Create account</a> or <a href="#">reset password</a>
+                    </div>
+
+                </form>
+
+                <div class="form-links">
+                    <a href="#">www.website.com</a>
+                </div>
+            </section>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+{% endblock %}

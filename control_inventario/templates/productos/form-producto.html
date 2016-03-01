@@ -1,0 +1,85 @@
+<form method="post" action="" table="tabla-producto">
+    {% csrf_token %}
+    <input type="text" name="id" value="" class="hidden">
+
+    <div class="form-group">
+        {#Nombre del producto/articulo#}
+        <label>Nombre del producto/art&iacute;culo:</label>
+
+        <div>
+            <input type="text" name="nombre" id="id_nombre" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        {#Nombre reducido#}
+        <label>Nombre reducido:</label>
+
+        <div>
+            <input type="text" name="nombre_reducido" maxlength="30" id="id_nombre_reducido" class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group">
+        {#Codigo#}
+        <label>Codigo:</label>
+
+        <div>
+            <input type="text" name="codigo" id="id_codigo" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        {#Categoria#}
+        <label>Categor&iacute;a:</label>
+
+        <div>
+            <select id="id_categoria" name="categoria">
+                <option></option>
+                {% for cat in cat_list %}
+                    <option value="{{ cat.id }}">{{ cat.denominacion }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        {#Tipo de producto#}
+        <label>Tipo de producto:</label>
+
+        <div>
+            <select id="id_tipo" name="tipo">
+                <option></option>
+                {% for tipo in tipo_list %}
+                    <option value="{{ tipo.id }}">{{ tipo.denominacion }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        {#Unidad#}
+        <label>Unidad:</label>
+
+        <div>
+            <select id="id_unidad" name="unidad">
+                <option></option>
+                {% for unidad in unidad_list %}
+                    <option value="{{ unidad.id }}" abrv="{{ unidad.abreviatura }}">{{ unidad.denominacion }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        {#Abreviatura#}
+        <label>Abreviatura:</label>
+
+        <div>
+            <input type="text" name="abreviatura" maxlength="50" id="id_abreviatura" class="form-control" readonly>
+        </div>
+    </div>
+
+    {#    --buttons--#}
+    <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+    </div>
+</form>

@@ -1,0 +1,46 @@
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title" id="producto-form-title">Lista de compras</h5>
+
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered" id="tabla-compras" select="true">
+                <thead class="bg-primary-600">
+                <tr>
+                    <th class="hidden">ID</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Serie</th>
+                    <th>N&uacute;mero</th>
+                    <th>Denominaci&oacute;n</th>
+                    <th>Subtotal</th>
+                    <th>IGV</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for compra in compra_list %}
+                    <tr>
+                        <td class="hidden" name="id">{{ compra.id }}</td>
+                        <td name="fecha">{{ compra.fecha }}</td>
+                        <td name="tipo">{{ compra.tipo_comprobante }}</td>
+                        <td name="serie">{{ compra.serie }}</td>
+                        <td name="numero">{{ compra.numero }}</td>
+                        <td name="denominacion">{{ compra.proveedor }}</td>
+                        <td name="subtotal">{{ compra.subtotal }}</td>
+                        <td name="igv">{{ compra.igv }}</td>
+                        <td name="total">{{ compra.total }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

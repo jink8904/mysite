@@ -1,0 +1,43 @@
+<form method="post" action="" table="tabla-proveedor">
+    {% csrf_token %}
+    <input type="text" name="id" value="" class="hidden">
+    {#Tipo de identificador#}
+    <div class="form-group">
+        <label>Tipo de identificaci&oacute;n:</label>
+
+        <div>
+            <select id="id_tipo_id" name="tipo_id">
+                <option></option>
+                {% for tipoid in tipoid_list %}
+                    <option value="{{ tipoid.id }}">{{ tipoid.denominacion }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {#Identificador#}
+        <label>Numero de identificaci&oacute;n:</label>
+
+        <div>
+            <input type="text" name="identificador" id="identificador_id" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        {#Nombre#}
+        <label>Nombre:</label>
+
+        <div>
+            <input type="text" name="nombre" maxlength="30" id="id_nombre" class="form-control">
+        </div>
+    </div>
+    {#Direccion#}
+    <div class="form-group">
+        <label>Direcci&oacute;n:</label>
+
+        <div>
+            <input type="text" name="direccion" maxlength="50" id="id_direccion" class="form-control">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button class="btn btn-primary" type="submit">Guardar</button>
+    </div>
+</form>

@@ -1,0 +1,221 @@
+{#Ingresa rapido#}
+<div class="col-md-12">
+    <fieldset class="scheduler-border col-md-12" id="importes-unitarios-salida">
+        <legend class="scheduler-border">Ingresa r&aacute;pido</legend>
+        <input type="text" name="id" value="" class="hidden">
+        {#Tipo cambio#}
+        <div class="form-group col-md-3">
+            <label>Tipo cambio:</label>
+
+            <div>
+                <input class="form-control" name="tipo_cambio" type="text">
+            </div>
+        </div>
+        {#IGV (%)#}
+        <div class="form-group col-md-3">
+            <label>IGV (%):</label>
+
+            <div>
+                <input class="form-control" name="igv" type="text">
+            </div>
+        </div>
+        {#Operacion gravada#}
+        <div class="form-group col-md-6" style="margin-top: 32px; padding-left: 10px !important;">
+            <label class="radio-inline">
+                <div class="choice">
+                    <span class="checked">
+                        <input type="radio" checked="checked" class="styled" name="tipo-operacion">
+                    </span>
+                </div>
+                Operaci&oacute;n gravada
+            </label>
+
+            <label class="radio-inline">
+                <div class="choice">
+                    <span class="">
+                        <input type="radio" class="styled" name="tipo-operacion">
+                    </span>
+                </div>
+                Operaci&oacute;n inafecta
+            </label>
+
+            <label class="radio-inline">
+                <div class="choice">
+                    <span class="">
+                        <input type="radio" class="styled" name="tipo-operacion">
+                    </span>
+                </div>
+                Operaci&oacute;n exonerada
+            </label>
+        </div>
+        <div class="col-md-6" style="clear: both">
+            <fieldset class="scheduler-border col-md-12" id="op-moneda-extranjera">
+                <legend class="scheduler-border">Operaci&oacute;n en moneda extranjera</legend>
+                <input type="text" name="id" value="" class="hidden">
+                {#Valor venta#}
+                <div class="form-group col-md-4">
+                    <label>Valor venta:</label>
+
+                    <div>
+                        <input type="text" name="valor_venta" class="form-control">
+                    </div>
+                </div>
+                {#IGV (%)#}
+                <div class="form-group col-md-4">
+                    <label>IGV (%):</label>
+
+                    <div>
+                        <input class="form-control" name="igv" type="text">
+                    </div>
+                </div>
+                {#Precio venta#}
+                <div class="form-group col-md-4">
+                    <label>Precio venta:</label>
+
+                    <div>
+                        <input type="text" name="precio_venta" class="form-control">
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-md-6">
+            <fieldset class="scheduler-border col-md-12" id="eq-moneda-nac">
+                <legend class="scheduler-border">Equivalente en moneda nacional</legend>
+                <input type="text" name="id" value="" class="hidden">
+                {#Valor venta#}
+                <div class="form-group col-md-4">
+                    <label>Valor venta:</label>
+
+                    <div>
+                        <input type="text" name="valor_venta" class="form-control">
+                    </div>
+                </div>
+                {#IGV (%)#}
+                <div class="form-group col-md-4">
+                    <label>IGV (%):</label>
+
+                    <div>
+                        <input class="form-control" name="igv" type="text">
+                    </div>
+                </div>
+                {#Precio venta#}
+                <div class="form-group col-md-4">
+                    <label>Precio venta:</label>
+
+                    <div>
+                        <input type="text" name="precio_venta" class="form-control">
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </fieldset>
+</div>
+{#Ingreso anual (%)#}
+<div class="col-md-12">
+    <fieldset class="scheduler-border col-md-12" id="ingreso_anual">
+        <legend class="scheduler-border">Ingreso anual</legend>
+        {#Valor exportacion#}
+        <div class="form-group col-md-1">
+            <label>Valor exp.</label>
+
+            <div>
+                <input type="text" name="valor_exportacion" class="form-control input-xs">
+            </div>
+        </div>
+        {#Base imponible#}
+        <div class="form-group col-md-1">
+            <label>Base imp.</label>
+
+            <div>
+                <input type="text" name="base_imponible" class="form-control input-xs">
+            </div>
+        </div>
+        {#Exonerada#}
+        <div class="form-group col-md-1">
+            <label>Exonerada:</label>
+
+            <div>
+                <input type="text" name="exonerada" class="form-control input-xs">
+            </div>
+        </div>
+        {#Inafecta#}
+        <div class="form-group col-md-1">
+            <label>Inafecta:</label>
+
+            <div>
+                <input type="text" name="inafecta" class="form-control input-xs">
+            </div>
+        </div>
+        {#ISC#}
+        <div class="form-group col-md-1">
+            <label>ISC:</label>
+
+            <div>
+                <input type="text" name="isc" class="form-control input-xs">
+            </div>
+        </div>
+        {#igv#}
+        <div class="form-group col-md-1">
+            <label>IGV:</label>
+
+            <div>
+                <input type="text" name="igv" class="form-control input-xs">
+            </div>
+        </div>
+        {#Base Imp. A#}
+        <div class="form-group col-md-1">
+            <label>Base Imp. A:</label>
+
+            <div>
+                <input type="text" name="base_imp_a" class="form-control input-xs">
+            </div>
+        </div>
+        {#IGV#}
+        <div class="form-group col-md-1">
+            <label>IGV - A:</label>
+
+            <div>
+                <input type="text" name="base_imponible" class="form-control input-xs">
+            </div>
+        </div>
+        {#Otros tributos#}
+        <div class="form-group col-md-2">
+            <label>Otros tributos:</label>
+
+            <div>
+                <input type="text" name="otros_trib" class="form-control input-xs">
+            </div>
+        </div>
+        {#Total#}
+        <div class="form-group col-md-2">
+            <label>Total:</label>
+
+            <div>
+                <input type="text" name="total" class="form-control input-xs">
+            </div>
+        </div>
+    </fieldset>
+</div>
+{#Otros datos#}
+<div class="col-md-12">
+    <fieldset class="scheduler-border col-md-12" id="otros_datos">
+        <legend class="scheduler-border">Otros datos</legend>
+        <input type="text" name="id" value="" class="hidden">
+        {#Valor FOB#}
+        <div class="form-group col-md-3">
+            <label>Valor FOB</label>
+
+            <div>
+                <input type="text" name="valor_fob" class="form-control">
+            </div>
+        </div>
+        {#Notas / Observaciones#}
+        <div class="form-group col-md-9">
+            <label>Notas / Observaciones</label>
+
+            <div>
+                <input type="text" name="notas" class="form-control">
+            </div>
+        </div>
+    </fieldset>
+</div>

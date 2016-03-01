@@ -1,0 +1,178 @@
+<div class="navbar-fixed-top">
+    <!-- Main navbar -->
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div id="barra-menu" class="navbar-collapse collapse">
+                {#Archivo#}
+                <ul class="nav navbar-nav" id="archivo">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Archivo<span
+                                class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="../empresa">Empresa</a></li>
+{#                            <li><a href="../selempresa">Seleccionar empresa</a></li>#}
+                            <li><a href="#">Generar a&ntilde;o</a></li>
+                            <li class="divider"></li>
+                            <li><a href="../cerrar">Salir</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {#           Editar #}
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Editar<span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="../categorias">Categor&iacute;a</a></li>
+                            <li class="divider"></li>
+                            <li><a href="../productos">Productos</a></li>
+                            <li class="divider"></li>
+                            <li><a href="../proveedor">Proveedor</a></li>
+                            <li><a href="../cliente">Cliente</a></li>
+                            <li class="divider"></li>
+                            <li class="disabled"><a href="#">Mis datos</a></li>
+                            <li><a href="#">Usuarios</a></li>
+                            <li><a href="#">Administrador</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {#           Operaciones   #}
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Operaciones<span
+                                class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="../inventario">Inventario inicial</a></li>
+                            <li class="divider"></li>
+                            <li><a href="../salida">Salida de mercader&iacute;a (Normal)</a></li>
+                            <li><a href="">Salida de mercader&iacute;a (Boleta de venta)</a></li>
+                            <li><a href="../entrada">Entrada de mercader&iacute;a(Normal)</a></li>
+                            <li class="divider"></li>
+                            <li><a href="../registro-ventas">Registro de ventas</a></li>
+                            <li><a href="#">Registro de ventas (Boleta de venta)</a></li>
+                            <li><a href="#">Registro de compras</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Modificar importe reg. ventas (Mul.)</a></li>
+                            <li><a href="#">Modificar importe reg. compras (Mul.)</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {#           Consultas   #}
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Consultas<span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="#">Resumen de movimientos</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Stock disponible</a></li>
+                            <li><a href="#">Inventario inicial</a></li>
+                            <li><a href="#">Inventario final</a></li>
+                            <li><a href="#">Costo de ventas</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {#           Consultas al registro #}
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Consultas al registro<span
+                                class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="#">Resumen registro de ventas</a></li>
+                            <li><a href="#">Resumen registro de compras</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Resumen de ventas</a></li>
+                            <li><a href="#">Resumen de compras</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {#           Reportes SUNAT #}
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Reportes SUNAT<span
+                                class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="#">Generar registro compra-ventas (f&iacute;sico)</a></li>
+                            <li><a href="#">Generar registro compra-ventas (PLE)</a></li>
+                            <li><a href="#">Generar registro inventario f&iacute;sico</a></li>
+                            <li><a href="#">Generar registro inventario valorizado</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Registro de compras (Libro f&iacute;sico)</a></li>
+                            <li><a href="#">Registro de ventas (Libro f&iacute;sico)</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Registro de compras (PLE)</a></li>
+                            <li><a href="#">Registro de ventas (PLE)</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Registro inventario f&iacute;sico</a></li>
+                            <li><a href="#">Registro inventario valorizado</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {#           Reportes #}
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="true">Reportes<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-left">
+                            <li class="dropdown-submenu">
+                                <a href="#">Producto</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Resumen de movimientos y saldos</a></li>
+                                    <li><a href="#">Resumen compra venta</a></li>
+                                    <li><a href="#">Resumen saldos finales</a></li>
+                                    <li><a href="#">Resumen costo de ventas</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Movimientos individuales</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown-submenu">
+                                <a href="#">Producto</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Resumen de movimientos y saldos</a></li>
+                                    <li><a href="#">Resumen compra venta</a></li>
+                                    <li><a href="#">Resumen saldos finales</a></li>
+                                    <li><a href="#">Resumen costo de ventas</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Movimientos individuales</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                {#           Herramientas #}
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Herramientas<span
+                                class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="#">Generar backup</a></li>
+                            <li><a href="#">Restaurar backup</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Importar productos</a></li>
+                            <li><a href="#">Importar clientes</a></li>
+                            <li><a href="#">Importar proveedores</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {#           Ayuda #}
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Ayuda<span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="#">Manual de usuario</a></li>
+                            <li><a href="#">Informacion del software</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /main navbar -->
+
+
+    <!-- Second navbar -->
+    <div class="navbar navbar-default navbar-xs">
+        <div class="container">
+        </div>
+    </div>
+    <!-- /second navbar -->
+
+</div>

@@ -1,0 +1,155 @@
+{#Estado del PLE#}
+<div class="col-md-12">
+    <div class="col-md-6">
+        <fieldset class="scheduler-border col-md-12" id="importes-unitarios-salida">
+            <legend class="scheduler-border">Estado del PLE</legend>
+            <input type="text" name="id" value="" class="hidden">
+            {#Valor unitario#}
+            <div class="form-group col-md-12">
+                <label>Valor unitario:</label>
+
+                <div>
+                    <select name="ple">
+                        <option value="0"></option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    {#Datos del cliente#}
+    <div class="col-md-6">
+        <fieldset class="scheduler-border col-md-12" id="datos-producto-salida">
+            <legend class="scheduler-border">Datos del cliente</legend>
+            {#Identificador#}
+            <div class="form-group col-md-6">
+                <label>N&uacute;mero de identificaci&oacute;n del cliente:</label>
+
+                <div>
+                    <select name="identificador">
+                        <option></option>
+                        {% for cliente in cliente_list %}
+                            <option value="{{ cliente.id }}">{{ cliente.identificador }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {#Nombre#}
+            <div class="form-group col-md-6">
+                <label>Nombre:</label>
+
+                <div>
+                    <select name="nombre" maxlength="30">
+                        <option value="0"></option>
+                        {% for cliente in cliente_list %}
+                            <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    {#Datos del comprobante#}
+    <div class="col-md-6">
+        <fieldset class="scheduler-border col-md-12" id="datos-comprobante-salida">
+            <legend class="scheduler-border">Datos del comprobante</legend>
+            <input type="text" name="id" value="" class="hidden">
+            {#Fecha de emision#}
+            <div class="form-group col-md-6">
+                <label>Fecha de amisi&oacute;n:</label>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                    <input type="text" name="fecha-ini"
+                           class="form-control pickadate picker__input picker__input--active">
+                </div>
+            </div>
+            {#Fecha de vencimiento#}
+            <div class="form-group col-md-6">
+                <label>Fecha de vencimiento:</label>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                    <input type="text" name="fecha-fin"
+                           class="form-control pickadate picker__input picker__input--active">
+                </div>
+            </div>
+            {#Tipo de comprobante#}
+            <div class="form-group col-md-6">
+                <label>Tipo de comprobante:</label>
+
+                <div>
+                    <select name="tipo-comprobante">
+                        <option></option>
+                        {% for tipo_comprobante in comprobante_list %}
+                            <option value="{{ tipo_comprobante.id }}">{{ tipo_comprobante.denominacion }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {#Serie#}
+            <div class="form-group col-md-3">
+                <label>Serie:</label>
+
+                <div>
+                    <input type="text" name="serie" class="form-control">
+                </div>
+            </div>
+            {#Numero#}
+            <div class="form-group col-md-3">
+                <label>N&uacute;mero:</label>
+
+                <div>
+                    <input type="text" name="numero" class="form-control">
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    {#Comprobante de pago que se modifica#}
+    <div class="col-md-6    ">
+        <fieldset class="scheduler-border col-md-12" id="importes-totales-salida">
+            <legend class="scheduler-border">Comprobante de pago que se modifica</legend>
+            {#Tipo de comprobante#}
+            <div class="form-group col-md-7">
+                <label>Tipo de comprobante:</label>
+
+                <div>
+                    <select name="tipo-comprobante">
+                        <option></option>
+                        {% for tipo_comprobante in comprobante_list %}
+                            <option value="{{ tipo_comprobante.id }}">{{ tipo_comprobante.denominacion }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {#Fecha#}
+            <div class="form-group col-md-5">
+                <label>Fecha:</label>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                    <input type="text" name="fecha" class="form-control pickadate picker__input picker__input--active">
+                </div>
+            </div>
+            {#Serie#}
+            <div class="form-group col-md-4">
+                <label>Serie:</label>
+
+                <div>
+                    <input type="text" name="serie" class="form-control">
+                </div>
+            </div>
+            {#Numero#}
+            <div class="form-group col-md-4">
+                <label>N&uacute;mero:</label>
+
+                <div>
+                    <input type="text" name="numero" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                <button class="btn btn-primary col-md-12" type="submit" style="margin-top: 25px">Buscar</button>
+            </div>
+        </fieldset>
+    </div>
+</div>

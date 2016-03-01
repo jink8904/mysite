@@ -1,0 +1,81 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <div class="modal fade col-md-12" id="modal-detalles-venta" tabindex="-1" role="dialog"
+         aria-labelledby="form-productoLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span
+                                aria-hidden="true">&times;</span>
+                        <span
+                                class="sr-only">Close
+                        </span>
+                    </button>
+                    <h4 class="modal-title" id="form-producto-label">Detalles de venta</h4>
+                </div>
+                <div class="modal-body">
+                    {% include "salida_mercancia/table_d_venta_modal.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <span productos='{{ producto_list }}'></span>
+    {% csrf_token %}
+    <div class="col-md-12">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h4 class="panel-title">Salida de mercader&iacute;a - Ventas (Normal)</h4>
+
+                <div class="heading-elements">
+                    <ul class="icons-list">
+                        <li>
+                            <a data-action="collapse"></a>
+                        </li>
+                        {#                        <li><a data-action="reload"></a></li>#}
+                        {#                        <li><a data-action="close"></a></li>#}
+                    </ul>
+                </div>
+                <a class="heading-elements-toggle">
+                    <i class="icon-menu"></i>
+                </a>
+            </div>
+
+            <div class="panel-body">
+                <div class="nav-panel col-md-12">
+                    <button class="btn btn-primary" type="submit" id="add-salida-merc">Guardar</button>
+                    <button class="btn btn-primary" type="submit">Eliminar</button>
+                    {#                    <button data-target="#modal_default" data-toggle="modal" class="btn btn-primary" type="button">Ver detalles</button>#}
+                    <button class="btn btn-primary" type="submit" id="ver-detalle-venta">Ver detalles</button>
+                </div>
+                <div class="tabbable">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active">
+                            <a data-toggle="tab" href="#registro_salidas"
+                               aria-expanded="true">Registro de salidas
+                            </a>
+                        </li>
+                        <li class="">
+                            <a data-toggle="tab" href="#detalles_comprobante_venta"
+                               aria-expanded="false">Detalles del comprobante
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="registro_salidas" class="tab-pane active">
+                            {% include "salida_mercancia/table-venta.html" %}
+                        </div>
+
+                        <div id="detalles_comprobante_venta" class="tab-pane">
+                            {% include "salida_mercancia/form-salida.html" %}
+                            {% include "salida_mercancia/table-detalle-venta.html" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

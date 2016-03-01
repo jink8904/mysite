@@ -1,0 +1,67 @@
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title" id="producto-form-title">Lista de productos</h5>
+
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+    </div>
+        
+    <div class="nav-table" id="navtb-producto">
+        <!-- Button trigger modal -->
+        <button class="btn btn-primary" data-toggle="modal" data-target="#form-producto" table="tabla-producto"
+                accion="add">
+            Nuevo
+        </button>
+        <button class="btn btn-primary disabled" data-toggle="modal" data-target="#form-producto"
+                table="tabla-producto" accion="mod">
+            Editar
+        </button>
+        <button class="btn btn-primary disabled" data-toggle="modal" data-target=".confirm-del"
+                table="tabla-producto" accion="del">
+            Eliminar
+        </button>
+    </div>
+
+    <div class="panel-body" style="display: block;">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered" id="tabla-producto" select="true">
+                <thead class="bg-primary-600">
+                <tr>
+                    <th class="hidden">Id</th>
+                    <th class="hidden">Nombre reducido</th>
+                    <th class="hidden">Abreviatura</th>
+                    <th class="hidden">categoria_id</th>
+                    <th class="hidden">tipo_id</th>
+                    <th class="hidden">unidad_id</th>
+                    <th>C&oacute;digo</th>
+                    <th>Nombre</th>
+                    <th>Categoria</th>
+                    <th>Tipo</th>
+                    <th>Unidad</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for producto in producto_list %}
+                    <tr>
+                        <td name="id" class="hidden">{{ producto.id }}</td>
+                        <td name="nombre_reducido" class="hidden">{{ producto.nombre_reducido }}</td>
+                        <td name="abreviatura" class="hidden">{{ producto.abreviatura }}</td>
+                        <td name="categoria_id" class="hidden">{{ producto.categoria_id }}</td>
+                        <td name="tipo_id" class="hidden">{{ producto.tipo_id }}</td>
+                        <td name="unidad_id" class="hidden">{{ producto.unidad_id }}</td>
+                        <td name="codigo">{{ producto.codigo}}</td>
+                        <td name="nombre">{{ producto.nombre }}</td>
+                        <td name="categoria">{{ producto.categoria }}</td>
+                        <td name="tipo">{{ producto.tipo }}</td>
+                        <td name="unidad">{{ producto.unidad }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

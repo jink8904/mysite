@@ -1,0 +1,52 @@
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title" id="categoria-form-title">Lista de categor&iacute;as</h5>
+
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+    </div>
+
+    <div class="nav-table" id="navtb-categoria">
+        <!-- Button trigger modal -->
+        <button class="btn btn-primary" data-toggle="modal" data-target="#form-categoria" table="tabla-categoria"
+                accion="add">
+            Nuevo
+        </button>
+        <button class="btn btn-primary disabled" data-toggle="modal" data-target="#form-categoria"
+                table="tabla-categoria" accion="mod">
+            Editar
+        </button>
+        <button class="btn btn-primary disabled" data-toggle="modal" data-target=".confirm-del"
+                table="tabla-categoria" accion="del">
+            Eliminar
+        </button>
+
+    </div>
+
+    <div class="panel-body" style="display: block;">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered" id="tabla-categoria" select="true">
+                <thead class="bg-primary-600">
+                <tr>
+                    <th class="hidden">id</th>
+                    <th>C&oacute;digo</th>
+                    <th>Denominaci&oacute;n</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for categoria in categoria_list %}
+                    <tr>
+                        <td name="id" class="hidden">{{ categoria.id }}</td>
+                        <td name="codigo">{{ categoria.codigo }}</td>
+                        <td name="denominacion">{{ categoria.denominacion }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
