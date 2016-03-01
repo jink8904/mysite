@@ -115,10 +115,10 @@ var updateFooter = function () {
     var mes = sessionStorage.getItem("mes_mostrar");
     if (empresa) {
         $("#empresa a").html("   " + empresa.nombre);
-        $("#barra-menu ul.hidden").removeClass("hidden");
+        $("#barra-menu>ul.hidden").removeClass("hidden");
     } else {
-        $("#barra-menu ul").addClass("hidden");
-        $("#barra-menu ul:first").removeClass("hidden");
+        $("#barra-menu>ul").addClass("hidden");
+        $("#barra-menu>ul:first").removeClass("hidden");
     }
     if (usuario)
         $("#usuario a").html("   " + usuario);
