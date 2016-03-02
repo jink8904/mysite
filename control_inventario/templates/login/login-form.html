@@ -1,13 +1,31 @@
 {% extends "layout/base.html" %}
 {% load staticfiles %}
 {% block content %}
+    {% if error %}
+        {#        <div class="col-md-8 col-md-offset-2">#}
+        {#            <div class="alert alert-danger alert-styled-left alert-bordered">#}
+        {#                <button data-dismiss="alert" class="close" type="button">#}
+        {#                    <span>x</span>#}
+        {#                    <span class="sr-only">Close</span>#}
+        {#                </button>#}
+        {#                {{ error }}#}
+        {#            </div>#}
+        {#        </div>#}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("form[role=login]").addClass("has-error");
+                $("form[role=login] input").focus(function(){
+                    $("form[role=login]").removeClass("has-error");
+                })
+            })
+        </script>
+    {% endif %}
     <div class="row" id="pwd-container">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-md-offset-4">
             <section class="login-form">
                 <form method="post" action="" role="login">
                     {% csrf_token %}
-{#                    <img src="{% static "images/index1.jpg"%}" class="img-responsive" alt=""/>#}
+                    {#                    <img src="{% static "images/index1.jpg"%}" class="img-responsive" alt=""/>#}
                     <input type="text" name="username" placeholder="Usuario" required class="form-control input-lg"/>
 
                     <input type="password" class="form-control input-lg" name="password" placeholder="Password"
@@ -17,15 +35,15 @@
                     <div class="pwstrength_viewport_progress"></div>
 
 
-                    <button type="submit" name="sign-in" class="btn btn-lg btn-primary btn-block">Sign in</button>
-                    <div>
-                        <a href="#">Create account</a> or <a href="#">reset password</a>
-                    </div>
+                    <button type="submit" name="sign-in" class="btn btn-lg btn-primary btn-block">Entrar</button>
+                    {#                    <div>#}
+                    {#                        <a href="#">Create account</a> or <a href="#">reset password</a>#}
+                    {#                    </div>#}
 
                 </form>
 
                 <div class="form-links">
-                    <a href="#">www.website.com</a>
+                    {#                    <a href="#">www.website.com</a>#}
                 </div>
             </section>
         </div>

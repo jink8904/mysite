@@ -267,14 +267,14 @@ jQuery(document).ready(function () {
         return message;
     };
     defaultOptions.ui.errorMessages = {
-        wordLength: "Your password is too short",
-        wordNotEmail: "Do not use your email as your password",
-        wordSimilarToUsername: "Your password cannot contain your username",
-        wordTwoCharacterClasses: "Use different character classes",
-        wordRepetitions: "Too many repetitions",
-        wordSequences: "Your password contains sequences"
+        wordLength: "Su contraseña es muy corta",
+        wordNotEmail: "No use su dirección email como contraseña",
+        wordSimilarToUsername: "La contraseña no puede contener su usuario",
+        wordTwoCharacterClasses: "Use diferentes clases de caracteres",
+        wordRepetitions: "Muchas repeticiones",
+        wordSequences: "Su contraseña contiene secuencias"
     };
-    defaultOptions.ui.verdicts = ["Weak", "Normal", "Medium", "Strong", "Very Strong"];
+    defaultOptions.ui.verdicts = ["Debil", "Normal", "Medio", "Fuerte", "Muy fuerte"];
     defaultOptions.ui.showVerdicts = true;
     defaultOptions.ui.showVerdictsInsideProgressBar = false;
     defaultOptions.ui.showErrors = true;

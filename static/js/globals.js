@@ -98,8 +98,10 @@ $(document).ready(function () {
         $("#form-empresa-label").html("Adicionar empresa");
     })
     $("button[table=tabla-empresa][accion=mod]").click(function () {
-        updateRecords("tabla-empresa");
-        $("#form-empresa-label").html("Modificar empresa");
+        if (!$(this).hasClass("disabled")) {
+            updateRecords("tabla-empresa");
+            $("#form-empresa-label").html("Modificar empresa");
+        }
     })
 
     $("button[table=tabla-empresa][accion=del]").click(function () {
@@ -115,7 +117,8 @@ $(document).ready(function () {
     })
 
     $("#sel-empresa").click(function () {
-        $("#sel-periodo").modal();
+        if (!$(this).hasClass("disabled"))
+            $("#sel-periodo").modal();
     })
 
 

@@ -18,6 +18,7 @@ from django.contrib.auth.decorators import login_required
 
 # Login
 def ingresar(request):
+    args = {}
     if request.method == "POST":
         form = AuthenticationForm(request.POST)
         if form.is_valid:
@@ -30,12 +31,10 @@ def ingresar(request):
                     request.session["user"] = usuario
                     return HttpResponseRedirect('/empresa')
                 else:
-                    return render_to_response('login/noactivo.html', context_instance=RequestContext(request))
+                    args['error']="El usuario no se encuetra activo."
             else:
-                return render_to_response('login/nousuario.html', context_instance=RequestContext(request))
-    else:
-        form = AuthenticationForm()
-    return render_to_response("login/login-form.html", context_instance=RequestContext(request))
+                args['error']="Error en la autenticacion."
+    return render_to_response("login/login-form.html", args, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar')
