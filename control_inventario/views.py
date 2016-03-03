@@ -8,12 +8,22 @@ from django.core.context_processors import csrf
 from django.core.serializers.json import DjangoJSONEncoder
 from control_inventario import forms
 from control_inventario import models
+from XlsxWriter import xlsxwriter
 import json
 # users
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+
+
+def export(request):
+    workbook = xlsxwriter.Workbook('exports/hello.xlsx')
+    worksheet = workbook.add_worksheet()
+
+    worksheet.write('A1', 'Hello world')
+
+    workbook.close()
 
 
 # Login
