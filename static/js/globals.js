@@ -7,42 +7,50 @@ $(document).ready(function () {
         params: {
             records: "empresas"
         }
-    });
+    })
+    .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-categoria").dynatable({
         params: {
             records: "categorias"
         }
-    });
+    })
+    .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-producto").dynatable({
         params: {
             records: "productos"
         }
-    });
+    })
+    .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-producto-inv").dynatable({
         params: {
             records: "productos"
         }
-    });
+    })
+    .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-proveedor").dynatable({
         params: {
             records: "proveedores"
         }
-    });
+    })
+    .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-cliente").dynatable({
         params: {
             records: "clientes"
         }
-    });
+    })
+    .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-ventas").dynatable({
         params: {
             records: "ventas"
         }
-    });
+    })
+    .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-compras").dynatable({
         params: {
             records: "compras"
         }
-    });
+    })
+    .bind('dynatable:afterProcess', fixTableSelect);
     //Manejo global
     $("table[select]>tbody>tr").click(function (evt) {
         var id = $(this).parent().parent().attr("id");

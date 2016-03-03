@@ -82,7 +82,7 @@
             searchPlacement: 'before',
             perPageTarget: null,
             perPagePlacement: 'before',
-            perPageText: 'Show: ',
+            perPageText: 'Mostrar: ',
             recordCountText: 'Mostrando ',
             processingText: 'Procesando...'
         },
@@ -140,7 +140,6 @@
 
             // All the setup that doesn't require element or options
             build.call(this);
-
             return this;
         },
 
@@ -1250,7 +1249,7 @@
                 $searchSpan = $('<span></span>', {
                     id: 'dynatable-search-' + obj.element.id,
                     'class': 'dynatable-search',
-                    text: 'Search: '
+                    text: 'Buscar: '
                 }).append($search);
 
             $search

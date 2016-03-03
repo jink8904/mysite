@@ -6,6 +6,17 @@ var empresa_seleccionada = null;
 
 //funciones
 
+function fixTableSelect(){
+    var id = this.id;
+    $("#"+id+">tbody>tr").click(function (evt) {
+        var id = $(this).parent().parent().attr("id");
+        cleanData('table', id);
+        var tr = $(this);
+        tr.addClass('active');
+        updateButtons(id);
+    })
+}
+
 var getRecord = function (table_id) {
     var record = {};
     $("#" + table_id + " tr.active > td").each(function (index, th) {
