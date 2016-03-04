@@ -6,9 +6,9 @@ var empresa_seleccionada = null;
 
 //funciones
 
-function fixTableSelect(){
+function fixTableSelect() {
     var id = this.id;
-    $("#"+id+">tbody>tr").click(function (evt) {
+    $("#" + id + ">tbody>tr").click(function (evt) {
         var id = $(this).parent().parent().attr("id");
         cleanData('table', id);
         var tr = $(this);
@@ -186,32 +186,33 @@ var llenarDatosImportesVenta = function () {
         igv = 0
 
     var cant = $("#datos-producto-salida input[name=cantidad]").val(),
-        valor_unitario = $("#importes-unitarios-salida input[name=valor-unitario]").val(),
-        igv_unitario = igv * valor_unitario,
-        precio_unitario = igv_unitario + parseInt(valor_unitario),
+        valor_unitario = parseFloat($("#importes-unitarios-salida input[name=valor-unitario]").val()),
+        igv_unitario = igv / 100 * valor_unitario,
+        precio_unitario = igv_unitario + valor_unitario,
         valor_venta = cant * valor_unitario,
         igv_total = cant * igv_unitario,
         precio_venta = valor_venta + igv_total;
 
     detalle_venta_actual = {
         cant: parseInt(cant),
-        valor_unitario: parseInt(valor_unitario),
-        igv: parseInt(igv),
-        igv_unitario: igv_unitario,
-        precio_unitario: precio_unitario,
-        valor_venta: valor_venta,
-        igv_total: igv_total,
-        precio_venta: precio_venta
+        valor_unitario: parseFloat(valor_unitario).toFixed(2),
+        igv: parseFloat(igv).toFixed(2),
+        igv_unitario: igv_unitario.toFixed(2),
+        precio_unitario: precio_unitario.toFixed(2),
+        valor_venta: valor_venta.toFixed(2),
+        igv_total: igv_total.toFixed(2),
+        precio_venta: precio_venta.toFixed(2)
     }
     if (!cant || !valor_unitario) {
         alert("Los campos cantidad y valor unitario no deben estar vacios");
         return false;
     } else {
-        $("#importes-unitarios-salida input[name=igv-unitario]").val(igv_unitario);
-        $("#importes-unitarios-salida input[name=precio-unitario]").val(precio_unitario);
-        $(" #importes-totales-salida input[name=valor-venta]").val(valor_venta);
-        $("#importes-totales-salida input[name=igv-total]").val(igv_total);
-        $("#importes-totales-salida input[name=precio-venta]").val(precio_venta);
+        $("#importes-unitarios-salida input[name=valor-unitario]").val(valor_unitario.toFixed(2))
+        $("#importes-unitarios-salida input[name=igv-unitario]").val(igv_unitario.toFixed(2));
+        $("#importes-unitarios-salida input[name=precio-unitario]").val(precio_unitario.toFixed(2));
+        $(" #importes-totales-salida input[name=valor-venta]").val(valor_venta.toFixed(2));
+        $("#importes-totales-salida input[name=igv-total]").val(igv_total.toFixed(2));
+        $("#importes-totales-salida input[name=precio-venta]").val(precio_venta.toFixed(2));
         return true;
     }
 }
@@ -222,10 +223,11 @@ var addDetalleVenta = function () {
     if (no_error && detalle_venta_actual) {
         var prod_id = $("#datos-producto-salida [name=codigo]").val();
         var codigo = $("#datos-producto-salida [name=codigo] option[value=" + prod_id + "]").html();
+        var producto = $("#datos-producto-salida [name=producto] option[value=" + prod_id + "]").html();
         detalle_venta_list[prod_id] = detalle_venta_actual;
         var det = '<tr>' +
-            '<td name="producto">' + codigo + '</td>' +
-            '<td name="codigo">' + $("#datos-producto-salida [name=producto]").val() + '</td>' +
+            '<td name="codigo">' + codigo + '</td>' +
+            '<td name="producto">' + producto + '</td>' +
             '<td name="cantidad">' + detalle_venta_actual.cant + '</td>' +
             '<td name="valor_unitario">' + detalle_venta_actual.valor_unitario + '</td>' +
             '<td name="valor_venta">' + detalle_venta_actual.valor_venta + '</td>' +
@@ -295,10 +297,10 @@ var verDetallesVenta = function () {
                     '<td name="codigo">' + detalle['codigo'] + '</td>' +
                     '<td name="descripcion">' + detalle['descripcion'] + '</td>' +
                     '<td name="cantidad">' + detalle['cantidad'] + '</td>' +
-                    '<td name="valor_unitario">' + detalle['valor_unitario'] + '</td>' +
-                    '<td name="valor_venta">' + detalle['valor_venta'] + '</td>' +
-                    '<td name="igv">' + detalle['igv'] + '</td>' +
-                    '<td name="importe">' + detalle['importe'] + '</td>' +
+                    '<td name="valor_unitario">' + parseFloat(detalle['valor_unitario']).toFixed(2) + '</td>' +
+                    '<td name="valor_venta">' + parseFloat(detalle['valor_venta']).toFixed(2) + '</td>' +
+                    '<td name="igv">' + parseFloat(detalle['igv']).toFixed(2) + '</td>' +
+                    '<td name="importe">' + parseFloat(detalle['importe']).toFixed(2) + '</td>' +
                     '</tr>';
                 $(det).appendTo("#tabla-d-venta-modal>tbody")
             }
@@ -313,17 +315,17 @@ var llenarDatosImportesCompra = function () {
     if ($("#datos-producto-entrada [name=igv-checkbox]").val() == 'off')
         igv = 0
     var cant = $("#datos-producto-entrada input[name=cantidad]").val(),
-        valor_unitario = $("#importes-unitarios-entrada input[name=valor-unitario]").val(),
-        igv_unitario = igv * valor_unitario,
-        precio_unitario = igv_unitario + parseInt(valor_unitario),
+        valor_unitario = parseFloat($("#importes-unitarios-entrada input[name=valor-unitario]").val()),
+        igv_unitario = igv/100 * valor_unitario,
+        precio_unitario = igv_unitario + valor_unitario,
         valor_compra = cant * valor_unitario,
         igv_total = cant * igv_unitario,
         precio_compra = valor_compra + igv_total;
 
     detalle_compra_actual = {
         cant: parseInt(cant),
-        valor_unitario: parseInt(valor_unitario),
-        igv: parseInt(igv),
+        valor_unitario: parseFloat(valor_unitario),
+        igv: parseFloat(igv),
         igv_unitario: igv_unitario,
         precio_unitario: precio_unitario,
         valor_compra: valor_compra,
@@ -333,11 +335,12 @@ var llenarDatosImportesCompra = function () {
     if (!cant || !valor_unitario)
         alert("Los campos cantidad y valor unitario no deben estar vacios");
     else {
-        $("#importes-unitarios-entrada input[name=igv-unitario]").val(igv_unitario);
-        $("#importes-unitarios-entrada input[name=precio-unitario]").val(precio_unitario);
-        $(" #importes-totales-entrada input[name=valor-compra]").val(valor_compra);
-        $("#importes-totales-entrada input[name=igv-total]").val(igv_total);
-        $("#importes-totales-entrada input[name=precio-compra]").val(precio_compra);
+        $("#importes-unitarios-entrada input[name=valor-unitario]").val(valor_unitario.toFixed(2))
+        $("#importes-unitarios-entrada input[name=igv-unitario]").val(igv_unitario.toFixed(2));
+        $("#importes-unitarios-entrada input[name=precio-unitario]").val(precio_unitario.toFixed(2));
+        $(" #importes-totales-entrada input[name=valor-compra]").val(valor_compra.toFixed(2));
+        $("#importes-totales-entrada input[name=igv-total]").val(igv_total.toFixed(2));
+        $("#importes-totales-entrada input[name=precio-compra]").val(precio_compra.toFixed(2));
     }
 }
 
@@ -345,15 +348,16 @@ detalle_compra_list = {};
 var addDetalleCompra = function () {
     var prod_id = $("#datos-producto-entrada [name=codigo]").val();
     var codigo = $("#datos-producto-entrada [name=codigo] option[value=" + prod_id + "]").html();
+    var producto = $("#datos-producto-entrada [name=producto] option[value=" + prod_id + "]").html();
     detalle_compra_list[prod_id] = detalle_compra_actual;
     var det = '<tr>' +
         '<td name="producto">' + codigo + '</td>' +
-        '<td name="codigo">' + $("#datos-producto-entrada [name=producto]").val() + '</td>' +
+        '<td name="codigo">' + producto + '</td>' +
         '<td name="cantidad">' + detalle_compra_actual.cant + '</td>' +
-        '<td name="valor_unitario">' + detalle_compra_actual.valor_unitario + '</td>' +
-        '<td name="valor_compra">' + detalle_compra_actual.valor_compra + '</td>' +
-        '<td name="igv_total">' + detalle_compra_actual.igv_total + '</td>' +
-        '<td name="precio_compra">' + detalle_compra_actual.precio_compra + '</td>' +
+        '<td name="valor_unitario">' + detalle_compra_actual.valor_unitario.toFixed(2) + '</td>' +
+        '<td name="valor_compra">' + detalle_compra_actual.valor_compra.toFixed(2) + '</td>' +
+        '<td name="igv_total">' + detalle_compra_actual.igv_total.toFixed(2) + '</td>' +
+        '<td name="precio_compra">' + detalle_compra_actual.precio_compra.toFixed(2) + '</td>' +
         '</tr>'
     $("#tabla-detalle-compra").removeClass("hidden");
     $(det).appendTo("#tabla-detalle-compra>tbody").click(function () {
@@ -417,10 +421,10 @@ var verDetallesCompra = function () {
                     '<td name="codigo">' + detalle['codigo'] + '</td>' +
                     '<td name="descripcion">' + detalle['descripcion'] + '</td>' +
                     '<td name="cantidad">' + detalle['cantidad'] + '</td>' +
-                    '<td name="valor_unitario">' + detalle['valor_unitario'] + '</td>' +
-                    '<td name="valor_venta">' + detalle['valor_venta'] + '</td>' +
-                    '<td name="igv">' + detalle['igv'] + '</td>' +
-                    '<td name="importe">' + detalle['importe'] + '</td>' +
+                    '<td name="valor_unitario">' + parseFloat(detalle['valor_unitario']).toFixed(2) + '</td>' +
+                    '<td name="valor_venta">' + parseFloat(detalle['valor_venta']).toFixed(2) + '</td>' +
+                    '<td name="igv">' + parseFloat(detalle['igv']).toFixed(2) + '</td>' +
+                    '<td name="importe">' + parseFloat(detalle['importe']).toFixed(2) + '</td>' +
                     '</tr>';
                 $(det).appendTo("#tabla-d-compra-modal>tbody")
             }

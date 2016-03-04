@@ -37,7 +37,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'control_inventario',
-    # 'XlsxWriter',
 )
 
 MIDDLEWARE_CLASSES = (

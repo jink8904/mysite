@@ -97,7 +97,7 @@
             </div>
         </div>
         {#Producto#}
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-8">
             <label>Producto:</label>
 
             <div>
@@ -109,8 +109,24 @@
                 </select>
             </div>
         </div>
+        {#IGV#}
+        <div class="form-group col-md-4">
+            <label>IGV:</label>
+
+            <div class="input-group col-md-12">
+                <span class="input-group-addon">
+                    <div class="checker">
+                        <span class="checked">
+                            <input type="checkbox" name="igv-checkbox" class="styled" value="on">
+                        </span>
+                    </div>
+                </span>
+                <input type="text" name="igv" class="form-control" value="18" readonly>
+                <span class="input-group-addon">%</span>
+            </div>
+        </div>
         {#Tipo de opreacion#}
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-8">
             <label>Tipo de operaci&oacute;n:</label>
 
             <div>
@@ -123,21 +139,8 @@
                 </select>
             </div>
         </div>
-        {#IGV#}
-        <div class="form-group col-md-3">
-            <label>IGV:</label>
-
-            <div class="input-group col-md-12">
-                <span class="input-group-addon">
-                    <div class="checker">
-                        <span class=""><input type="checkbox" name="igv-checkbox" class="styled"></span>
-                    </div>
-                </span>
-                <input type="text" name="igv" class="form-control" value="18" readonly>
-            </div>
-        </div>
         {#Cantidad#}
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <label>Cantidad:</label>
 
             <div>

@@ -453,9 +453,9 @@ def add_salida_mercancia(request):
         total = 0
         for i in detalle_list:
             detalle = detalle_list[i]
-            igv = igv + detalle['igv_total']
-            subtotal = subtotal + detalle['valor_venta']
-            total = total + detalle['precio_venta']
+            igv = igv + float(detalle['igv_total'])
+            subtotal = subtotal + float(detalle['valor_venta'])
+            total = total + float(detalle['precio_venta'])
         cliente = models.Cliente.objects.get(id=datos_venta['cliente'])
         tipo_comprobante = models.TipoComprobante.objects.get(id=datos_venta['tipo_comprobante'])
         venta = models.Venta(
