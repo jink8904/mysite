@@ -41,9 +41,9 @@ def ingresar(request):
                     request.session["user"] = usuario
                     return HttpResponseRedirect('/empresa')
                 else:
-                    args['error']="El usuario no se encuetra activo."
+                    args['error'] = "El usuario no se encuetra activo."
             else:
-                args['error']="Error en la autenticacion."
+                args['error'] = "Error en la autenticacion."
     return render_to_response("login/login-form.html", args, context_instance=RequestContext(request))
 
 
@@ -621,7 +621,6 @@ def detalle_compra(request):
             prod = models.Producto.objects.get(id=i['producto_id'])
             i['codigo'] = prod.codigo
             d_list.append(i)
-    print(d_list)
     args = {}
     args['d_list'] = d_list
     args['success'] = True
@@ -634,6 +633,12 @@ def registro_ventas(request):
     id_empresa = request.session['empresa']["id"]
     emp = models.Empresa.objects.get(id=id_empresa)
 
+    estadoPLE_list = models.EstadoPLE.objects.values()
+    comprobante_list = models.TipoComprobante.objects.values()
+    cliente_list = emp.cliente_set.values()
+
     args = {}
-    return render_to_response('registro_ventas/registro_ventas.html', args,
-                              context_instance=RequestContext(request))
+    args['estadoPLE_list'] = estadoPLE_list
+    args['cliente_list'] = cliente_list
+    args['comprobante_list'] = comprobante_list
+    return render_to_response('registro_ventas/registro_ventas.html', args, context_instance=RequestContext(request))

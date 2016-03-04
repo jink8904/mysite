@@ -141,3 +141,7 @@ class DetalleVenta(models.Model):
 
 class TipoOperacion(models.Model):
     denominacion = models.CharField(max_length=50)
+
+
+class EstadoPLE(models.Model):
+    denominacion = models.CharField(max_length=50)

@@ -4,13 +4,16 @@
         <fieldset class="scheduler-border col-md-12" id="importes-unitarios-salida">
             <legend class="scheduler-border">Estado del PLE</legend>
             <input type="text" name="id" value="" class="hidden">
-            {#Valor unitario#}
+            {#Estado PLE#}
             <div class="form-group col-md-12">
-                <label>Valor unitario:</label>
-
+                <label>Estado PLE:</label>
                 <div>
                     <select name="ple">
                         <option value="0"></option>
+                        {% for estadoPLE in estadoPLE_list %}
+                        <option id="{{ estadoPLE.id }}">{{ estadoPLE.denominacion }}</option>
+                        {% endfor %}
+
                     </select>
                 </div>
             </div>
@@ -55,7 +58,7 @@
             <input type="text" name="id" value="" class="hidden">
             {#Fecha de emision#}
             <div class="form-group col-md-6">
-                <label>Fecha de amisi&oacute;n:</label>
+                <label>Fecha de emisi&oacute;n:</label>
 
                 <div class="input-group">
                     <span class="input-group-addon"><i class="icon-calendar3"></i></span>
