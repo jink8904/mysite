@@ -99,6 +99,12 @@ $(document).ready(function () {
     });
 
 
+    $('.pickadate-this-month').pickadate({
+        min: [2016,3,1],
+        max: [2016,3,30]
+    });
+
+
     //--------------------------- Login ------------------------------
     $("form[role=login] button[type=submit]").click(function () {
         var usuario = $("form[role=login] input[name=username]").val();
