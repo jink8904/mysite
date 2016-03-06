@@ -51,6 +51,11 @@ $(document).ready(function () {
         }
     })
         .bind('dynatable:afterProcess', fixTableSelect);
+    $("#tabla-stock-disp").dynatable({
+        params: {
+            records: "productos"
+        }
+    })
     //Manejo global
     $("table[select]>tbody>tr").click(function (evt) {
         var id = $(this).parent().parent().attr("id");
@@ -311,6 +316,8 @@ $(document).ready(function () {
         $(this).addClass("disabled");
         eliminarDetalleCompra()
     })
+
+    //------------------------ Stock disponible ----------------------------
 
 
 })

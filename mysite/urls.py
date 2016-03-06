@@ -43,6 +43,8 @@ urlpatterns = patterns('',
     url(r'^registro-ventas/$', 'control_inventario.views.registro_ventas', name='registro_ventas'),
    # urls-resumen de movimientos
     url(r'^resumen-movimientos/$', 'control_inventario.views.resumen_mov', name='resumen_mov'),
+   # urls-stock disponible
+    url(r'^stock-disponible/$', 'control_inventario.views.stock_disponible', name='stock_disponible'),
    # exportar a excel
    #  url(r'^export/$', 'control_inventario.views.export', name='export'),
 
