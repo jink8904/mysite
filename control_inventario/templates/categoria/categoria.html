@@ -1,5 +1,9 @@
 {% extends "index.html" %}
 
+{% block title %}
+    Categoria
+{% endblock %}
+
 {% block content %}
     <div class="modal fade confirm-del" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
          aria-hidden="true">
@@ -14,6 +18,7 @@
                     <form action="del" method="post" id="del-table" accion="del">
                         {% csrf_token %}
                         <input type="text" name="codigo" class="hidden">
+
                         <p>Est&aacute; seguro que desea eliminar la categor&iacute;a seleccionada</p>
 
                         <div class="btn-modals">

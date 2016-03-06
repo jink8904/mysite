@@ -8,49 +8,49 @@ $(document).ready(function () {
             records: "empresas"
         }
     })
-    .bind('dynatable:afterProcess', fixTableSelect);
+        .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-categoria").dynatable({
         params: {
             records: "categorias"
         }
     })
-    .bind('dynatable:afterProcess', fixTableSelect);
+        .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-producto").dynatable({
         params: {
             records: "productos"
         }
     })
-    .bind('dynatable:afterProcess', fixTableSelect);
+        .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-producto-inv").dynatable({
         params: {
             records: "productos"
         }
     })
-    .bind('dynatable:afterProcess', fixTableSelect);
+        .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-proveedor").dynatable({
         params: {
             records: "proveedores"
         }
     })
-    .bind('dynatable:afterProcess', fixTableSelect);
+        .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-cliente").dynatable({
         params: {
             records: "clientes"
         }
     })
-    .bind('dynatable:afterProcess', fixTableSelect);
+        .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-ventas").dynatable({
         params: {
             records: "ventas"
         }
     })
-    .bind('dynatable:afterProcess', fixTableSelect);
+        .bind('dynatable:afterProcess', fixTableSelect);
     $("#tabla-compras").dynatable({
         params: {
             records: "compras"
         }
     })
-    .bind('dynatable:afterProcess', fixTableSelect);
+        .bind('dynatable:afterProcess', fixTableSelect);
     //Manejo global
     $("table[select]>tbody>tr").click(function (evt) {
         var id = $(this).parent().parent().attr("id");
@@ -94,13 +94,19 @@ $(document).ready(function () {
     });
 
 
-    //login
+    //--------------------------- Login ------------------------------
     $("form[role=login] button[type=submit]").click(function () {
         var usuario = $("form[role=login] input[name=username]").val();
         sessionStorage.setItem("usuario", usuario)
     })
 
-    //empresa
+    $("li[logout]").click(function(){
+        console.log(sessionStorage);
+        sessionStorage.removeItem("empresa");
+        sessionStorage.removeItem("mes_mostrar");
+    })
+
+    //-------------------- Empresa ------------------------------------
     $("button[table=tabla-empresa][accion=add]").click(function () {
         cleanData("form", "tabla-empresa");
         $("#form-empresa-label").html("Adicionar empresa");
@@ -109,6 +115,7 @@ $(document).ready(function () {
         if (!$(this).hasClass("disabled")) {
             updateRecords("tabla-empresa");
             $("#form-empresa-label").html("Modificar empresa");
+            $("#form-empresa").modal();
         }
     })
 
@@ -130,69 +137,93 @@ $(document).ready(function () {
     })
 
 
-    //categoria
+    //------------------- Categoria   -------------------
     $("button[table=tabla-categoria][accion=add]").click(function () {
         cleanData("form", "tabla-categoria");
         $("#form-empresa-label").html("Adicionar categor&iacute;a");
     })
     $("button[table=tabla-categoria][accion=mod]").click(function () {
-        updateRecords("tabla-categoria");
-        $("#form-empresa-label").html("Modificar categor&iacute;a");
+        if (!$(this).hasClass("disabled")) {
+            updateRecords("tabla-categoria");
+            $("#form-empresa-label").html("Modificar categor&iacute;a");
+            $("#form-categoria").modal();
+        }
     })
     $("button[table=tabla-categoria][accion=del]").click(function () {
-        var codigo = $("#tabla-categoria tr.active td[key=codigo]").html();
-        $("form[accion=del] input[name=codigo]").val(codigo);
+        if (!$(this).hasClass("disabled")) {
+            $(".confirm-del").modal();
+            var codigo = $("#tabla-categoria tr.active td[key=codigo]").html();
+            $("form[accion=del] input[name=codigo]").val(codigo);
+        }
     })
 
-    //producto
+    //--------------------------- Producto ----------------------------------------
     $("button[table=tabla-producto][accion=add]").click(function () {
         cleanData("form", "tabla-producto");
         $("#form-empresa-label").html("Adicionar producto");
     })
     $("button[table=tabla-producto][accion=mod]").click(function () {
-        updateRecords("tabla-producto");
-        $("#form-empresa-label").html("Modificar producto");
+        if (!$(this).hasClass("disabled")) {
+            updateRecords("tabla-producto");
+            $("#form-empresa-label").html("Modificar producto");
+            $("#form-producto").modal();
+        }
     })
     $("button[table=tabla-producto][accion=del]").click(function () {
-        var codigo = $("#tabla-producto tr.active td[key=codigo]").html();
-        $("form[accion=del] input[name=codigo]").val(codigo);
+        if (!$(this).hasClass("disabled")) {
+            var codigo = $("#tabla-producto tr.active td[key=codigo]").html();
+            $("form[accion=del] input[name=codigo]").val(codigo);
+            $(".confirm-del").modal();
+        }
     })
     $("#id_unidad>option").click(function () {
         var abrv = $(this).attr("abrv");
-        $("#id_abreviatura").val(abrv)
+        $("#id_abreviatura").val(abrv);
     })
 
-    //inventario
+    //----------------------------- Inventario ---------------------------
     $("#tabla-producto-inv>tbody>tr").click(function () {
         updateRecords("tabla-producto-inv");
     });
 
-    //proveedor
+    //----------------------- Proveedor --------------------------------------
     $("button[table=tabla-proveedor][accion=add]").click(function () {
         cleanData("form", "tabla-proveedor");
         $("#form-empresa-label").html("Adicionar proveedor");
     })
     $("button[table=tabla-proveedor][accion=mod]").click(function () {
-        updateRecords("tabla-proveedor");
-        $("#form-empresa-label").html("Modificar proveedor");
+        if (!$(this).hasClass("disabled")) {
+            updateRecords("tabla-proveedor");
+            $("#form-empresa-label").html("Modificar proveedor");
+            $("#form-proveedor").modal();
+        }
     })
     $("button[table=tabla-proveedor][accion=del]").click(function () {
-        var identificador = $("#tabla-proveedor tr.active td[key=no_identificacion]").html();
-        $("form[accion=del] input[name=identificador]").val(identificador);
+        if (!$(this).hasClass("disabled")) {
+            var identificador = $("#tabla-proveedor tr.active td[key=no_identificacion]").html();
+            $("form[accion=del] input[name=identificador]").val(identificador);
+            $(".confirm-del").modal();
+        }
     })
 
-    //cliente
+    //-------------------------------  Cliente ------------------------------
     $("button[table=tabla-cliente][accion=add]").click(function () {
         cleanData("form", "tabla-cliente");
         $("#form-empresa-label").html("Adicionar cliente");
     })
     $("button[table=tabla-cliente][accion=mod]").click(function () {
-        updateRecords("tabla-cliente");
-        $("#form-empresa-label").html("Modificar cliente");
+        if (!$(this).hasClass("disabled")) {
+            updateRecords("tabla-cliente");
+            $("#form-cliente-label").html("Modificar cliente");
+            $("#form-cliente").modal();
+        }
     })
     $("button[table=tabla-cliente][accion=del]").click(function () {
-        var identificador = $("#tabla-cliente tr.active td[key=no_identificacion]").html();
-        $("form[accion=del] input[name=identificador]").val(identificador);
+        if (!$(this).hasClass("disabled")) {
+            var identificador = $("#tabla-cliente tr.active td[key=no_identificacion]").html();
+            $("form[accion=del] input[name=identificador]").val(identificador);
+            $(".confirm-del").modal();
+        }
     })
 
     //---------------- Salida de mercancia -------------------------

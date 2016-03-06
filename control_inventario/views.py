@@ -1,3 +1,4 @@
+from _ast import arg
 from builtins import print
 from datetime import timedelta
 from xml.sax.saxutils import prepare_input_source
@@ -17,6 +18,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
 
+# funcion para crear excel
 # def export(request):
 #     workbook = xlsxwriter.Workbook('exports/hello.xlsx')
 #     worksheet = workbook.add_worksheet()
@@ -99,8 +101,8 @@ def select_empresa(request):
         "id": datos.get("empresa[id]"),
         "direccion": datos.get("empresa[direccion]"),
         "anno_inicio": datos.get("empresa[anno_inicio]"),
-        "mes": datos.get("empresa[mes]"),
     }
+    request.session['mes'] = datos.get("mes")
     json_data = json.dumps({"success": True})
     return HttpResponse(json_data, mimetype="application/json")
 
@@ -413,22 +415,25 @@ def update_prod_list(emp):
     return producto_list
 
 
-def update_venta_list(emp):
-    venta_list = emp.venta_set.values()
-    for i in venta_list:
-        i['tipo_comprobante'] = models.TipoComprobante.objects.get(id=i["tipo_comprobante_id"]).denominacion
-        i['cliente'] = models.Cliente.objects.get(id=i["cliente_id"]).nombre
+def update_venta_list(emp, mes):
+    venta_list = emp.venta_set.filter(fecha__month=mes)
+    venta_list = venta_list.order_by("fecha")
+    venta_list = venta_list.values()
+    for venta in venta_list:
+        venta['tipo_comprobante'] = models.TipoComprobante.objects.get(id=venta["tipo_comprobante_id"]).denominacion
+        venta['cliente'] = models.Cliente.objects.get(id=venta["cliente_id"]).nombre
     return venta_list
 
 
 def salida_mercancia(request):
     id_empresa = request.session['empresa']["id"]
+    mes = request.session["mes"]
     emp = models.Empresa.objects.get(id=id_empresa)
 
     comprobante_list = models.TipoComprobante.objects.values()
     cliente_list = emp.cliente_set.values()
     producto_list = update_prod_list(emp)
-    venta_list = update_venta_list(emp)
+    venta_list = update_venta_list(emp, mes)
     tipo_operacion_list = models.TipoOperacion.objects.values()
 
     args = {}
@@ -525,8 +530,10 @@ def update_prod_list(emp):
     return producto_list
 
 
-def update_compra_list(emp):
-    compra_list = emp.compra_set.values()
+def update_compra_list(emp, mes):
+    compra_list = emp.compra_set.filter(fecha__month=mes)
+    compra_list = compra_list.order_by("fecha")
+    compra_list = compra_list.values()
     for i in compra_list:
         i['tipo_comprobante'] = models.TipoComprobante.objects.get(id=i["tipo_comprobante_id"]).denominacion
         i['proveedor'] = models.Proveedor.objects.get(id=i["proveedor_id"]).nombre
@@ -536,11 +543,12 @@ def update_compra_list(emp):
 def entrada_mercancia(request):
     id_empresa = request.session['empresa']["id"]
     emp = models.Empresa.objects.get(id=id_empresa)
+    mes = request.session['mes']
 
     comprobante_list = models.TipoComprobante.objects.values()
     proveedor_list = emp.proveedor_set.values()
     producto_list = update_prod_list(emp)
-    compra_list = update_compra_list(emp)
+    compra_list = update_compra_list(emp, mes)
     tipo_operacion_list = models.TipoOperacion.objects.values()
 
     args = {}
@@ -642,3 +650,40 @@ def registro_ventas(request):
     args['cliente_list'] = cliente_list
     args['comprobante_list'] = comprobante_list
     return render_to_response('registro_ventas/registro_ventas.html', args, context_instance=RequestContext(request))
+
+
+# -----------------  Resumen de movimientos ------------------
+def resumen_mov(request):
+    id_empresa = request.session['empresa']["id"]
+    emp = models.Empresa.objects.get(id=id_empresa)
+
+    args = {}
+    form = True
+    detalle_venta_list = {}
+    datos = request.POST
+    if datos:
+        year = datos.get("year")
+        args["year"] = year
+        periodo = datos.get("periodo")
+        rango = {"ini": 1, "fin": 5}
+        meses = ["Enero", "Febrero", "Marzo", "Abril"]
+        if periodo == 2:
+            rango["ini"] = 5
+            rango["fin"] = 9
+            meses = ["Mayo", "Junio", "Julio", "Agosto"]
+        elif periodo == 3:
+            rango["ini"] = 9
+            rango["fin"] = 13
+            meses = ["Septiembre", "Ocyubre", "Noviembre", "Diciembre"]
+        args["meses"] = meses
+
+        form = False
+        for mes in range(rango["ini"], rango["fin"]):
+            ventas = emp.venta_set.filter(fecha__year=year, fecha__month=mes)
+            if ventas:
+                for venta in ventas:
+                    detalle_v = venta.detalleventa_set.values()
+                    detalle_venta_list[mes] = detalle_v
+    args['form'] = form
+    args['detalle_venta_list'] = detalle_venta_list
+    return render_to_response('resumen_movimientos/resumen_mov.html', args, context_instance=RequestContext(request))

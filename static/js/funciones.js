@@ -93,7 +93,6 @@ var updateButtons = function (table_id) {
 
 var selEmpresa = function () {
     empresa_seleccionada = getRecord("tabla-empresa");
-    console.log(empresa_seleccionada);
     mes = $("select[name=mes]").val();
     mes_mostrar = $("select[name=mes]>option[value=" + mes + "]").html();
     sessionStorage.setItem("empresa", JSON.stringify(empresa_seleccionada));
