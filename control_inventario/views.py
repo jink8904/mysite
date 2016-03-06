@@ -90,7 +90,7 @@ def empresa(request):
 
     args['form'] = form
     args['empresa_list'] = empresa_list
-    return render_to_response('empresa/empresa.html', args)
+    return render_to_response('empresa/main.html', args)
 
 
 def select_empresa(request):
@@ -132,7 +132,6 @@ def categoria(request):
                         denominacion=datos.get("denominacion")
                     )
                     cat.save()
-                    # cat.empresa.add(empresa_p);
         else:
             cat = models.Categoria(
                 codigo=datos.get("codigo"),
@@ -149,7 +148,7 @@ def categoria(request):
     args['form'] = form
     args['categoria_list'] = categoria_list
 
-    return render_to_response('categoria/categoria.html', args, context_instance=RequestContext(request))
+    return render_to_response('categoria/main.html', args, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar')
@@ -232,7 +231,7 @@ def producto(request):
     args['tipo_list'] = tipo_list
     args['cat_list'] = cat_list
     render_to_response('productos/form-producto.html', args)
-    return render_to_response('productos/productos.html', args, context_instance=RequestContext(request))
+    return render_to_response('productos/main.html', args, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar')
@@ -274,7 +273,7 @@ def inventario_inicial(request):
     print(producto_list)
     args["productos"] = producto_list
 
-    return render_to_response('inventario_inicial/inventario_inicial.html', args,
+    return render_to_response('inventario_inicial/main.html', args,
                               context_instance=RequestContext(request))
 
 
@@ -331,7 +330,7 @@ def proveedor(request):
     args['proveedor_list'] = proveedor_list
     args['tipoid_list'] = tipoid_list
     render_to_response('proveedores/form-proveedor.html', args)
-    return render_to_response('proveedores/proveedor.html', args, context_instance=RequestContext(request))
+    return render_to_response('proveedores/main.html', args, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar')
@@ -394,7 +393,7 @@ def cliente(request):
     args['cliente_list'] = cliente_list
     args['tipoid_list'] = tipoid_list
     render_to_response('clientes/form-cliente.html', args)
-    return render_to_response('clientes/cliente.html', args, context_instance=RequestContext(request))
+    return render_to_response('clientes/main.html', args, context_instance=RequestContext(request))
 
 
 @login_required(login_url='/ingresar')
@@ -442,7 +441,7 @@ def salida_mercancia(request):
     args["producto_list"] = producto_list
     args["venta_list"] = venta_list
     args["tipo_operacion_list"] = tipo_operacion_list
-    return render_to_response('salida_mercancia/salida_mercancia.html', args, context_instance=RequestContext(request))
+    return render_to_response('salida_mercancia/main.html', args, context_instance=RequestContext(request))
 
 
 def add_salida_mercancia(request):
@@ -558,7 +557,7 @@ def entrada_mercancia(request):
     args["compra_list"] = compra_list
     args["tipo_operacion_list"] = tipo_operacion_list
 
-    return render_to_response('entrada_mercancia/entrada_mercancia.html', args,
+    return render_to_response('entrada_mercancia/main.html', args,
                               context_instance=RequestContext(request))
 
 
@@ -649,7 +648,7 @@ def registro_ventas(request):
     args['estadoPLE_list'] = estadoPLE_list
     args['cliente_list'] = cliente_list
     args['comprobante_list'] = comprobante_list
-    return render_to_response('registro_ventas/registro_ventas.html', args, context_instance=RequestContext(request))
+    return render_to_response('registro_ventas/main.html', args, context_instance=RequestContext(request))
 
 
 # -----------------  Resumen de movimientos ------------------
@@ -686,4 +685,4 @@ def resumen_mov(request):
                     detalle_venta_list[mes] = detalle_v
     args['form'] = form
     args['detalle_venta_list'] = detalle_venta_list
-    return render_to_response('resumen_movimientos/resumen_mov.html', args, context_instance=RequestContext(request))
+    return render_to_response('resumen_movimientos/main.html', args, context_instance=RequestContext(request))
