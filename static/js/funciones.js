@@ -119,8 +119,8 @@ var selEmpresa = function () {
 }
 
 var selPeriodo = function () {
-    mes = $("form#select-periodo [name=mes]").val();
-    mes_mostrar = $("form#select-periodo [name=mes]>option[value=" + mes + "]").html();
+    mes = $("form#select-periodo [name=periodo]").val();
+    mes_mostrar = $("form#select-periodo [name=periodo]>option[value=" + mes + "]").html();
     sessionStorage.setItem("mes", mes);
     sessionStorage.setItem("mes_mostrar", mes_mostrar);
 }
