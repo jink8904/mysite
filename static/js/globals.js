@@ -3,6 +3,7 @@
  */
 $(document).ready(function () {
     updateFooter();
+    //------------- Configuracion de las tablas -------------
     $("#tabla-empresa").dynatable({
         params: {
             records: "empresas"
@@ -56,7 +57,7 @@ $(document).ready(function () {
             records: "productos"
         }
     })
-    //Manejo global
+    //------- Manejo global ---------
     $("table[select]>tbody>tr").click(function (evt) {
         var id = $(this).parent().parent().attr("id");
         cleanData('table', id);
@@ -98,12 +99,24 @@ $(document).ready(function () {
         close: 'Cerrar',
     });
 
-
+    var year = sessionStorage.getItem("anno");
+    var mes = sessionStorage.getItem("mes");
     $('.pickadate-this-month').pickadate({
-        min: [2016,3,1],
-        max: [2016,3,30]
+        labelMonthNext: 'Ir al mes siguiente ',
+        labelMonthPrev: 'Ir al mes anterior',
+        formatSubmit: 'yyyy-mm-dd',
+        format: 'yyyy-mm-dd',
+        monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+        today: 'Hoy',
+        clear: 'Limpiar',
+        close: 'Cerrar',
+        min: [year, mes - 1, 1],
+        max: [year, mes - 1, 30]
     });
 
+    //hidding panel tools
+    $(".heading-elements").addClass("hidden");
 
     //--------------------------- Login ------------------------------
     $("form[role=login] button[type=submit]").click(function () {
@@ -111,7 +124,7 @@ $(document).ready(function () {
         sessionStorage.setItem("usuario", usuario)
     })
 
-    $("li[logout]").click(function(){
+    $("li[logout]").click(function () {
         console.log(sessionStorage);
         sessionStorage.removeItem("empresa");
         sessionStorage.removeItem("mes_mostrar");
@@ -323,7 +336,7 @@ $(document).ready(function () {
         eliminarDetalleCompra()
     })
 
-    //------------------------ Stock disponible ----------------------------
-
+    //------------------------ Resumen de ventas ----------------------------
+    //$("#del-detalle-compra")
 
 })

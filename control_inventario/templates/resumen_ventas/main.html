@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Resumen de ventas
+{% endblock %}
+
+{% block content %}
+    <div class="modal fade col-md-12" id="modal-detalles-venta" tabindex="-1" role="dialog"
+         aria-labelledby="form-productoLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span
+                                aria-hidden="true">&times;</span>
+                        <span
+                                class="sr-only">Close
+                        </span>
+                    </button>
+                    <h4 class="modal-title" id="form-producto-label">Detalles de venta</h4>
+                </div>
+                <div class="modal-body">
+                    {% include "resumen_ventas/table_d_venta_modal.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        {% include "resumen_ventas/table-venta.html" %}
+    </div>
+{% endblock %}
