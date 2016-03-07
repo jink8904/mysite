@@ -12,6 +12,7 @@ urlpatterns = patterns('control_inventario.app',
     url(r'^empresa/$', 'empresa.views.empresa', name='empresa'),
     url(r'^empresa/del$', 'empresa.views.del_empresa', name='del_empresa'),
     url(r'^select-empresa$', 'empresa.views.select_empresa', name='select_empresa'),
+    url(r'^select-periodo$', 'empresa.views.select_periodo', name='select_periodo'),
    # urls-categoria
     url(r'^categorias/$', 'categoria.views.categoria', name='categoria'),
     url(r'^categorias/del$', 'categoria.views.del_categoria', name='del_categoria'),

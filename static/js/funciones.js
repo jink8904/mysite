@@ -118,6 +118,13 @@ var selEmpresa = function () {
 
 }
 
+var selPeriodo = function () {
+    mes = $("form#select-periodo [name=mes]").val();
+    mes_mostrar = $("form#select-periodo [name=mes]>option[value=" + mes + "]").html();
+    sessionStorage.setItem("mes", mes);
+    sessionStorage.setItem("mes_mostrar", mes_mostrar);
+}
+
 var updateFooter = function () {
     var empresa = $.parseJSON(sessionStorage.getItem("empresa"));
     var usuario = sessionStorage.getItem("usuario");

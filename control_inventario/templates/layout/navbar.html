@@ -10,8 +10,8 @@
                                 class="caret"></span></a>
                         <ul role="menu" class="dropdown-menu">
                             <li><a href="../empresa">Empresa</a></li>
-{#                            <li><a href="../selempresa">Seleccionar empresa</a></li>#}
-{#                            <li><a href="#">Generar a&ntilde;o</a></li>#}
+                            {#                            <li><a href="../selempresa">Seleccionar empresa</a></li>#}
+                            {#                            <li><a href="#">Generar a&ntilde;o</a></li>#}
                             <li class="divider"></li>
                             <li logout><a href="../cerrar">Salir</a></li>
                         </ul>
@@ -44,11 +44,11 @@
                             <li><a href="../inventario">Inventario inicial</a></li>
                             <li class="divider"></li>
                             <li><a href="../salida">Salida de mercader&iacute;a (Normal)</a></li>
-{#                            <li><a href="">Salida de mercader&iacute;a (Boleta de venta)</a></li>#}
+                            {#                            <li><a href="">Salida de mercader&iacute;a (Boleta de venta)</a></li>#}
                             <li><a href="../entrada">Entrada de mercader&iacute;a(Normal)</a></li>
                             <li class="divider"></li>
                             <li><a href="../registro-ventas">Registro de ventas</a></li>
-{#                            <li><a href="#">Registro de ventas (Boleta de venta)</a></li>#}
+                            {#                            <li><a href="#">Registro de ventas (Boleta de venta)</a></li>#}
                             <li><a href="#">Registro de compras</a></li>
                             <li class="divider"></li>
                             <li><a href="#">Modificar importe reg. ventas (Mul.)</a></li>
@@ -180,6 +180,29 @@
     <!-- Second navbar -->
     <div class="navbar navbar-default navbar-xs">
         <div class="container">
+            <form class="navbar-form navbar-left" action="../select-periodo" method="post" id="select-periodo">
+                {% csrf_token %}
+                <div class="form-group">
+                    <select class="form-control" name="mes">
+                        <option value="">Seleccionar per&iacute;odo</option>
+                        <option value="1">Enero</option>
+                        <option value="2">Febrero</option>
+                        <option value="3">Marzo</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Mayo</option>
+                        <option value="6">Junio</option>
+                        <option value="7">Julio</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Septiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" type="submit">
+                    <i class="icon-checkmark"></i>
+                </button>
+            </form>
         </div>
     </div>
     <!-- /second navbar -->

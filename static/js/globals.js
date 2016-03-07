@@ -118,6 +118,10 @@ $(document).ready(function () {
     //hidding panel tools
     $(".heading-elements").addClass("hidden");
 
+    //select-periodo
+    $("form#select-periodo button[type=submit]").click(function(){
+        selPeriodo();
+    })
     //--------------------------- Login ------------------------------
     $("form[role=login] button[type=submit]").click(function () {
         var usuario = $("form[role=login] input[name=username]").val();
@@ -125,7 +129,6 @@ $(document).ready(function () {
     })
 
     $("li[logout]").click(function () {
-        console.log(sessionStorage);
         sessionStorage.removeItem("empresa");
         sessionStorage.removeItem("mes_mostrar");
     })

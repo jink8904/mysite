@@ -59,3 +59,8 @@ def del_empresa(request):
     empresa = models.Empresa.objects.get(ruc=request.POST.get("ruc"))
     empresa.delete();
     return HttpResponseRedirect('/empresa')
+
+def select_periodo(request):
+    request.session['mes'] = request.POST.get("mes")
+    return HttpResponseRedirect('/');
+
