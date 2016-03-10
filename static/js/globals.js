@@ -101,6 +101,7 @@ $(document).ready(function () {
 
     var year = sessionStorage.getItem("anno");
     var mes = sessionStorage.getItem("mes");
+    var last_day = new Date(year, mes, 0).getDate();
     $('.pickadate-this-month').pickadate({
         labelMonthNext: 'Ir al mes siguiente ',
         labelMonthPrev: 'Ir al mes anterior',
@@ -112,14 +113,14 @@ $(document).ready(function () {
         clear: 'Limpiar',
         close: 'Cerrar',
         min: [year, mes - 1, 1],
-        max: [year, mes - 1, 30]
+        max: [year, mes - 1, last_day]
     });
 
-    //hidding panel tools
-    $(".heading-elements").addClass("hidden");
+    ////hidding panel tools
+    //$(".heading-elements").addClass("hidden");
 
     //select-periodo
-    $("form#select-periodo button[type=submit]").click(function(){
+    $("form#select-periodo button[type=submit]").click(function () {
         selPeriodo();
     })
     //--------------------------- Login ------------------------------
@@ -165,9 +166,17 @@ $(document).ready(function () {
 
 
     //------------------- Categoria   -------------------
+    $("li a[action=add-categoria]").click(function () {
+        cleanData("form", "tabla-categoria");
+        $("#form-categoria-label").html("Adicionar categor&iacute;a");
+        $("#form-categoria").modal();
+    })
+
     $("button[table=tabla-categoria][accion=add]").click(function () {
         cleanData("form", "tabla-categoria");
-        $("#form-empresa-label").html("Adicionar categor&iacute;a");
+        $("#form-categoria-label").html("Adicionar categor&iacute;a");
+        $("#form-categoria").modal();
+
     })
     $("button[table=tabla-categoria][accion=mod]").click(function () {
         if (!$(this).hasClass("disabled")) {
@@ -183,6 +192,15 @@ $(document).ready(function () {
             $("form[accion=del] input[name=codigo]").val(codigo);
         }
     })
+    $('#sweet_html').on('click', function () {
+        swal({
+            title: "HTML <small>small subtitle</small>",
+            text: "A custom <span style='color:#F8BB86'>html<span> message.",
+            html: true,
+            showCancelButton: true,
+            confirmButtonColor: "#2196F3"
+        });
+    });
 
     //--------------------------- Producto ----------------------------------------
     $("button[table=tabla-producto][accion=add]").click(function () {

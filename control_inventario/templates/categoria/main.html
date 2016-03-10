@@ -1,55 +1,46 @@
 {% extends "index.html" %}
+{% load staticfiles %}
+{% block script %}
+    <script src="{% static 'js/limitless/plugins/notifications/bootbox.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/limitless/plugins/notifications/sweet_alert.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/limitless/core/app.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/app/categoria/categoria.js' %}" type="text/javascript"></script>
+{% endblock %}
 
 {% block title %}
-    Categoria
+    Categor&iacute;a
 {% endblock %}
 
 {% block content %}
-    <div class="modal fade confirm-del" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xs">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span
-                            class="sr-only">Close</span></button>
-                    <h4 id="mySmallModalLabel" class="modal-title">Eliminar categor&iacute;a</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="del" method="post" id="del-table" accion="del">
-                        {% csrf_token %}
-                        <input type="text" name="codigo" class="hidden">
-
-                        <p>Est&aacute; seguro que desea eliminar la categor&iacute;a seleccionada</p>
-
-                        <div class="btn-modals">
-                            <button class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-primary" type="submit">Aceptar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-10 col-md-offset-1">
-        <!-- Modal -->
-        <div class="modal fade" id="form-categoria" tabindex="-1" role="dialog" aria-labelledby="form-categoriaLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                                class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="form-categoria-label">Adicionar categoria</h4>
-                    </div>
-                    <div class="modal-body">
-                        {% include "categoria/form-categoria.html" %}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /horizotal form -->
-        {#        Tabla categorias#}
-        {% include "categoria/table-categoria.html" %}
-    </div>
+    {#    <div class="modal fade confirm-del" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"#}
+    {#         aria-hidden="true">#}
+    {#        <div class="modal-dialog modal-xs">#}
+    {#            <div class="modal-content">#}
+    {#                <div class="modal-header">#}
+    {#                    <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span#}
+    {#                            class="sr-only">Close</span></button>#}
+    {#                    <h4 id="mySmallModalLabel" class="modal-title">Eliminar categor&iacute;a</h4>#}
+    {#                </div>#}
+    {#                <div class="modal-body">#}
+    {#                    <form action="del" method="post" id="del-table" accion="del">#}
+    {#                        {% csrf_token %}#}
+    {#                        <input type="text" name="codigo" class="hidden">#}
+    {##}
+    {#                        <p>Est&aacute; seguro que desea eliminar la categor&iacute;a seleccionada</p>#}
+    {##}
+    {#                        <div class="btn-modals">#}
+    {#                            <button class="btn btn-default" data-dismiss="modal">Cerrar</button>#}
+    {#                            <button class="btn btn-primary" type="submit">Aceptar</button>#}
+    {#                        </div>#}
+    {#                    </form>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    {% include "categoria/confirm-message.html" %}
+    {#    Form categorias#}
+    {% include "categoria/form-categoria.html" %}
+    {#        Tabla categorias#}
+    {% include "categoria/table-categoria.html" %}
     {#    {{ categoria_list }}#}
 {% endblock %}
