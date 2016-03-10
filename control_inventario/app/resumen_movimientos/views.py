@@ -18,14 +18,14 @@ def resumen_mov(request):
         periodo = datos.get("periodo")
         rango = {"ini": 1, "fin": 5}
         meses = ["Enero", "Febrero", "Marzo", "Abril"]
-        if periodo == 2:
+        if int(periodo) == 2:
             rango["ini"] = 5
             rango["fin"] = 9
             meses = ["Mayo", "Junio", "Julio", "Agosto"]
-        elif periodo == 3:
+        elif int(periodo) == 3:
             rango["ini"] = 9
             rango["fin"] = 13
-            meses = ["Septiembre", "Ocyubre", "Noviembre", "Diciembre"]
+            meses = ["Septiembre", "Octubre", "Noviembre", "Diciembre"]
         args["meses"] = meses
 
         form = False
@@ -37,4 +37,4 @@ def resumen_mov(request):
                     detalle_venta_list[mes] = detalle_v
     args['form'] = form
     args['detalle_venta_list'] = detalle_venta_list
-    return render_to_response('resumen_movimientos/main.html', args, context_instance=RequestContext(request))
+    return render_to_response('resumen_movimientos/main.html', args, context_instance=RequestContext(request));

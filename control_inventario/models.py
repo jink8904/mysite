@@ -1,5 +1,6 @@
 from pickle import TRUE
 from django.db import models
+import reversion
 
 
 class Empresa(models.Model):
@@ -86,6 +87,16 @@ class Inventario(models.Model):
     cantidad = models.IntegerField()
     producto = models.ForeignKey(Producto)
     empresa = models.ForeignKey(Empresa)
+
+
+class InventarioHist(models.Model):
+    fecha_real = models.DateField()
+    fecha_operacion = models.DateField()
+    tipo_operacion = models.CharField(max_length=10)
+    cantidad = models.IntegerField()
+    cantidad_final = models.IntegerField()
+    inventario = models.ForeignKey(Inventario)
+
 
 
 class TipoComprobante(models.Model):

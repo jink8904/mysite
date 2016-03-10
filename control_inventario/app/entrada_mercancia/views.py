@@ -2,14 +2,8 @@ from builtins import print
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from django.core.context_processors import csrf
 from control_inventario import forms, models
-import json
-# from XlsxWriter import xlsxwriter
-# users
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
+import json, datetime
 from django.contrib.auth.decorators import login_required
 
 # ----------- Entrada de mercancia ------------------
@@ -92,6 +86,17 @@ def add_entrada_mercancia(request):
             inv = models.Inventario.objects.get(producto_id=i)
             inv.cantidad = inv.cantidad + detalle['cant']
             inv.save()
+            # salvar al historico
+            inv_hist = models.InventarioHist(
+                fecha_real=datetime.datetime.now(),
+                fecha_operacion=compra.fecha,
+                tipo_operacion="entrada",
+                cantidad=detalle['cant'],
+                cantidad_final=inv.cantidad,
+                inventario=inv
+            )
+            inv_hist.save()
+            # salvar detalle
             detalle_obj = models.DetalleCompra(
                 descripcion=prod.nombre,
                 cantidad=detalle['cant'],

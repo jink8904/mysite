@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
 from control_inventario import models
-import json
+import json, datetime
 
 from django.contrib.auth.decorators import login_required
 
@@ -84,6 +84,17 @@ def add_salida_mercancia(request):
             inv = models.Inventario.objects.get(producto_id=i)
             inv.cantidad = inv.cantidad - detalle['cant']
             inv.save()
+            # salvar al historico
+            inv_hist = models.InventarioHist(
+                fecha_real=datetime.datetime.now(),
+                fecha_operacion=venta.fecha,
+                tipo_operacion="salida",
+                cantidad=detalle['cant'],
+                cantidad_final=inv.cantidad,
+                inventario=inv
+            )
+            inv_hist.save()
+            # salvar detalles
             detalle_obj = models.DetalleVenta(
                 descripcion=prod.nombre,
                 cantidad=detalle['cant'],
