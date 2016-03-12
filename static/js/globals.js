@@ -194,8 +194,8 @@ $(document).ready(function () {
     })
     $('#sweet_html').on('click', function () {
         swal({
-            title: "HTML <small>small subtitle</small>",
-            text: "A custom <span style='color:#F8BB86'>html<span> message.",
+            title: "Eliminar categor&iacute;a",
+            text: "Est&aacute; seguro que quiere elimnar la categoria seleccionada.",
             html: true,
             showCancelButton: true,
             confirmButtonColor: "#2196F3"
