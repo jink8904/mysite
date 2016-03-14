@@ -405,7 +405,7 @@ $(function() {
     // Unblock on click
     $('#click-unblock').on('click', function() {
         var block = $(this).parent();
-        $(block).block({ 
+        $(block).block({
             message: '<i class="icon-spinner4 spinner"></i>',
             overlayCSS: {
                 backgroundColor: '#fff',

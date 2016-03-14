@@ -6,6 +6,18 @@ var empresa_seleccionada = null;
 
 //funciones
 
+function showMsg(msg, tipo, opt) {
+    var event = new Events();
+    var defaults = {
+        type: (tipo) ? tipo : 'success',
+    }
+    var settings = $.extend({}, defaults, opt);
+    if (msg) {
+        event.Mensaje(msg, settings);
+    }
+
+}
+
 function fixTableSelect() {
     var id = this.id;
     $("#" + id + ">tbody>tr").click(function (evt) {
@@ -15,6 +27,86 @@ function fixTableSelect() {
         tr.addClass('active');
         updateButtons(id);
     })
+}
+
+function loadMask(options) {
+    var defaults = {
+        selector: 'body',
+        msg: "Cargando..."
+    }
+    var settings = $.extend({}, defaults, options);
+
+    $(settings.selector).block({
+        message: '<span class="text-semibold"><i class="icon-spinner10 spinner"></i><h5>' + settings.msg + '</h5></span>',
+        overlayCSS: {
+            backgroundColor: '#000000',
+            opacity: .5,
+            cursor: 'wait',
+            zIndex: 1040
+        },
+        css: {
+            border: 0,
+            padding: 0,
+            color: '#fff',
+            backgroundColor: 'transparent',
+            zIndex: 1041,
+            fontFamily: 'cursive',
+            font: 'initial',
+        }
+    });
+}
+
+function unMask(selector, fn) {
+    if (selector == null)
+        selector = "body";
+    $(selector).unblock({
+        onUnblock: fn
+    });
+
+}
+
+function notificacion(options) {
+    var defaults = {
+        title: "",
+        text: "La acci&oacute;n se ha completado satisfactoriamente",
+        confirmButtonColor: "#66BB6A",
+        type: "success",
+        allowOutsideClick: !1,
+        showConfirmButton: !0,
+        showCancelButton: !1,
+        closeOnConfirm: !0,
+        closeOnCancel: !0,
+        confirmButtonText: "OK",
+        confirmButtonColor: "#8CD4F5",
+        cancelButtonText: "Cancel",
+        imageUrl: null,
+        imageSize: null,
+        timer: null,
+        customClass: "",
+        html: !1,
+        animation: !0,
+        allowEscapeKey: !0,
+        inputType: "text",
+        inputPlaceholder: "",
+        inputValue: "",
+        showLoaderOnConfirm: !1,
+        ok: function () {
+            console.log("ok")
+        },
+        cancel: function () {
+            console.log("cancel")
+        },
+    }
+    var settings = $.extend({}, defaults, options);
+    swal(settings,
+        function (ok) {
+            if (ok)
+                settings.ok();
+            else
+                settings.cancel();
+
+        }
+    );
 }
 
 var getRecord = function (table_id) {
@@ -88,6 +180,8 @@ var updateRecords = function (table_id) {
 
 var updateButtons = function (table_id) {
     var sel_btns = "button[table=" + table_id + "][accion!=add]";
+    if (!$(sel_btns).length)
+        sel_btns = "li[table=" + table_id + "]";
     $(sel_btns).removeClass("disabled");
 }
 
@@ -322,7 +416,7 @@ var llenarDatosImportesCompra = function () {
         igv = 0
     var cant = $("#datos-producto-entrada input[name=cantidad]").val(),
         valor_unitario = parseFloat($("#importes-unitarios-entrada input[name=valor-unitario]").val()),
-        igv_unitario = igv/100 * valor_unitario,
+        igv_unitario = igv / 100 * valor_unitario,
         precio_unitario = igv_unitario + valor_unitario,
         valor_compra = cant * valor_unitario,
         igv_total = cant * igv_unitario,

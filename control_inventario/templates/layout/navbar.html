@@ -182,8 +182,8 @@
         <div class="container">
             <form class="navbar-form navbar-left" action="../select-periodo" method="post" id="select-periodo">
                 {% csrf_token %}
-                <div class="form-group">
-                    <select class="form-control" name="periodo">
+                <div class="input-group">
+                    <select class="form-control bootstrap-select" name="periodo" data-size="6">
                         <option value="">Seleccionar per&iacute;odo</option>
                         <option value="1">Enero</option>
                         <option value="2">Febrero</option>
@@ -198,10 +198,11 @@
                         <option value="11">Noviembre</option>
                         <option value="12">Diciembre</option>
                     </select>
+
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn bg-primary btn-icon"><i class="icon-checkmark"></i></button>
+                    </div>
                 </div>
-                <button class="btn btn-primary" type="submit">
-                    <i class="icon-checkmark"></i>
-                </button>
             </form>
         </div>
     </div>

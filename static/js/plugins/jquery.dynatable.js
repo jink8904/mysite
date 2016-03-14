@@ -1323,7 +1323,7 @@
         this.create = function () {
             var $select = $('<select>', {
                 id: 'dynatable-per-page-' + obj.element.id,
-                'class': 'dynatable-per-page-select'
+                'class': 'dynatable-per-page-select bootstrap-select'
             });
 
             for (var i = 0, len = settings.dataset.perPageOptions.length; i < len; i++) {
@@ -1337,9 +1337,11 @@
                 obj.process();
             });
 
-            return $('<span />', {
-                'class': 'dynatable-per-page'
-            }).append("<span class='dynatable-per-page-label'>" + settings.inputs.perPageText + "</span>").append($select);
+            return $('<div />', {
+                'class': 'dynatable-per-page form-group col-md-3'
+            }).css({
+                marginBottom: 10
+            }).append("<label class='dynatable-per-page-label' style='display:block; margin-bottom:0'>" + settings.inputs.perPageText + "</span>").append($select);
         };
 
         this.attach = function () {
@@ -1381,7 +1383,7 @@
                     (pages + 1) - settings.inputs.paginationGap[3]
                 ];
 
-            pageLinks += '<li><span>Pages: </span></li>';
+            pageLinks += '<li><span>P&aacute;ginas: </span></li>';
 
             for (var i = 1; i <= pages; i++) {
                 if ((i > breaks[0] && i < breaks[1]) || (i > breaks[2] && i < breaks[3])) {

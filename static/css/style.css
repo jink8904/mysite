@@ -45,11 +45,11 @@ li.disabled > a {
     outline: 0 none;
 }
 
-.dynatable-per-page-select {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    width: 220px;
-}
+/*.dynatable-per-page-select {*/
+    /*background-color: #fff;*/
+    /*border: 1px solid #ccc;*/
+    /*width: 220px;*/
+/*}*/
 
 table {
     border-radius: 4px;

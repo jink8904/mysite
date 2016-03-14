@@ -3,21 +3,22 @@
  * VideoVigilancia - XETID
  * (c) 2014 Danny Almeida Perez
  */
+
 /*
  * Requiere event.css para los estilos de los eventos.
  * Requiere jQuery v1.9 o mayor.
  * Solamente esta probado en ExtJS 2.2 (otras versiones sin testear)
  */
 
-Eventos = function () {
+Events = function () {
 
 
     this.containerTop = $('<div/>', {
-        'class': 'evt-container-top',
+        'class': 'evt-container-top'
     });
 
     this.containerRigth = $('<div/>', {
-        'class': 'evt-container-rigth',
+        'class': 'evt-container-rigth'
     });
 
     var body = $('body');
@@ -31,12 +32,12 @@ Eventos = function () {
 
         var defaults = {
             /* Duracion del mensaje en el area */
-            duration: 3, // segundos
+            duration: 2, // segundos
 
             position: 'top', // [top , right]
 
             /* Tipo de Mensaje (carga todo los css correspondientes del tipo de mensaje)*/
-            type: 'information', // [information, success, warning , error, alarma,confirm(no implementado todavia)]
+            type: 'information', // [information, success, warning , error, confirm(no implementado todavia)]
 
             /* Si  presenta color de fondo el mensaje*/
             frame: true, // [true, false]
@@ -53,11 +54,17 @@ Eventos = function () {
             /* Tipo de animacion del mensaje */
             animation: 'fade', // [fade, bounce, slide, scale]
 
+            /* callback */
+            callback: function () {
+            }
+
         };
 
         var settings = $.extend({}, defaults, options);
 
+
         var mensaje = {
+
             'top': function () {
 
                 $('.evt-top').remove();
@@ -74,6 +81,7 @@ Eventos = function () {
                 var icon = $('<div/>', {
                     'class': 'image ' + 'img-' + settings.type
                 });
+
 
                 if (settings.shadow) {
                     borderRad.addClass('shadow-' + settings.type);
@@ -92,18 +100,23 @@ Eventos = function () {
                     'information': function () {
                         title = "Información";
                     },
+
                     'success': function () {
                         title = "Información";
                     },
+
                     'error': function () {
                         title = "Error";
                     },
+
                     'warning': function () {
                         title = "Advertencia";
                     },
+
                     'confirm': function () {
                         title = "Confirmación";
                     },
+
                     'default': function () {
                         console.error('Tipo de mensaje no valido');
                         exit;
@@ -119,30 +132,17 @@ Eventos = function () {
                 var pTitle = $('<p/>', {
                     'class': 'title ' + 'title-' + settings.type,
                     html: title,
-                });
+                })
 
                 var pMessage = $('<p/>', {
                     'class': 'message',
                     html: message,
-                });
-
-                var btnsMessage = $('<div/>', {
-                    'class': 'btns',
-                    html: '<button type="button" class="btn btn-primary btn-xs" id="aceptar"> Aceptar\n\
-                             <button type="button" class="btn btn-danger btn-xs" id="cancelar">Cancelar',
-                });
+                })
 
                 mensajee.appendTo(_this.containerTop);
                 borderRad.appendTo(mensajee);
                 pTitle.appendTo(borderRad);
                 pMessage.appendTo(borderRad);
-                if (settings.type == 'confirm') {
-                    btnsMessage.appendTo(borderRad);
-                    settings.duration = 60;
-                    $('#aceptar').click(function () {
-                        settings.callback(settings.params);
-                    });
-                }
 
                 borderCirc.appendTo(mensajee);
                 icon.appendTo(mensajee);
@@ -154,12 +154,15 @@ Eventos = function () {
                         mensajee.addClass(settings.animation + 'OutUp');
                         mensajee.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
                             mensajee.remove();
-                        });
-                    } else
+                        })
+                    } else {
                         mensajee.remove();
-                };
+                    }
+                    settings.callback();
+                }
 
                 if (settings.animate) {
+
                     mensajee.addClass(settings.animation + 'InUp');
 
                     mensajee.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
@@ -169,22 +172,29 @@ Eventos = function () {
                             mensajee.addClass(settings.animation + 'OutUp');
                             mensajee.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
                                 mensajee.remove();
-                            });
-                        }, settings.duration * 1000);
-                    });
+                                settings.callback();
+                            })
+                        }, settings.duration * 1000)
+                    })
 
                     icon.click(cerrarMensaje);
                     borderCirc.click(cerrarMensaje);
                     borderRad.click(cerrarMensaje);
+
+
                 } else {
+
                     setTimeout(function () {
                         mensajee.remove();
+                        settings.callback();
                     }, settings.duration * 1000)
                     icon.click(cerrarMensaje);
                     borderCirc.click(cerrarMensaje);
                     borderRad.click(cerrarMensaje);
                 }
             },
+
+
             'right': function () {
 
                 var mensajee = $('<div/>', {
@@ -237,6 +247,7 @@ Eventos = function () {
                         })
                     } else
                         mensajee.remove();
+                    settings.callback();
 
                 }
 
@@ -272,6 +283,8 @@ Eventos = function () {
                 }
 
             },
+
+
             'default': function () {
                 console.error('mensaje no valido');
                 exit;
@@ -283,5 +296,9 @@ Eventos = function () {
         } else {
             mensaje['default']();
         }
+
+
     }
+
+
 }

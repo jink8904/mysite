@@ -87,6 +87,7 @@ $(document).ready(function () {
 
     })
 
+    //campo fecha addClass pickadate
     $('.pickadate').pickadate({
         labelMonthNext: 'Ir al mes siguiente ',
         labelMonthPrev: 'Ir al mes anterior',
@@ -116,8 +117,7 @@ $(document).ready(function () {
         max: [year, mes - 1, last_day]
     });
 
-    ////hidding panel tools
-    //$(".heading-elements").addClass("hidden");
+    $('.bootstrap-select').selectpicker();
 
     //select-periodo
     $("form#select-periodo button[type=submit]").click(function () {
@@ -169,9 +169,46 @@ $(document).ready(function () {
     $("li a[action=add-categoria]").click(function () {
         cleanData("form", "tabla-categoria");
         $("#form-categoria-label").html("Adicionar categor&iacute;a");
-        $("#form-categoria").modal();
+        $("#form-categoria").modal().on('shown.bs.modal', function () {
+            $("#form-categoria input[name=codigo]").focus();
+        });
+        $("#form-categoria button[type=submit]").click(function () {
+            $("#form-categoria").hide();
+            loadMask({
+                msg: "Adicionando categor&iacute;a..."
+            })
+        })
     })
 
+    $("li a[action=mod-categoria]").click(function () {
+        cleanData("form", "tabla-categoria");
+        updateRecords("tabla-categoria");
+        $("#form-categoria-label").html("Modificar categor&iacute;a");
+        $("#form-categoria").modal().on('shown.bs.modal', function () {
+            $("#form-categoria input[name=codigo]").focus();
+        });
+        $("#form-categoria button[type=submit]").click(function () {
+            $("#form-categoria").hide();
+            loadMask({
+                msg: "Adicionando categor&iacute;a..."
+            })
+        })
+    })
+
+    $('li a[action=del-categoria]').on('click', function () {
+        if (!$(this).parent().hasClass("disabled"))
+            swal({
+                title: "Eliminar categor&iacute;a",
+                text: "Est&aacute; seguro que quiere elimnar la categor&iacute;a seleccionada.",
+                html: true,
+                showCancelButton: true,
+                confirmButtonColor: "#2196F3"
+            }, function (ok) {
+                if (ok)
+                    delCategoria();
+            });
+    });
+    //old
     $("button[table=tabla-categoria][accion=add]").click(function () {
         cleanData("form", "tabla-categoria");
         $("#form-categoria-label").html("Adicionar categor&iacute;a");
@@ -192,15 +229,6 @@ $(document).ready(function () {
             $("form[accion=del] input[name=codigo]").val(codigo);
         }
     })
-    $('#sweet_html').on('click', function () {
-        swal({
-            title: "Eliminar categor&iacute;a",
-            text: "Est&aacute; seguro que quiere elimnar la categoria seleccionada.",
-            html: true,
-            showCancelButton: true,
-            confirmButtonColor: "#2196F3"
-        });
-    });
 
     //--------------------------- Producto ----------------------------------------
     $("button[table=tabla-producto][accion=add]").click(function () {
