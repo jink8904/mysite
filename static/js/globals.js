@@ -2,6 +2,8 @@
  * Created by Julio on 03-Feb-16.
  */
 $(document).ready(function () {
+    document.addEventListener("keydown", keyDownEvt, false);
+
     updateFooter();
     //------------- Configuracion de las tablas -------------
     $("#tabla-empresa").dynatable({
@@ -167,17 +169,7 @@ $(document).ready(function () {
 
     //------------------- Categoria   -------------------
     $("li a[action=add-categoria]").click(function () {
-        cleanData("form", "tabla-categoria");
-        $("#form-categoria-label").html("Adicionar categor&iacute;a");
-        $("#form-categoria").modal().on('shown.bs.modal', function () {
-            $("#form-categoria input[name=codigo]").focus();
-        });
-        $("#form-categoria button[type=submit]").click(function () {
-            $("#form-categoria").hide();
-            loadMask({
-                msg: "Adicionando categor&iacute;a..."
-            })
-        })
+        gestCategoria("add");
     })
 
     $("li a[action=mod-categoria]").click(function () {
@@ -196,39 +188,30 @@ $(document).ready(function () {
     })
 
     $('li a[action=del-categoria]').on('click', function () {
-        if (!$(this).parent().hasClass("disabled"))
-            swal({
-                title: "Eliminar categor&iacute;a",
-                text: "Est&aacute; seguro que quiere elimnar la categor&iacute;a seleccionada.",
-                html: true,
-                showCancelButton: true,
-                confirmButtonColor: "#2196F3"
-            }, function (ok) {
-                if (ok)
-                    delCategoria();
-            });
+        delCategoria();
     });
-    //old
-    $("button[table=tabla-categoria][accion=add]").click(function () {
-        cleanData("form", "tabla-categoria");
-        $("#form-categoria-label").html("Adicionar categor&iacute;a");
-        $("#form-categoria").modal();
 
-    })
-    $("button[table=tabla-categoria][accion=mod]").click(function () {
-        if (!$(this).hasClass("disabled")) {
-            updateRecords("tabla-categoria");
-            $("#form-empresa-label").html("Modificar categor&iacute;a");
-            $("#form-categoria").modal();
-        }
-    })
-    $("button[table=tabla-categoria][accion=del]").click(function () {
-        if (!$(this).hasClass("disabled")) {
-            $(".confirm-del").modal();
-            var codigo = $("#tabla-categoria tr.active td[key=codigo]").html();
-            $("form[accion=del] input[name=codigo]").val(codigo);
-        }
-    })
+    //old
+    //$("button[table=tabla-categoria][accion=add]").click(function () {
+    //    cleanData("form", "tabla-categoria");
+    //    $("#form-categoria-label").html("Adicionar categor&iacute;a");
+    //    $("#form-categoria").modal();
+    //
+    //})
+    //$("button[table=tabla-categoria][accion=mod]").click(function () {
+    //    if (!$(this).hasClass("disabled")) {
+    //        updateRecords("tabla-categoria");
+    //        $("#form-empresa-label").html("Modificar categor&iacute;a");
+    //        $("#form-categoria").modal();
+    //    }
+    //})
+    //$("button[table=tabla-categoria][accion=del]").click(function () {
+    //    if (!$(this).hasClass("disabled")) {
+    //        $(".confirm-del").modal();
+    //        var codigo = $("#tabla-categoria tr.active td[key=codigo]").html();
+    //        $("form[accion=del] input[name=codigo]").val(codigo);
+    //    }
+    //})
 
     //--------------------------- Producto ----------------------------------------
     $("button[table=tabla-producto][accion=add]").click(function () {
