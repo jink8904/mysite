@@ -5,6 +5,8 @@
 var empresa_seleccionada = null;
 
 //funciones
+keyDownEvt = function () {
+};
 
 function showMsg(msg, tipo, opt) {
     var event = new Events();

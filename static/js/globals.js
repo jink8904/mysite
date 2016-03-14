@@ -3,7 +3,6 @@
  */
 $(document).ready(function () {
     document.addEventListener("keydown", keyDownEvt, false);
-
     updateFooter();
     //------------- Configuracion de las tablas -------------
     $("#tabla-empresa").dynatable({
