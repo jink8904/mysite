@@ -1,22 +1,21 @@
 /**
  * Created by Julio on 09-Mar-16.
  */
-
-
 function keyDownEvt(e) {
     var keyCode = e.which;
-    console.log(e.which);
+    //console.log(e.which);
     if (keyCode == 46)
         delCategoria();
     if (keyCode == 65 && e.ctrlKey) {
         e.preventDefault();
-        gestCategoria("add");
+        addCategoria();
     }
     if (keyCode == 77 && e.ctrlKey) {
         e.preventDefault();
-        gestCategoria("mod");
+        modCategoria();
     }
 }
+
 
 function delCategoria() {
     if (!$('li a[action=del-categoria]').parent().hasClass("disabled"))
@@ -51,30 +50,41 @@ function delCategoria() {
         });
 }
 
-function gestCategoria(action) {
-    show_panel = true;
-    if (action == "add") {
-        panel_title = "Adicionar categor&iacute;a";
-        load_msg = "Adicionando categor&iacute;a...";
-    } else {
-        panel_title = "Modificar categor&iacute;a";
-        load_msg = "Modificando categor&iacute;a...";
-        if ($("li a[action=mod-categoria]").parent().hasClass("disabled"))
-            show_panel = false;
-    }
+function addCategoria() {
+    disabled = $("li a[action=mod-categoria]").parent().hasClass("disabled");
     cleanData("form", "tabla-categoria");
-    updateRecords("tabla-categoria");
+    panel_title = "Adicionar categor&iacute;a";
+    load_msg = "Adicionando categor&iacute;a...";
+
     $("#form-categoria-label").html(panel_title);
-    if (show_panel)
-        $("#form-categoria").modal().on('shown.bs.modal', function () {
-            $("#form-categoria input[name=codigo]").focus();
-        });
-    $("#form-categoria button[type=submit]").click(function () {
+    $("#form-categoria").modal().on('shown.bs.modal', function () {
+        $("#form-categoria input[name=codigo]").focus();
+    });
+
+    submitForm("#form-categoria form", function () {
         $("#form-categoria").hide();
         loadMask({
             msg: load_msg
         })
-    })
+    });
+}
 
 
+function modCategoria() {
+    cleanData("form", "tabla-categoria");
+    updateRecords("tabla-categoria");
+    panel_title = "Modificar categor&iacute;a";
+    load_msg = "Modificando categor&iacute;a...";
+
+    $("#form-categoria-label").html(panel_title);
+    $("#form-categoria").modal().on('shown.bs.modal', function () {
+        $("#form-categoria input[name=codigo]").focus();
+    });
+
+    submitForm("#form-categoria form", function () {
+        $("#form-categoria").hide();
+        loadMask({
+            msg: load_msg
+        })
+    });
 }

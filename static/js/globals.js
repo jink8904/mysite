@@ -59,6 +59,7 @@ $(document).ready(function () {
         }
     })
     //------- Manejo global ---------
+    //select table
     $("table[select]>tbody>tr").click(function (evt) {
         var id = $(this).parent().parent().attr("id");
         cleanData('table', id);
@@ -66,6 +67,9 @@ $(document).ready(function () {
         tr.addClass('active');
         updateButtons(id);
     })
+
+    //fix required msg
+    $("[required]").attr("oninvalid", "this.setCustomValidity('Este campo es requerido.')");
 
     //checkbox fix
     $("span input[type=checkbox]").click(function () {
@@ -168,7 +172,7 @@ $(document).ready(function () {
 
     //------------------- Categoria   -------------------
     $("li a[action=add-categoria]").click(function () {
-        gestCategoria("add");
+        addCategoria();
     })
 
     $("li a[action=mod-categoria]").click(function () {
@@ -367,7 +371,10 @@ $(document).ready(function () {
         eliminarDetalleCompra()
     })
 
-    //------------------------ Resumen de ventas ----------------------------
-    //$("#del-detalle-compra")
+    //------------------------ Stock disponible ----------------------------
+    $("#navtb-stock-disp button[accion=export_excel]").click(function(){
+        console.log("fgdfgdfgdf");
+        exportarExcel();
+    })
 
 })

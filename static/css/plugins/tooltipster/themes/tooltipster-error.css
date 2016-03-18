@@ -1,0 +1,12 @@
+.tooltipster-error {
+	border-radius: 5px; 
+	border: 1px solid #9c1f1f;
+	background: #fbe9e7;
+	color: #9c1f1f;
+}
+.tooltipster-error .tooltipster-content {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	line-height: 16px;
+	padding: 8px 10px;
+}

@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
 from control_inventario import forms, models
+from control_inventario.app.export_excel import export
 from django.contrib.auth.decorators import login_required
 
 
@@ -86,3 +87,8 @@ def del_producto(request):
     producto = models.Producto.objects.get(codigo=request.POST.get("codigo"))
     producto.delete();
     return HttpResponseRedirect('/productos')
+
+
+def export_productos(request):
+    prod_list = models.Producto.objects.values()
+    export.export_excel();

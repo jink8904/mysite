@@ -6,7 +6,7 @@
             </div>
 
             <div class="modal-body">
-                <form class="form-horizontal" enctype="multipart/form-data" method="post" action=""
+                <form class="form-horizontal" enctype="multipart/form-data" method="post" action="" novalidate
                       table="tabla-categoria">
                     {% csrf_token %}
                     <input type="text" name="id" value="" class="hidden">
@@ -16,13 +16,14 @@
                         <label class="control-label col-lg-1">C&oacute;digo:</label>
 
                         <div class="col-lg-4">
-                            <input type="text" name="codigo" id="id_codigo" class="form-control">
+                            <input type="text" name="codigo" id="id_codigo" class="form-control" required=true
+                                   numberfield=true>
                         </div>
                         {#Denominacion#}
                         <label class="control-label col-lg-2">Denominaci&oacute;n:</label>
 
                         <div class="col-lg-5">
-                            <input type="text" name="denominacion" id="id_denominacion" class="form-control">
+                            <input type="text" name="denominacion" id="id_denominacion" class="form-control" required>
                         </div>
                     </div>
 

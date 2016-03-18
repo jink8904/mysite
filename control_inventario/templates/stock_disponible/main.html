@@ -1,9 +1,14 @@
 {% extends "index.html" %}
+{% load staticfiles %}
 
 {% block title %}
     Stock disponible
 {% endblock %}
 
+{% block script %}
+    <script src="{% static 'js/app/stock_disponible/functions.js' %}" type="text/javascript"></script>
+{% endblock %}
+
 {% block content %}
-        {% include "stock_disponible/table-stock.html" %}
+    {% include "stock_disponible/table-stock.html" %}
 {% endblock %}
