@@ -49,7 +49,7 @@ urlpatterns = patterns('control_inventario.app',
     url(r'^resumen-compras/$', 'resumen_compras.views.resumen_compra', name='resumen_compra'),
     url(r'^resumen-compras/detalles$', 'resumen_compras.views.detalle_compra', name='detalle_compra'),
    # exportar a excel
-    url(r'^export/$', 'export_excel.views.export_excel', name='export'),
+   #  url(r'^export/$', 'export_excel.views.export_excel', name='export'),
 
 
 )
