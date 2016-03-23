@@ -61,9 +61,9 @@ def add_salida_mercancia(request):
         total = 0
         for i in detalle_list:
             detalle = detalle_list[i]
-            igv = igv + float(detalle['igv_total'])
-            subtotal = subtotal + float(detalle['valor_venta'])
-            total = total + float(detalle['precio_venta'])
+            igv += float(detalle['igv_total'])
+            subtotal += float(detalle['valor_venta'])
+            total += float(detalle['precio_venta'])
         cliente = models.Cliente.objects.get(id=datos_venta['cliente'])
         tipo_comprobante = models.TipoComprobante.objects.get(id=datos_venta['tipo_comprobante'])
         venta = models.Venta(
@@ -91,7 +91,8 @@ def add_salida_mercancia(request):
                 tipo_operacion="salida",
                 cantidad=detalle['cant'],
                 cantidad_final=inv.cantidad,
-                inventario=inv
+                producto=prod,
+                empresa=emp
             )
             inv_hist.save()
             # salvar detalles

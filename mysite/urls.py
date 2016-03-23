@@ -41,7 +41,8 @@ urlpatterns = patterns('control_inventario.app',
     url(r'^resumen-movimientos/$', 'resumen_movimientos.views.resumen_mov', name='resumen_mov'),
    # urls-stock disponible
     url(r'^stock-disponible/$', 'stock_disponible.views.stock_disponible', name='stock_disponible'),
-    url(r'^stock-disponible/export-excel$', 'stock_disponible.views.export_excel', name='export_excel'),
+    url(r'^stock-disponible/export-excel$', 'stock_disponible.views.export_excel'),
+    url(r'^stock-disponible/export-pdf$', 'stock_disponible.views.export_pdf'),
    # urls-resumen de ventas
     url(r'^resumen-ventas/$', 'resumen_ventas.views.resumen_venta', name='resumen_venta'),
     url(r'^resumen-ventas/detalles$', 'resumen_ventas.views.detalle_venta', name='detalle_venta'),
@@ -49,7 +50,7 @@ urlpatterns = patterns('control_inventario.app',
     url(r'^resumen-compras/$', 'resumen_compras.views.resumen_compra', name='resumen_compra'),
     url(r'^resumen-compras/detalles$', 'resumen_compras.views.detalle_compra', name='detalle_compra'),
    # exportar a excel
-   #  url(r'^export/$', 'export_excel.views.export_excel', name='export'),
+   #  url(r'^export/$', 'export_excel.export.generar_pdf', name='export'),
 
 
 )

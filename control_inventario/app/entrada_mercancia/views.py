@@ -6,7 +6,7 @@ from control_inventario import forms, models
 import json, datetime
 from django.contrib.auth.decorators import login_required
 
-# ----------- Entrada de mercancia ------------------
+
 def update_prod_list(emp):
     producto_list = emp.producto_set.values()
     inventario_list = emp.inventario_set.values()
@@ -93,7 +93,8 @@ def add_entrada_mercancia(request):
                 tipo_operacion="entrada",
                 cantidad=detalle['cant'],
                 cantidad_final=inv.cantidad,
-                inventario=inv
+                producto=prod,
+                empresa=emp
             )
             inv_hist.save()
             # salvar detalle

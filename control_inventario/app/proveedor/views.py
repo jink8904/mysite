@@ -45,9 +45,9 @@ def proveedor(request):
                 nombre=datos.get("nombre"),
                 direccion=datos.get("direccion"),
                 tipo_id=tipo_id,
+                empresa=emp
             )
             p.save()
-            p.empresa.add(emp);
         return HttpResponseRedirect('/proveedor', {"proveedor_list": proveedor_list})
     else:
         form = forms.ProductoForm()

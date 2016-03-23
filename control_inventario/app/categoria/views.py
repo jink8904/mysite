@@ -22,23 +22,15 @@ def categoria(request):
             cat = emp.categoria_set.get(id=datos.get("id"))
             cat.codigo = datos.get("codigo")
             cat.denominacion = datos.get("denominacion")
-            # for obj in categoria_list:
-            #     id = obj.get("id")
-            #     if str(id) == datos.get("id"):
-            #         cat = models.Categoria(
-            #             id=id,
-            #             codigo=datos.get("codigo"),
-            #             denominacion=datos.get("denominacion")
-            #         )
             cat.save()
             args['action'] = 'mod'
         else:
             cat = models.Categoria(
                 codigo=datos.get("codigo"),
-                denominacion=datos.get("denominacion")
+                denominacion=datos.get("denominacion"),
+                empresa=emp
             )
             cat.save()
-            cat.empresa.add(emp)
             args['action'] = 'add'
     if request.session.has_key("categoria-del") == 1:
         if request.session["categoria-del"]:

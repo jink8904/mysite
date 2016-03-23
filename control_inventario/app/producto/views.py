@@ -56,10 +56,10 @@ def producto(request):
                 nombre_reducido=datos.get("nombre_reducido"),
                 tipo=tipo_p,
                 unidad=unidad_p,
-                categoria=categoria_p
+                categoria=categoria_p,
+                empresa=emp
             )
             p.save()
-            p.empresa.add(emp)
             inv = models.Inventario(
                 costo_unitario=0,
                 cantidad=0,

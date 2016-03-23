@@ -1,7 +1,7 @@
 <div class="panel panel-flat">
     <div class="panel-heading">
-        <h5 class="panel-title" id="empresa-form-title">Resumen  de  saldos  y  movimientos  de  productos  desde
-            el  mes  de  {{ meses.0 }}  hasta  {{ meses.3 }}  del  a&nacute;o  {{ year }}</h5>
+        <h5 class="panel-title" id="empresa-form-title">Resumen de saldos y movimientos de productos desde
+            el mes de {{ meses.0 }} hasta {{ meses.2 }} del a&nacute;o {{ year }}</h5>
 
         <div class="heading-elements">
             <ul class="icons-list">
@@ -31,13 +31,8 @@
                     <th colspan="4" class="text-center">{{ meses.0 }}</th>
                     <th colspan="4" class="text-center">{{ meses.1 }}</th>
                     <th colspan="4" class="text-center">{{ meses.2 }}</th>
-                    <th colspan="4" class="text-center">{{ meses.3 }}</th>
                 </tr>
                 <tr>
-                    <th>Sal.Ini.</th>
-                    <th>Entrada</th>
-                    <th>Salida</th>
-                    <th>Saldo</th>
                     <th>Sal.Ini.</th>
                     <th>Entrada</th>
                     <th>Salida</th>
@@ -53,25 +48,27 @@
                 </tr>
                 </thead>
                 <tbody>
-{#                <tr>#}
-{#                    <td>Codigo</td>#}
-{#                    <td>Producto</td>#}
-{#                    <td>{{ meses.0 }}</td>#}
-{#                    <td>{{ meses.1 }}</td>#}
-{#                    <td>{{ meses.2 }}</td>#}
-{#                    <td>{{ meses.3 }}</td>#}
-{#                    <td>{{ meses.3 }}</td>#}
-{#                    <td>{{ meses.3 }}</td>#}
-{#                </tr>#}
-{#                {% for empresa in empresa_list %}#}
-{#                    <tr>#}
-{#                        <td name="id" class="hidden">{{ empresa.id }}</td>#}
-{#                        <td name="nombre">{{ empresa.nombre }}</td>#}
-{#                        <td name="ruc">{{ empresa.ruc }}</td>#}
-{#                        <td name="anno_inicio">{{ empresa.anno_inicio }}</td>#}
-{#                        <td name="direccion">{{ empresa.direccion }}</td>#}
-{#                    </tr>#}
-{#                {% endfor %}#}
+                {% for key, value in movimientos.items %}
+                    <tr>
+                        <td name="codigo">{{ value.codigo }}</td>
+                        <td name="nombre">{{ value.nombre }}</td>
+
+                        <td>{{ value.0.saldo_inicial }}</td>
+                        <td>{{ value.0.entradas }}</td>
+                        <td>{{ value.0.salidas }}</td>
+                        <td>{{ value.0.saldo_final }}</td>
+
+                        <td>{{ value.1.saldo_inicial }}</td>
+                        <td>{{ value.1.entradas }}</td>
+                        <td>{{ value.1.salidas }}</td>
+                        <td>{{ value.1.saldo_final }}</td>
+
+                        <td>{{ value.2.saldo_inicial }}</td>
+                        <td>{{ value.2.entradas }}</td>
+                        <td>{{ value.2.salidas }}</td>
+                        <td>{{ value.2.saldo_final }}</td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>

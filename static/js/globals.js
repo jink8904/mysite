@@ -372,9 +372,11 @@ $(document).ready(function () {
     })
 
     //------------------------ Stock disponible ----------------------------
-    $("#navtb-stock-disp button[accion=export_excel]").click(function(){
-        console.log("fgdfgdfgdf");
+    $("#navtb-stock-disp button[accion=export_excel]").click(function () {
         exportarExcel();
+    })
+    $("#navtb-stock-disp button[accion=pdf]").click(function () {
+        exportarPDF();
     })
 
 })

@@ -43,9 +43,9 @@ def cliente(request):
                 nombre=datos.get("nombre"),
                 direccion=datos.get("direccion"),
                 tipo_id=tipo_id,
+                empresa=emp
             )
             p.save()
-            p.empresa.add(emp);
         return HttpResponseRedirect('/cliente', {"cliente_list": cliente_list})
     else:
         form = forms.ProductoForm()

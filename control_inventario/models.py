@@ -15,7 +15,7 @@ class Empresa(models.Model):
 class Categoria(models.Model):
     codigo = models.IntegerField(unique=TRUE)
     denominacion = models.CharField(max_length=50)
-    empresa = models.ManyToManyField(Empresa)
+    empresa = models.ForeignKey(Empresa)
 
     def __str__(self):
         return self.denominacion
@@ -51,7 +51,7 @@ class Producto(models.Model):
     tipo = models.ForeignKey(TipoProducto)
     unidad = models.ForeignKey(UnidadProducto)
     categoria = models.ForeignKey(Categoria)
-    empresa = models.ManyToManyField(Empresa)
+    empresa = models.ForeignKey(Empresa)
 
 
 class TipoId(models.Model):
@@ -70,7 +70,7 @@ class Proveedor(models.Model):
     direccion = models.CharField(max_length=50)
     identificador = models.IntegerField(unique=TRUE)
     tipo_id = models.ForeignKey(TipoId)
-    empresa = models.ManyToManyField(Empresa)
+    empresa = models.ForeignKey(Empresa)
 
 
 class Cliente(models.Model):
@@ -78,7 +78,7 @@ class Cliente(models.Model):
     direccion = models.CharField(max_length=50)
     identificador = models.IntegerField(unique=TRUE)
     tipo_id = models.ForeignKey(TipoId)
-    empresa = models.ManyToManyField(Empresa)
+    empresa = models.ForeignKey(Empresa)
 
 
 class Inventario(models.Model):
@@ -94,7 +94,8 @@ class InventarioHist(models.Model):
     tipo_operacion = models.CharField(max_length=10)
     cantidad = models.IntegerField()
     cantidad_final = models.IntegerField()
-    inventario = models.ForeignKey(Inventario)
+    producto = models.ForeignKey(Producto)
+    empresa = models.ForeignKey(Empresa)
 
 
 
