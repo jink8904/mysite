@@ -67,25 +67,25 @@ function unMask(selector, fn) {
 
 }
 
-function notificacion(options) {
+function notificacion(title, msg, options) {
     var defaults = {
-        title: "",
-        text: "La acci&oacute;n se ha completado satisfactoriamente",
+        title: title,
+        text: msg,
         confirmButtonColor: "#66BB6A",
-        type: "success",
+        type: "warning",
         allowOutsideClick: !1,
         showConfirmButton: !0,
-        showCancelButton: !1,
+        showCancelButton: !0,
         closeOnConfirm: !0,
         closeOnCancel: !0,
-        confirmButtonText: "OK",
-        confirmButtonColor: "#8CD4F5",
-        cancelButtonText: "Cancel",
+        confirmButtonText: "Aceptar",
+        confirmButtonColor: "#2196F3",
+        cancelButtonText: "Cancelar",
         imageUrl: null,
         imageSize: null,
         timer: null,
         customClass: "",
-        html: !1,
+        html: !0,
         animation: !0,
         allowEscapeKey: !0,
         inputType: "text",
@@ -174,9 +174,9 @@ var updateRecords = function (table_id) {
         var name = $(this).attr("name");
         var record_id = name + "_id";
         var select_id = $(this).attr("id");
-        cleanData("select", $(this).attr("id"), function () {
-            $("#" + select_id + ">option[value=" + record[record_id] + "]").attr("selected", true);
-        })
+        //ta chapusero arreglar despues... nada mas para los bootstrap-select
+        $("select[name=" + name + "]").next().children("button").children(".filter-option").html(record[name]);
+        $("select[name=" + name + "]").val(record[name])
     })
 }
 
@@ -187,30 +187,31 @@ var updateButtons = function (table_id) {
     $(sel_btns).removeClass("disabled");
 }
 
+//--------------------- Empresa ----------------------------
 var selEmpresa = function () {
-    empresa_seleccionada = getRecord("tabla-empresa");
-    mes = $("select[name=mes]").val();
-    mes_mostrar = $("select[name=mes]>option[value=" + mes + "]").html();
-    sessionStorage.setItem("empresa", JSON.stringify(empresa_seleccionada));
-    sessionStorage.setItem("anno", empresa_seleccionada.anno_inicio);
-    sessionStorage.setItem("mes", mes);
-    sessionStorage.setItem("mes_mostrar", mes_mostrar);
-
-    token = $("#navtb-empresa input[name=csrfmiddlewaretoken]").attr("value");
-    $.ajax({
-        url: "../select-empresa",
-        method: "post",
-        dataType: 'json',
-        async: true,
-        data: {
-            csrfmiddlewaretoken: token,
-            empresa: empresa_seleccionada,
-            mes: mes
-        },
-        success: function (data) {
-            $(location).attr("href", "../");
-        }
-    })
+    //empresa_seleccionada = getRecord("tabla-empresa");
+    //mes = $("select[name=mes]").val();
+    //mes_mostrar = $("select[name=mes]>option[value=" + mes + "]").html();
+    //sessionStorage.setItem("empresa", JSON.stringify(empresa_seleccionada));
+    //sessionStorage.setItem("anno", empresa_seleccionada.anno_inicio);
+    //sessionStorage.setItem("mes", mes);
+    //sessionStorage.setItem("mes_mostrar", mes_mostrar);
+    //
+    //token = $("#navtb-empresa input[name=csrfmiddlewaretoken]").attr("value");
+    //$.ajax({
+    //    url: "../select-empresa",
+    //    method: "post",
+    //    dataType: 'json',
+    //    async: true,
+    //    data: {
+    //        csrfmiddlewaretoken: token,
+    //        empresa: empresa_seleccionada,
+    //        mes: mes
+    //    },
+    //    success: function (data) {
+    //        $(location).attr("href", "../");
+    //    }
+    //})
 
 }
 

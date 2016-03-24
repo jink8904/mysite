@@ -5,9 +5,9 @@
                 <h6 class="modal-title">Adicionar categor&iacute;a</h6>
             </div>
 
-            <div class="modal-body">
-                <form class="form-horizontal" enctype="multipart/form-data" method="post" action="" novalidate
-                      table="tabla-categoria">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="" novalidate
+                  table="tabla-categoria">
+                <div class="modal-body">
                     {% csrf_token %}
                     <input type="text" name="id" value="" class="hidden">
                     <input type="text" name="id_empresa" value="" class="hidden">
@@ -27,14 +27,14 @@
                         </div>
                     </div>
 
-                    <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal">
-                            Cerrar
-                        </button>
-                        <button class="btn btn-primary" type="submit">Guardar</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button class="btn btn-primary" type="submit">Guardar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

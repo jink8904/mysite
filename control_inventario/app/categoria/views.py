@@ -32,6 +32,7 @@ def categoria(request):
             )
             cat.save()
             args['action'] = 'add'
+
     if request.session.has_key("categoria-del") == 1:
         if request.session["categoria-del"]:
             args['action'] = 'del'

@@ -18,19 +18,15 @@ function keyDownEvt(e) {
 
 
 function delCategoria() {
-    if (!$('li a[action=del-categoria]').parent().hasClass("disabled"))
-        swal({
-            title: "Eliminar categor&iacute;a",
-            text: "Est&aacute; seguro que quiere elimnar la categor&iacute;a seleccionada.",
-            html: true,
-            showCancelButton: true,
-            confirmButtonColor: "#2196F3"
-        }, function (ok) {
-            if (ok) {
+    if (!$('li a[action=del-categoria]').parent().hasClass("disabled")) {
+        title = "Eliminar categor&iacute;a";
+        text = "Est&aacute; seguro que quiere eliminar la categor&iacute;a seleccionada.";
+        notificacion(title, text, {
+            ok: function () {
                 loadMask({
                     msg: "Eliminando categor&iacute;a..."
                 })
-                //var tabla_categoria = $("#tabla-categoria").data('dynatable');
+
                 var id = $("#tabla-categoria>tbody>tr.active>td[key=id]").html();
                 token = $("input[name=csrfmiddlewaretoken]").attr("value");
                 $.ajax({
@@ -47,7 +43,8 @@ function delCategoria() {
                     }
                 })
             }
-        });
+        })
+    }
 }
 
 function addCategoria() {
@@ -71,20 +68,22 @@ function addCategoria() {
 
 
 function modCategoria() {
-    cleanData("form", "tabla-categoria");
-    updateRecords("tabla-categoria");
-    panel_title = "Modificar categor&iacute;a";
-    load_msg = "Modificando categor&iacute;a...";
+    if (!$('li a[action=del-categoria]').parent().hasClass("disabled")) {
+        cleanData("form", "tabla-categoria");
+        updateRecords("tabla-categoria");
+        panel_title = "Modificar categor&iacute;a";
+        load_msg = "Modificando categor&iacute;a...";
 
-    $("#form-categoria-label").html(panel_title);
-    $("#form-categoria").modal().on('shown.bs.modal', function () {
-        $("#form-categoria input[name=codigo]").focus();
-    });
+        $("#form-categoria-label").html(panel_title);
+        $("#form-categoria").modal().on('shown.bs.modal', function () {
+            $("#form-categoria input[name=codigo]").focus();
+        });
 
-    submitForm("#form-categoria form", function () {
-        $("#form-categoria").hide();
-        loadMask({
-            msg: load_msg
-        })
-    });
+        submitForm("#form-categoria form", function () {
+            $("#form-categoria").hide();
+            loadMask({
+                msg: load_msg
+            })
+        });
+    }
 }

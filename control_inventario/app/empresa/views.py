@@ -12,31 +12,30 @@ from django.contrib.auth.decorators import login_required
 def empresa(request):
     empresa_list = models.Empresa.objects.values()
     datos = request.POST
+    args = {}
+
     if datos:
         if datos.get("id"):
-            for obj in empresa_list:
-                id = obj.get("id")
-                if str(id) == datos.get("id"):
-                    emp = models.Empresa(
-                        id=id,
-                        nombre=datos.get("nombre"),
-                        anno_inicio=datos.get("anno_inicio"),
-                        ruc=datos.get("ruc"),
-                        direccion=datos.get("direccion"),
-                    )
-                    emp.save()
+            emp = models.Empresa.objects.get(id=datos.get("id"))
+            emp.nombre = datos.get("nombre")
+            emp.anno_inicio = datos.get("anno_inicio")
+            emp.ruc = datos.get("ruc")
+            emp.direccion = datos.get("direccion")
+            emp.save()
+            args['action'] = "mod"
         else:
             form = forms.EmpresaForm(request.POST)
+            args['action'] = "add"
             if form.is_valid():
                 form.save()
-        return HttpResponseRedirect('/empresa', {"empresa_list": empresa_list})
-    else:
-        form = forms.EmpresaForm()
-    args = {}
-    args.update(csrf(request))
 
-    args['form'] = form
+    if request.session.has_key("empresa-del") == 1:
+        if request.session["empresa-del"]:
+            args['action'] = 'del'
+            request.session["empresa-del"] = False
+    args.update(csrf(request))
     args['empresa_list'] = empresa_list
+    print(args)
     return render_to_response('empresa/main.html', args, context_instance=RequestContext(request))
 
 
@@ -56,11 +55,16 @@ def select_empresa(request):
 
 @login_required(login_url='/ingresar')
 def del_empresa(request):
-    empresa = models.Empresa.objects.get(ruc=request.POST.get("ruc"))
-    empresa.delete();
-    return HttpResponseRedirect('/empresa')
+    empresa = models.Empresa.objects.get(id=request.POST.get("id"))
+    empresa.delete()
+    request.session['empresa-del'] = True
+
+    args = {}
+    args['success'] = True
+    json_data = json.dumps(args)
+    return HttpResponse(json_data, mimetype="application/json")
+
 
 def select_periodo(request):
     request.session['mes'] = request.POST.get("periodo")
-    return HttpResponseRedirect('/');
-
+    return HttpResponseRedirect('/')

@@ -70,10 +70,10 @@ table {
     text-align: right;
 }
 
-.modal-footer {
-    border-top: 1px solid #e5e5e5;
-    padding: 15px 0 0 15px;
-}
+/*.modal-footer {*/
+    /*border-top: 1px solid #e5e5e5;*/
+    /*padding: 15px 0 0 15px;*/
+/*}*/
 
 .modal-footer1 {
     border-top: 1px solid #e5e5e5;

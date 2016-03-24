@@ -124,6 +124,9 @@ $(document).ready(function () {
 
     $('.bootstrap-select').selectpicker();
 
+    $('.bootstrap-select-search').attr("data-live-search", true);
+    $('.bootstrap-select-search').selectpicker();
+
     //select-periodo
     $("form#select-periodo button[type=submit]").click(function () {
         selPeriodo();
@@ -140,34 +143,26 @@ $(document).ready(function () {
     })
 
     //-------------------- Empresa ------------------------------------
-    $("button[table=tabla-empresa][accion=add]").click(function () {
-        cleanData("form", "tabla-empresa");
-        $("#form-empresa-label").html("Adicionar empresa");
-    })
-    $("button[table=tabla-empresa][accion=mod]").click(function () {
-        if (!$(this).hasClass("disabled")) {
-            updateRecords("tabla-empresa");
-            $("#form-empresa-label").html("Modificar empresa");
-            $("#form-empresa").modal();
-        }
+    $("li a[action=add-empresa]").click(function () {
+        addEmpresa();
     })
 
-    $("button[table=tabla-empresa][accion=del]").click(function () {
-        if (!$(this).hasClass("disabled")) {
-            $(".confirm-del").modal();
-            var ruc = $("#tabla-empresa tr.active td[key=ruc]").html();
-            $("form[accion=del] [name=ruc]").val(ruc);
-        }
+    $("li a[action=mod-empresa]").click(function () {
+        modEmpresa();
     })
 
-    $("button[action=sel-empresa]").click(function () {
+    $('li a[action=del-empresa]').click(function () {
+        delEmpresa();
+    });
+
+    $('li a[action=sel-empresa]').click(function () {
         selEmpresa();
-    })
+    });
 
-    $("#sel-empresa").click(function () {
-        if (!$(this).hasClass("disabled"))
-            $("#sel-periodo").modal();
-    })
+    $('#tabla-empresa>tbody>tr').dblclick(function () {
+        selEmpresa();
+    });
+
 
 
     //------------------- Categoria   -------------------
@@ -176,45 +171,12 @@ $(document).ready(function () {
     })
 
     $("li a[action=mod-categoria]").click(function () {
-        cleanData("form", "tabla-categoria");
-        updateRecords("tabla-categoria");
-        $("#form-categoria-label").html("Modificar categor&iacute;a");
-        $("#form-categoria").modal().on('shown.bs.modal', function () {
-            $("#form-categoria input[name=codigo]").focus();
-        });
-        $("#form-categoria button[type=submit]").click(function () {
-            $("#form-categoria").hide();
-            loadMask({
-                msg: "Adicionando categor&iacute;a..."
-            })
-        })
+        modCategoria()
     })
 
     $('li a[action=del-categoria]').on('click', function () {
         delCategoria();
     });
-
-    //old
-    //$("button[table=tabla-categoria][accion=add]").click(function () {
-    //    cleanData("form", "tabla-categoria");
-    //    $("#form-categoria-label").html("Adicionar categor&iacute;a");
-    //    $("#form-categoria").modal();
-    //
-    //})
-    //$("button[table=tabla-categoria][accion=mod]").click(function () {
-    //    if (!$(this).hasClass("disabled")) {
-    //        updateRecords("tabla-categoria");
-    //        $("#form-empresa-label").html("Modificar categor&iacute;a");
-    //        $("#form-categoria").modal();
-    //    }
-    //})
-    //$("button[table=tabla-categoria][accion=del]").click(function () {
-    //    if (!$(this).hasClass("disabled")) {
-    //        $(".confirm-del").modal();
-    //        var codigo = $("#tabla-categoria tr.active td[key=codigo]").html();
-    //        $("form[accion=del] input[name=codigo]").val(codigo);
-    //    }
-    //})
 
     //--------------------------- Producto ----------------------------------------
     $("button[table=tabla-producto][accion=add]").click(function () {
