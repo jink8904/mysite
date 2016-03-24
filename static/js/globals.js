@@ -179,6 +179,7 @@ $(document).ready(function () {
     });
 
     //--------------------------- Producto ----------------------------------------
+
     $("button[table=tabla-producto][accion=add]").click(function () {
         cleanData("form", "tabla-producto");
         $("#form-empresa-label").html("Adicionar producto");

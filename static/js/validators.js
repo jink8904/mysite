@@ -24,6 +24,11 @@ function submitForm(selector, fn) {
                 var aux = checkNumberField(th);
                 valid = (valid) ? aux : valid;
             }
+            //    validate validator
+            if ($(th).attr("validator") && valid) {
+                var aux = checkValidator(th);
+                valid = (valid) ? aux : valid;
+            }
         })
         return valid;
     }
@@ -56,6 +61,25 @@ function submitForm(selector, fn) {
         var regex = /^\d+$/;
         if (!regex.test($(th).val())) {
             return showErrors(th, "Solo numeros");
+        }
+        return true;
+    }
+
+
+    var checkValidator = function (th) {
+        var validator = $(th).attr("validator");
+        var regex = /^\d+$/;
+        switch (validator){
+            case "v_11digits":
+
+                break
+            default :
+
+                break
+
+        }
+        if (!regex.test($(th).val())) {
+            return showErrors(th, "Solo fhghgh");
         }
         return true;
     }
