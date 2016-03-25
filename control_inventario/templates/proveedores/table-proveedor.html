@@ -1,53 +1,42 @@
-<div class="panel panel-flat">
+<div class="panel panel-primary panel-bordered">
     <div class="panel-heading">
-        <h5 class="panel-title" id="proveedor-form-title">Lista de proveedores</h5>
+        <h6 class="panel-title">Lista de categor&iacute;as</h6>
 
         <div class="heading-elements">
             <ul class="icons-list">
-                <li><a data-action="collapse"></a></li>
+                <li><a title="Adicionar (CTR+A)" action="add-proveedor"><i class=" icon-plus-circle2"></i></a></li>
+                <li class="disabled" table="tabla-proveedor"><a title="Editar (CTR+M)" action="mod-proveedor"><i
+                        class="icon-pen6"></i></a></li>
+                <li class="disabled" table="tabla-proveedor"><a title="Eliminar (DEL)" action="del-proveedor"><i
+                        class="icon-trash"></i></a></li>
             </ul>
         </div>
-        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
-    </div>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
 
-    <div class="nav-table" id="navtb-proveedor">
-        <!-- Button trigger modal -->
-        <button class="btn btn-primary" data-toggle="modal" data-target="#form-proveedor" table="tabla-proveedor"
-                accion="add">
-            Nuevo
-        </button>
-        <button class="btn btn-primary disabled" table="tabla-proveedor" accion="mod">
-            Editar
-        </button>
-        <button class="btn btn-primary disabled" table="tabla-proveedor" accion="del">
-            Eliminar
-        </button>
-    </div>
-
-    <div class="panel-body" style="display: block;">
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered" id="tabla-proveedor" select="true">
-                <thead class="bg-primary-600">
+    <div class="panel-body">
+        <table class="table table-hover table-bordered" id="tabla-proveedor" select="true">
+            <thead class="bg-primary-600">
+            <tr>
+                <th class="hidden">id</th>
+                <th class="hidden">tipo_id_id</th>
+                <th>Nombre</th>
+                <th>Direcci&oacute;n</th>
+                <th>Tipo de identificaci&oacute;n</th>
+                <th>No identificaci&oacute;n</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for proveedor in proveedor_list %}
                 <tr>
-                    <th class="hidden">id</th>
-                    <th>Nombre</th>
-                    <th>Direcci&oacute;n</th>
-                    <th>Tipo de identificaci&oacute;n</th>
-                    <th>No identificaci&oacute;n</th>
+                    <td name="id" class="hidden">{{ proveedor.id }}</td>
+                    <td name="tipo_id_id" class="hidden">{{ proveedor.tipo_id_id }}</td>
+                    <td name="nombre">{{ proveedor.nombre }}</td>
+                    <td name="direccion">{{ proveedor.direccion }}</td>
+                    <td name="tipo_id">{{ proveedor.tipo_id }}</td>
+                    <td name="identificador">{{ proveedor.identificador }}</td>
                 </tr>
-                </thead>
-                <tbody>
-                {% for proveedor in proveedor_list %}
-                    <tr>
-                        <td name="id" class="hidden">{{ proveedor.id }}</td>
-                        <td name="nombre">{{ proveedor.nombre }}</td>
-                        <td name="direccion">{{ proveedor.direccion }}</td>
-                        <td name="tipo_id">{{ proveedor.tipo_id }}</td>
-                        <td name="identificador">{{ proveedor.identificador }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>

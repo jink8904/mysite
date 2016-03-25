@@ -176,6 +176,8 @@ var updateRecords = function (table_id) {
         var name = $(this).attr("name");
         var record_id = name + "_id";
         var select_id = $(this).attr("id");
+        console.log(record)
+        console.log(name)
         //ta chapusero arreglar despues... nada mas para los bootstrap-select
         $("select[name=" + name + "]").next().children("button").children(".filter-option").html(record[name]);
         $("select[name=" + name + "]").val(record[record_id])

@@ -209,6 +209,19 @@ $(document).ready(function () {
     });
 
     //----------------------- Proveedor --------------------------------------
+     $("li a[action=add-proveedor]").click(function () {
+        addProveedor();
+    })
+
+    $("li a[action=mod-proveedor]").click(function () {
+        modProveedor();
+    })
+
+    $('li a[action=del-proveedor]').on('click', function () {
+        delProveedor();
+    })
+    
+    
     $("button[table=tabla-proveedor][accion=add]").click(function () {
         cleanData("form", "tabla-proveedor");
         $("#form-empresa-label").html("Adicionar proveedor");
@@ -241,26 +254,6 @@ $(document).ready(function () {
     $('li a[action=del-cliente]').on('click', function () {
         delCliente();
     });
-
-    //--old
-    $("button[table=tabla-cliente][accion=add]").click(function () {
-        cleanData("form", "tabla-cliente");
-        $("#form-empresa-label").html("Adicionar cliente");
-    })
-    $("button[table=tabla-cliente][accion=mod]").click(function () {
-        if (!$(this).hasClass("disabled")) {
-            updateRecords("tabla-cliente");
-            $("#form-cliente-label").html("Modificar cliente");
-            $("#form-cliente").modal();
-        }
-    })
-    $("button[table=tabla-cliente][accion=del]").click(function () {
-        if (!$(this).hasClass("disabled")) {
-            var identificador = $("#tabla-cliente tr.active td[key=no_identificacion]").html();
-            $("form[accion=del] input[name=identificador]").val(identificador);
-            $(".confirm-del").modal();
-        }
-    })
 
     //---------------- Salida de mercancia -------------------------
 
