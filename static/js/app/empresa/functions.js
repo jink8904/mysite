@@ -57,7 +57,7 @@ function addEmpresa() {
     load_msg = "Adicionando empresa...";
 
     $("#form-empresa-label").html(panel_title);
-    $("#form-empresa").modal({}).on('shown.bs.modal', function () {
+    $("#form-empresa").modal().on('shown.bs.modal', function () {
         $("#form-empresa input[name=ruc]").focus();
     });
 

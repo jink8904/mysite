@@ -3,7 +3,6 @@
  */
 function submitForm(selector, fn) {
     $(selector).submit(function (evt) {
-        console.log(isValid());
         if (isValid())
             fn()
         else {
@@ -13,6 +12,7 @@ function submitForm(selector, fn) {
 
     var isValid = function () {
         var valid = true;
+        //select form inputs
         $(selector + " input").each(function (index, th) {
             //validate required
             if ($(th).attr("required")) {
@@ -28,6 +28,21 @@ function submitForm(selector, fn) {
             if ($(th).attr("validator") && valid) {
                 var aux = checkValidator(th);
                 valid = (valid) ? aux : valid;
+            }
+        })
+        //select form selects
+        $(selector + " select").each(function (index, th) {
+            if ($(th).attr("required")) {
+                if ($(th).val() == "") {
+                    $(th).next().children(":first").addClass("invalid");
+                    valid = false;
+                    $(th).change(function () {
+                        //var selected = $(this).find("option:selected").val();
+                        if ($(th).next().children(":first").hasClass("invalid")) {
+                            $(th).next().children(":first").removeClass("invalid")
+                        }
+                    })
+                }
             }
         })
         return valid;
@@ -68,18 +83,19 @@ function submitForm(selector, fn) {
 
     var checkValidator = function (th) {
         var validator = $(th).attr("validator");
-        var regex = /^\d+$/;
-        switch (validator){
+        var regex = "";
+        var msg = "";
+        switch (validator) {
             case "v_11digits":
-
+                regex = /^\d{11,11}$/
+                msg = "Solo admite números enteros de 11 digitos"
                 break
             default :
 
                 break
-
         }
         if (!regex.test($(th).val())) {
-            return showErrors(th, "Solo fhghgh");
+            return showErrors(th, msg);
         }
         return true;
     }

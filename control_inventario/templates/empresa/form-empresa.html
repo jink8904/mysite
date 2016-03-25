@@ -5,7 +5,7 @@
                 <h6 class="modal-title">Adicionar empresa</h6>
             </div>
 
-            <form class="form-horizontal" enctype="multipart/form-data" method="post" action=""
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="" novalidate
                   table="tabla-empresa">
                 <div class="modal-body">
                     {% csrf_token %}
@@ -15,17 +15,17 @@
                         <label class="control-label col-lg-2">RUC:</label>
 
                         <div class="col-md-4">
-                            <input type="text" name="ruc" class="form-control" validator="v_11digits">
+                            <input type="text" name="ruc" class="form-control" validator="v_11digits" required>
                         </div>
                         {#Año inicio#}
                         <label class="control-label col-md-2">A&ntilde;o inicio:</label>
 
                         <div class="col-md-4">
-                            <select class="bootstrap-select" name="anno_inicio" data-width="100%">
-                                <option>Seleccionar año</option>
-                                <option>2016</option>
-                                <option>2015</option>
-                                <option>2014</option>
+                            <select class="bootstrap-select" name="anno_inicio" data-width="100%" required>
+                                <option value="">Seleccionar año</option>
+                                <option value="2016">2016</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
                             </select>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                         <label class="control-label col-lg-2">Nombre:</label>
 
                         <div class="col-lg-10">
-                            <input type="text" name="nombre" maxlength="30" id="id_nombre" class="form-control">
+                            <input type="text" name="nombre" class="form-control" required>
                         </div>
                     </div>
                     {#Direccion#}
@@ -41,8 +41,7 @@
                         <label class="control-label col-lg-2">Direcci&oacute;n:</label>
 
                         <div class="col-lg-10">
-                            <input type="text" name="direccion" maxlength="50" id="id_direccion"
-                                   class="form-control">
+                            <input type="text" name="direccion" class="form-control" required>
                         </div>
                     </div>
                 </div>

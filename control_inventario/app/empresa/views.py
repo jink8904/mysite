@@ -25,9 +25,11 @@ def empresa(request):
             args['action'] = "mod"
         else:
             form = forms.EmpresaForm(request.POST)
-            args['action'] = "add"
             if form.is_valid():
+                args['action'] = "add"
                 form.save()
+            else:
+                args['action'] = "error"
 
     if request.session.has_key("empresa-del") == 1:
         if request.session["empresa-del"]:
@@ -35,7 +37,6 @@ def empresa(request):
             request.session["empresa-del"] = False
     args.update(csrf(request))
     args['empresa_list'] = empresa_list
-    print(args)
     return render_to_response('empresa/main.html', args, context_instance=RequestContext(request))
 
 

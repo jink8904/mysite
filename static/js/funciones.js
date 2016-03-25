@@ -135,6 +135,8 @@ var cleanData = function (tipo, id, callback) {
             var sel = "form[table=" + id + "] input[type!=hidden], form[table=" + id + "] select";
             $(sel).each(function (index, th) {
                 $(this).val("");
+                $(this).find("option:selected").val("")
+                $(this).selectpicker("refresh")
             })
             break;
         case "select":
@@ -176,7 +178,7 @@ var updateRecords = function (table_id) {
         var select_id = $(this).attr("id");
         //ta chapusero arreglar despues... nada mas para los bootstrap-select
         $("select[name=" + name + "]").next().children("button").children(".filter-option").html(record[name]);
-        $("select[name=" + name + "]").val(record[name])
+        $("select[name=" + name + "]").val(record[record_id])
     })
 }
 

@@ -46,7 +46,7 @@ def categoria(request):
 def del_categoria(request):
     categoria = models.Categoria.objects.get(id=request.POST.get("id"))
     categoria.delete()
-    request.session['categoria-del'] = True;
+    request.session['categoria-del'] = True
 
     args = {}
     args['success'] = True

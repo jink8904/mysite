@@ -127,6 +127,13 @@ $(document).ready(function () {
     $('.bootstrap-select-search').attr("data-live-search", true);
     $('.bootstrap-select-search').selectpicker();
 
+    //remove validations error classs from modals
+    $(".modal").on("show.bs.modal", function(){
+        $(this).find(".invalid").each(function(index, th){
+            $(th).removeClass("invalid");
+        })
+    })
+
     //select-periodo
     $("form#select-periodo button[type=submit]").click(function () {
         selPeriodo();
@@ -171,7 +178,7 @@ $(document).ready(function () {
     })
 
     $("li a[action=mod-categoria]").click(function () {
-        modCategoria()
+        modCategoria();
     })
 
     $('li a[action=del-categoria]').on('click', function () {
@@ -179,6 +186,19 @@ $(document).ready(function () {
     });
 
     //--------------------------- Producto ----------------------------------------
+    $("li a[action=add-producto]").click(function () {
+        addProducto();
+    })
+
+    $("li a[action=mod-producto]").click(function () {
+        modProducto();
+    })
+
+    $('li a[action=del-producto]').on('click', function () {
+        delProducto();
+    });
+
+
 
     $("button[table=tabla-producto][accion=add]").click(function () {
         cleanData("form", "tabla-producto");

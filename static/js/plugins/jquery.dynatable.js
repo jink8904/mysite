@@ -1685,35 +1685,22 @@
             }
             return res;
         },
-        limpiar: function (text) {
-            var text = text.toLowerCase(); // a minusculas
-            text = text.replace(/[באהגו]/, 'a');
-            text = text.replace(/[יטכך]/, 'e');
-            text = text.replace(/[םלןמ]/, 'i');
-            text = text.replace(/[ףעצפ]/, 'o');
-            text = text.replace(/[תשüû]/, 'u');
-            text = text.replace(/[‎ÿ]/, 'y');
-            text = text.replace(/[ס]/, 'n');
-            text = text.replace(/[ח]/, 'c');
-            //text = text.replace(/['"]/, '');
-            text = text.replace(/[^a-zA-Z0-9-]/, '');
-            //text = text.replace(/\s+/, '-');
-            //text = text.replace(/' '/, '-');
-            //text = text.replace(/(_)$/, '');
-            //text = text.replace(/^(_)/, '');
-            return text;
-        },
         normalize: function (str) {
             var result = [];
             for (var i = 0; i < str.length; i++) {
                 var code = str.charCodeAt(i);
                 var c = str.charAt(i);
+                //console.log(c)
+                //console.log(code)
                 switch (code) {
                     case 241:
                         result.push("nn");
                         break;
                     case 243:
                         result.push("o");
+                        break;
+                    case 237:
+                        result.push("i");
                         break;
                     default:
                         result.push(c);
@@ -1780,7 +1767,6 @@
                 if (!pair[1]) {
                     continue
                 }
-                ;
                 v = decodeURIComponent(pair[1].replace(/\+/g, ' '));
 
                 // modified to parse multi-level parameters (e.g. "hi[there][dude]=whatsup" => hi: {there: {dude: "whatsup"}})

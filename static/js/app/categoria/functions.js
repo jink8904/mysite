@@ -48,7 +48,6 @@ function delCategoria() {
 }
 
 function addCategoria() {
-    disabled = $("li a[action=mod-categoria]").parent().hasClass("disabled");
     cleanData("form", "tabla-categoria");
     panel_title = "Adicionar categor&iacute;a";
     load_msg = "Adicionando categor&iacute;a...";

@@ -1,85 +1,94 @@
-<form method="post" action="" table="tabla-producto">
-    {% csrf_token %}
-    <input type="text" name="id" value="" class="hidden">
+<div class="modal fade in" id="form-producto">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h6 class="modal-title">Adicionar producto</h6>
+            </div>
+            {#------------------ form ---------------------#}
+            <form method="post" action="" table="tabla-producto" novalidate>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <input type="text" name="id" value="" class="hidden">
 
-    <div class="form-group">
-        {#Nombre del producto/articulo#}
-        <label>Nombre del producto/art&iacute;culo:</label>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {#Nombre del producto/articulo#}
+                                <label>Nombre del producto/art&iacute;culo</label>
+                                <input type="text" name="nombre" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                {#Nombre reducido#}
+                                <label>Nombre reducido</label>
+                                <input type="text" name="nombre_reducido" class="form-control" required>
+                            </div>
 
-        <div>
-            <input type="text" name="nombre" id="id_nombre" class="form-control">
+                            <div class="col-sm-5">
+                                {#Codigo#}
+                                <label>Codigo</label>
+                                <input type="text" name="codigo" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+
+                            <div class="col-sm-7">
+                                {#Tipo de producto#}
+                                <label>Tipo de producto</label>
+                                <select name="tipo" class="bootstrap-select-search" data-width="100%" required>
+                                    <option value="">Seleccionar tipo de producto</option>
+                                    {% for tipo in tipo_list %}
+                                        <option value="{{ tipo.id }}">{{ tipo.denominacion }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="col-sm-5">
+                                {#Categoria#}
+                                <label>Categor&iacute;a</label>
+                                <select name="categoria" class="bootstrap-select-search" data-width="100%" required>
+                                    <option value="">Seleccionar categor&iacute;a</option>
+                                    {% for cat in cat_list %}
+                                        <option value="{{ cat.id }}">{{ cat.denominacion }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-7">
+                                {#Unidad#}
+                                <label>Unidad</label>
+                                <select name="unidad" class="bootstrap-select-search" data-width="100%" required>
+                                    <option value="">Seleccionar unidad</option>
+                                    {% for unidad in unidad_list %}
+                                        <option value="{{ unidad.id }}"
+                                                abrv="{{ unidad.abreviatura }}">{{ unidad.denominacion }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="col-sm-5">
+                                {#Abreviatura#}
+                                <label>Abreviatura</label>
+                                <input type="text" name="abreviatura" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {#    --buttons--#}
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary" type="submit">Guardar</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <div class="form-group">
-        {#Nombre reducido#}
-        <label>Nombre reducido:</label>
-
-        <div>
-            <input type="text" name="nombre_reducido" maxlength="30" id="id_nombre_reducido" class="form-control">
-        </div>
-    </div>
-
-    <div class="form-group">
-        {#Codigo#}
-        <label>Codigo:</label>
-
-        <div>
-            <input type="text" name="codigo" id="id_codigo" class="form-control">
-        </div>
-    </div>
-    <div class="form-group">
-        {#Categoria#}
-        <label>Categor&iacute;a:</label>
-
-        <div>
-            <select id="id_categoria" name="categoria">
-                <option></option>
-                {% for cat in cat_list %}
-                    <option value="{{ cat.id }}">{{ cat.denominacion }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
-        {#Tipo de producto#}
-        <label>Tipo de producto:</label>
-
-        <div>
-            <select id="id_tipo" name="tipo">
-                <option></option>
-                {% for tipo in tipo_list %}
-                    <option value="{{ tipo.id }}">{{ tipo.denominacion }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
-        {#Unidad#}
-        <label>Unidad:</label>
-
-        <div>
-            <select id="id_unidad" name="unidad">
-                <option></option>
-                {% for unidad in unidad_list %}
-                    <option value="{{ unidad.id }}" abrv="{{ unidad.abreviatura }}">{{ unidad.denominacion }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        {#Abreviatura#}
-        <label>Abreviatura:</label>
-
-        <div>
-            <input type="text" name="abreviatura" maxlength="50" id="id_abreviatura" class="form-control" readonly>
-        </div>
-    </div>
-
-    {#    --buttons--#}
-    <div class="modal-footer">
-        <button class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        <button class="btn btn-primary" type="submit">Guardar</button>
-    </div>
-</form>

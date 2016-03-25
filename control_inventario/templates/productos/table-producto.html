@@ -1,32 +1,18 @@
-<div class="panel panel-flat">
+<div class="panel panel-primary panel-bordered">
     <div class="panel-heading">
-        <h5 class="panel-title" id="producto-form-title">Lista de productos</h5>
+        <h6 class="panel-title">Lista de productos</h6>
 
         <div class="heading-elements">
             <ul class="icons-list">
-                <li><a data-action="collapse"></a></li>
+                <li><a title="Adicionar (CTR+A)" action="add-producto"><i class=" icon-plus-circle2"></i></a></li>
+                <li class="disabled" table="tabla-producto"><a title="Editar producto seleccionado (CTR+M)" action="mod-producto"><i class="icon-pen6"></i></a></li>
+                <li class="disabled" table="tabla-producto"><a title="Eliminar producto seleccionado (DEL)" action="del-producto"><i class="icon-trash"></i></a></li>
             </ul>
         </div>
-        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
-    </div>
-        
-    <div class="nav-table" id="navtb-producto">
-        <!-- Button trigger modal -->
-        <button class="btn btn-primary" data-toggle="modal" data-target="#form-producto" table="tabla-producto"
-                accion="add">
-            Nuevo
-        </button>
-        <button class="btn btn-primary disabled" table="tabla-producto" accion="mod">
-            Editar
-        </button>
-        <button class="btn btn-primary disabled" table="tabla-producto" accion="del">
-            Eliminar
-        </button>
-    </div>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
 
-    <div class="panel-body" style="display: block;">
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered" id="tabla-producto" select="true">
+    <div class="panel-body">
+        <table class="table table-hover table-bordered" id="tabla-producto" select="true">
                 <thead class="bg-primary-600">
                 <tr>
                     <th class="hidden">Id</th>
@@ -37,7 +23,7 @@
                     <th class="hidden">unidad_id</th>
                     <th>C&oacute;digo</th>
                     <th>Nombre</th>
-                    <th>Categoria</th>
+                    <th>Categor&iacute;a</th>
                     <th>Tipo</th>
                     <th>Unidad</th>
                 </tr>
@@ -60,6 +46,5 @@
                 {% endfor %}
                 </tbody>
             </table>
-        </div>
     </div>
 </div>

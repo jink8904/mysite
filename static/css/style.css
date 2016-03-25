@@ -51,11 +51,12 @@ input.invalid {
     outline: 0 none;
 }
 
-/*.dynatable-per-page-select {*/
-    /*background-color: #fff;*/
-    /*border: 1px solid #ccc;*/
-    /*width: 220px;*/
-/*}*/
+button.invalid {
+    border-color: #b94a48 !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(206, 31, 23, 0.5);
+    outline: 0 none;
+}
+
 
 table {
     border-radius: 4px;
@@ -69,11 +70,6 @@ table {
 .btn-modals {
     text-align: right;
 }
-
-/*.modal-footer {*/
-    /*border-top: 1px solid #e5e5e5;*/
-    /*padding: 15px 0 0 15px;*/
-/*}*/
 
 .modal-footer1 {
     border-top: 1px solid #e5e5e5;
