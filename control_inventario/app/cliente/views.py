@@ -4,11 +4,13 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
 from control_inventario import forms, models
 from django.contrib.auth.decorators import login_required
+import json
+
 
 def list_cliente(cliente_list):
-    for i in cliente_list:
-        i["tipo_id"] = models.TipoId.objects.get(id=i.get("tipo_id_id"))
-    return cliente_list;
+    for ciente in cliente_list:
+        ciente["tipo_id"] = models.TipoId.objects.get(id=ciente.get("tipo_id_id"))
+    return cliente_list
 
 
 @login_required(login_url='/ingresar')
@@ -17,27 +19,24 @@ def cliente(request):
     emp = models.Empresa.objects.get(id=id_empresa)
     c = emp.cliente_set.values()
 
-    cliente_list = list_cliente(c)
     tipoid_list = models.TipoId.objects.values()
+
+    args = {}
     datos = request.POST
     if datos:
+        tipo_id = models.TipoId.objects.get(id=datos.get("tipo_id"))
         if datos.get("id"):
-            for obj in cliente_list:
-                id = obj.get("id")
-                if str(id) == datos.get("id"):
-                    tipo_id = models.TipoId.objects.get(id=datos.get("tipo_id"))
-                    p = models.Cliente(
-                        id=id,
-                        identificador=datos.get("identificador"),
-                        nombre=datos.get("nombre"),
-                        direccion=datos.get("direccion"),
-                        tipo_id=tipo_id,
-                    )
-                    p.save()
-                    break
+            p = models.Cliente(
+                id=datos.get("id"),
+                identificador=datos.get("identificador"),
+                nombre=datos.get("nombre"),
+                direccion=datos.get("direccion"),
+                tipo_id=tipo_id,
+                empresa=emp
+            )
+            p.save()
+            args['action'] = 'mod'
         else:
-            form = forms.ProductoForm(datos)
-            tipo_id = models.TipoId.objects.get(id=datos.get("tipo_id"))
             p = models.Cliente(
                 identificador=datos.get("identificador"),
                 nombre=datos.get("nombre"),
@@ -46,13 +45,15 @@ def cliente(request):
                 empresa=emp
             )
             p.save()
-        return HttpResponseRedirect('/cliente', {"cliente_list": cliente_list})
-    else:
-        form = forms.ProductoForm()
-    args = {}
-    args.update(csrf(request))
+            args['action'] = 'add'
 
-    args['form'] = form
+    if request.session.has_key("cliente-del") == 1:
+        if request.session["cliente-del"]:
+            args['action'] = 'del'
+            request.session["cliente-del"] = False
+
+    cliente_list = list_cliente(c)
+    args.update(csrf(request))
     args['cliente_list'] = cliente_list
     args['tipoid_list'] = tipoid_list
     render_to_response('clientes/form-cliente.html', args)
@@ -61,6 +62,11 @@ def cliente(request):
 
 @login_required(login_url='/ingresar')
 def del_cliente(request):
-    producto = models.Cliente.objects.get(identificador=request.POST.get("identificador"))
-    producto.delete();
-    return HttpResponseRedirect('/cliente')
+    cliente = models.Cliente.objects.get(id=request.POST.get("id"))
+    cliente.delete()
+    request.session['cliente-del'] = True
+
+    args = {}
+    args['success'] = True
+    json_data = json.dumps(args)
+    return HttpResponse(json_data, mimetype="application/json")

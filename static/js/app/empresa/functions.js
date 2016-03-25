@@ -129,7 +129,6 @@ function selPeriodo(fn) {
             size: 'small',
             message: "Your message here…",
             inputType: "select",
-            size: "small",
             inputOptions: inputOptions,
             callback: function (result) {
                 if (result !== null)

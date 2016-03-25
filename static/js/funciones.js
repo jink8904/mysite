@@ -189,41 +189,6 @@ var updateButtons = function (table_id) {
     $(sel_btns).removeClass("disabled");
 }
 
-//--------------------- Empresa ----------------------------
-var selEmpresa = function () {
-    //empresa_seleccionada = getRecord("tabla-empresa");
-    //mes = $("select[name=mes]").val();
-    //mes_mostrar = $("select[name=mes]>option[value=" + mes + "]").html();
-    //sessionStorage.setItem("empresa", JSON.stringify(empresa_seleccionada));
-    //sessionStorage.setItem("anno", empresa_seleccionada.anno_inicio);
-    //sessionStorage.setItem("mes", mes);
-    //sessionStorage.setItem("mes_mostrar", mes_mostrar);
-    //
-    //token = $("#navtb-empresa input[name=csrfmiddlewaretoken]").attr("value");
-    //$.ajax({
-    //    url: "../select-empresa",
-    //    method: "post",
-    //    dataType: 'json',
-    //    async: true,
-    //    data: {
-    //        csrfmiddlewaretoken: token,
-    //        empresa: empresa_seleccionada,
-    //        mes: mes
-    //    },
-    //    success: function (data) {
-    //        $(location).attr("href", "../");
-    //    }
-    //})
-
-}
-
-var selPeriodo = function () {
-    mes = $("form#select-periodo [name=periodo]").val();
-    mes_mostrar = $("form#select-periodo [name=periodo]>option[value=" + mes + "]").html();
-    sessionStorage.setItem("mes", mes);
-    sessionStorage.setItem("mes_mostrar", mes_mostrar);
-}
-
 var updateFooter = function () {
     var empresa = $.parseJSON(sessionStorage.getItem("empresa"));
     var usuario = sessionStorage.getItem("usuario");

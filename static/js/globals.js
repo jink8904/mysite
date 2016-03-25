@@ -198,26 +198,6 @@ $(document).ready(function () {
         delProducto();
     });
 
-
-
-    $("button[table=tabla-producto][accion=add]").click(function () {
-        cleanData("form", "tabla-producto");
-        $("#form-empresa-label").html("Adicionar producto");
-    })
-    $("button[table=tabla-producto][accion=mod]").click(function () {
-        if (!$(this).hasClass("disabled")) {
-            updateRecords("tabla-producto");
-            $("#form-empresa-label").html("Modificar producto");
-            $("#form-producto").modal();
-        }
-    })
-    $("button[table=tabla-producto][accion=del]").click(function () {
-        if (!$(this).hasClass("disabled")) {
-            var codigo = $("#tabla-producto tr.active td[key=codigo]").html();
-            $("form[accion=del] input[name=codigo]").val(codigo);
-            $(".confirm-del").modal();
-        }
-    })
     $("#id_unidad>option").click(function () {
         var abrv = $(this).attr("abrv");
         $("#id_abreviatura").val(abrv);
@@ -249,6 +229,20 @@ $(document).ready(function () {
     })
 
     //-------------------------------  Cliente ------------------------------
+     $("li a[action=add-cliente]").click(function () {
+         console.log("dfgfdgdf")
+        addCliente();
+    })
+
+    $("li a[action=mod-cliente]").click(function () {
+        modCliente();
+    })
+
+    $('li a[action=del-cliente]').on('click', function () {
+        delCliente();
+    });
+
+    //--old
     $("button[table=tabla-cliente][accion=add]").click(function () {
         cleanData("form", "tabla-cliente");
         $("#form-empresa-label").html("Adicionar cliente");
