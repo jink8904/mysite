@@ -6,13 +6,6 @@
 
 
 {% block content %}
-    <div class="col-md-10 col-md-offset-1">
-        <!-- Form -->
-        <div class="form-productos-inv">
-            {% include "inventario_inicial/form-producto_inv.html" %}
-        </div>
-        <!-- /horizotal form -->
-        {#        Tabla productos#}
-        {% include "inventario_inicial/table-producto.html" %}
-    </div>
+    {% include "inventario_inicial/form-producto_inv.html" %}
+    {% include "inventario_inicial/table-producto.html" %}
 {% endblock %}

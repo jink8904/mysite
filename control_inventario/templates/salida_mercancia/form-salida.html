@@ -8,8 +8,8 @@
             <label>Tipo de comprobante:</label>
 
             <div>
-                <select name="tipo-comprobante">
-                    <option></option>
+                <select name="tipo-comprobante" class="bootstrap-select-search" data-width="100%" data-size="8" required>
+                    <option value="0">Seleccionar tipo de comprobante</option>
                     {% for tipo_comprobante in comprobante_list %}
                         <option value="{{ tipo_comprobante.id }}">{{ tipo_comprobante.denominacion }}</option>
                     {% endfor %}
@@ -46,8 +46,8 @@
             <label>N&uacute;mero de identificaci&oacute;n del cliente:</label>
 
             <div>
-                <select name="identificador">
-                    <option></option>
+                <select name="identificador" class="bootstrap-select-search" data-size="8" data-width="100%" required>
+                    <option value="">Seleccionar identificaci&oacute;n</option>
                     {% for cliente in cliente_list %}
                         <option value="{{ cliente.id }}">{{ cliente.identificador }}</option>
                     {% endfor %}
@@ -59,8 +59,8 @@
             <label>Nombre:</label>
 
             <div>
-                <select name="nombre" maxlength="30">
-                    <option value="0"></option>
+                <select name="nombre" class="bootstrap-select-search" data-size="8" data-width="100%" required>
+                    <option value="">Seleccionar cliente</option>
                     {% for cliente in cliente_list %}
                         <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
                     {% endfor %}
@@ -79,8 +79,8 @@
             <label>Codigo:</label>
 
             <div>
-                <select name="codigo">
-                    <option value="0"></option>
+                <select name="codigo" class="bootstrap-select-search" data-size="8" data-width="100%" required>
+                    <option value="0">Seleccionar c&oacute;digo</option>
                     {% for producto in producto_list %}
                         <option value="{{ producto.id }}" stock="{{ producto.stock }}">{{ producto.codigo }}</option>
                     {% endfor %}
@@ -100,8 +100,8 @@
             <label>Producto:</label>
 
             <div>
-                <select name="producto">
-                    <option value="0"></option>
+                <select name="producto" class="bootstrap-select-search" data-size="8" data-width="100%" required>
+                    <option value="0">Seleccionar producto</option>
                     {% for producto in producto_list %}
                         <option value="{{ producto.id }}" stock="{{ producto.stock }}">{{ producto.nombre }}</option>
                     {% endfor %}
@@ -129,8 +129,8 @@
             <label>Tipo de operaci&oacute;n:</label>
 
             <div>
-                <select name="tipo-operacion" id="tipo-comprobante-id">
-                    <option value="0"></option>
+                <select name="tipo-operacion" class="bootstrap-select-search" data-size="8" data-width="100%" required>
+                    <option value=""></option>
                     {% for operacion in tipo_operacion_list %}
                         <option value="{{ operacion.id }}">{{ operacion.denominacion }}</option>
                     {% endfor %}

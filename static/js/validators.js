@@ -20,7 +20,7 @@ function submitForm(selector, fn) {
                 valid = (valid) ? aux : valid;
             }
             //    validate numberfield
-            if ($(th).attr("numberfield") && valid) {
+            if ($(th).attr("numberfield") != undefined && valid) {
                 var aux = checkNumberField(th);
                 valid = (valid) ? aux : valid;
             }
@@ -48,7 +48,7 @@ function submitForm(selector, fn) {
         return valid;
     }
 
-    var showErrors = function (th, msg) {
+    var showErrorTooltip = function (th, msg) {
         if ($(th).hasClass("tooltipstered"))
             $(th).tooltipster("destroy");
         $(th).tooltipster({
@@ -66,7 +66,7 @@ function submitForm(selector, fn) {
 
     var checkRequired = function (th) {
         if ($(th).val() == "") {
-            return showErrors(th, "El campo es requerido");
+            return showErrorTooltip(th, "El campo es requerido");
         }
         return true;
     }
@@ -75,7 +75,7 @@ function submitForm(selector, fn) {
     var checkNumberField = function (th) {
         var regex = /^\d+$/;
         if (!regex.test($(th).val())) {
-            return showErrors(th, "Solo numeros");
+            return showErrorTooltip(th, "Solo numeros");
         }
         return true;
     }
@@ -95,7 +95,7 @@ function submitForm(selector, fn) {
                 break
         }
         if (!regex.test($(th).val())) {
-            return showErrors(th, msg);
+            return showErrorTooltip(th, msg);
         }
         return true;
     }

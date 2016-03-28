@@ -9,55 +9,55 @@ $(document).ready(function () {
         params: {
             records: "empresas"
         }
-    })
-        .bind('dynatable:afterProcess', fixTableSelect);
+    }).bind('dynatable:afterProcess', fixTableSelect);
+
     $("#tabla-categoria").dynatable({
         params: {
             records: "categorias"
         }
-    })
-        .bind('dynatable:afterProcess', fixTableSelect);
+    }).bind('dynatable:afterProcess', fixTableSelect);
+
     $("#tabla-producto").dynatable({
         params: {
             records: "productos"
         }
-    })
-        .bind('dynatable:afterProcess', fixTableSelect);
+    }).bind('dynatable:afterProcess', fixTableSelect);
+
     $("#tabla-producto-inv").dynatable({
         params: {
             records: "productos"
         }
-    })
-        .bind('dynatable:afterProcess', fixTableSelect);
+    }).bind('dynatable:afterProcess', fixTableSelect);
+
     $("#tabla-proveedor").dynatable({
         params: {
             records: "proveedores"
         }
-    })
-        .bind('dynatable:afterProcess', fixTableSelect);
+    }).bind('dynatable:afterProcess', fixTableSelect);
+
     $("#tabla-cliente").dynatable({
         params: {
             records: "clientes"
         }
-    })
-        .bind('dynatable:afterProcess', fixTableSelect);
+    }).bind('dynatable:afterProcess', fixTableSelect);
+
     $("#tabla-ventas").dynatable({
         params: {
             records: "ventas"
         }
-    })
-        .bind('dynatable:afterProcess', fixTableSelect);
+    }).bind('dynatable:afterProcess', fixTableSelect);
+
     $("#tabla-compras").dynatable({
         params: {
             records: "compras"
         }
-    })
-        .bind('dynatable:afterProcess', fixTableSelect);
+    }).bind('dynatable:afterProcess', fixTableSelect);
+
     $("#tabla-stock-disp").dynatable({
         params: {
             records: "productos"
         }
-    })
+    }).bind('dynatable:afterProcess', fixTableSelect);
     //------- Manejo global ---------
     //select table
     $("table[select]>tbody>tr").click(function (evt) {
@@ -134,10 +134,6 @@ $(document).ready(function () {
         })
     })
 
-    //select-periodo
-    $("form#select-periodo button[type=submit]").click(function () {
-        selPeriodo();
-    })
     //--------------------------- Login ------------------------------
     $("form[role=login] button[type=submit]").click(function () {
         var usuario = $("form[role=login] input[name=username]").val();
@@ -170,9 +166,8 @@ $(document).ready(function () {
         selEmpresa();
     });
 
-
-
     //------------------- Categoria   -------------------
+
     $("li a[action=add-categoria]").click(function () {
         addCategoria();
     })
@@ -185,7 +180,8 @@ $(document).ready(function () {
         delCategoria();
     });
 
-    //--------------------------- Producto ----------------------------------------
+    //--------------------------- Producto ---------------------------------
+
     $("li a[action=add-producto]").click(function () {
         addProducto();
     })
@@ -204,11 +200,13 @@ $(document).ready(function () {
     })
 
     //----------------------------- Inventario ---------------------------
+
     $("#tabla-producto-inv>tbody>tr").click(function () {
         updateRecords("tabla-producto-inv");
     });
 
-    //----------------------- Proveedor --------------------------------------
+    //----------------------- Proveedor ------------------------------------
+
      $("li a[action=add-proveedor]").click(function () {
         addProveedor();
     })
@@ -220,30 +218,10 @@ $(document).ready(function () {
     $('li a[action=del-proveedor]').on('click', function () {
         delProveedor();
     })
-    
-    
-    $("button[table=tabla-proveedor][accion=add]").click(function () {
-        cleanData("form", "tabla-proveedor");
-        $("#form-empresa-label").html("Adicionar proveedor");
-    })
-    $("button[table=tabla-proveedor][accion=mod]").click(function () {
-        if (!$(this).hasClass("disabled")) {
-            updateRecords("tabla-proveedor");
-            $("#form-empresa-label").html("Modificar proveedor");
-            $("#form-proveedor").modal();
-        }
-    })
-    $("button[table=tabla-proveedor][accion=del]").click(function () {
-        if (!$(this).hasClass("disabled")) {
-            var identificador = $("#tabla-proveedor tr.active td[key=no_identificacion]").html();
-            $("form[accion=del] input[name=identificador]").val(identificador);
-            $(".confirm-del").modal();
-        }
-    })
 
     //-------------------------------  Cliente ------------------------------
+
      $("li a[action=add-cliente]").click(function () {
-         console.log("dfgfdgdf")
         addCliente();
     })
 
@@ -257,11 +235,14 @@ $(document).ready(function () {
 
     //---------------- Salida de mercancia -------------------------
 
-    $("#datos-producto-salida [name=codigo]>option," +
-        "#datos-producto-salida [name=producto]>option").click(function () {
-        var id = $(this).attr("value");
-        var selector_id = "#datos-producto-salida";
-        llenarDatosProducto(id, selector_id);
+    $("#datos-producto-salida [name=codigo]," +
+        "#datos-producto-salida [name=producto]").change(function(){
+        updateProductsData(this)
+    })
+
+    $("#datos-comprobante-salida [name=identificador]," +
+        "#datos-comprobante-salida [name=nombre]").change(function(){
+        updateComprobantData(this)
     })
 
     $("#datos-producto-salida input[name=cantidad], " +
@@ -274,19 +255,17 @@ $(document).ready(function () {
         addDetalleVenta()
     })
 
-    $("#add-salida-merc").click(function () {
+    $('li a[action=add-venta]').on('click', function () {
+        addVenta();
+    });
+
+    $('li a[action=det-venta]').on('click', function () {
+        verDetallesVenta();
+    });
+
+    $('a[href=#detalles_comprobante_venta] i[action=add-venta]').on('click', function () {
         addSalidaMercancia();
-    })
-
-    $("#datos-comprobante-salida [name=identificador]>option").click(function () {
-        var value = $(this).val();
-        $("#datos-comprobante-salida [name=nombre]").val(value);
-    })
-
-    $("#datos-comprobante-salida [name=nombre]>option").click(function () {
-        var value = $(this).val();
-        $("#datos-comprobante-salida [name=identificador]").val(value);
-    })
+    });
 
     $("#del-detalle-venta").click(function () {
         $(this).addClass("disabled");
@@ -299,6 +278,7 @@ $(document).ready(function () {
     })
 
     //------------- Entrada de mercancia ---------------------
+
     $("#datos-producto-entrada select[name=codigo]>option," +
         "#datos-producto-entrada select[name=producto]>option").click(function () {
         var id = $(this).attr("value");
@@ -342,6 +322,7 @@ $(document).ready(function () {
     })
 
     //------------------------ Stock disponible ----------------------------
+
     $("#navtb-stock-disp button[accion=export_excel]").click(function () {
         exportarExcel();
     })

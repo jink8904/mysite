@@ -17,7 +17,6 @@ function showMsg(msg, tipo, opt) {
     if (msg) {
         event.Mensaje(msg, settings);
     }
-
 }
 
 function fixTableSelect() {
@@ -176,8 +175,6 @@ var updateRecords = function (table_id) {
         var name = $(this).attr("name");
         var record_id = name + "_id";
         var select_id = $(this).attr("id");
-        console.log(record)
-        console.log(name)
         //ta chapusero arreglar despues... nada mas para los bootstrap-select
         $("select[name=" + name + "]").next().children("button").children(".filter-option").html(record[name]);
         $("select[name=" + name + "]").val(record[record_id])
@@ -251,135 +248,6 @@ var limpiarCamposAddDet = function (tipo) {
     detalle_compra_actual = null;
 }
 
-//------Salida de mercancia---
-var llenarDatosImportesVenta = function () {
-    var igv = $("#datos-producto-salida input[name=igv]").val();
-    if ($("#datos-producto-salida [name=igv-checkbox]").val() == 'off')
-        igv = 0
-
-    var cant = $("#datos-producto-salida input[name=cantidad]").val(),
-        valor_unitario = parseFloat($("#importes-unitarios-salida input[name=valor-unitario]").val()),
-        igv_unitario = igv / 100 * valor_unitario,
-        precio_unitario = igv_unitario + valor_unitario,
-        valor_venta = cant * valor_unitario,
-        igv_total = cant * igv_unitario,
-        precio_venta = valor_venta + igv_total;
-
-    detalle_venta_actual = {
-        cant: parseInt(cant),
-        valor_unitario: parseFloat(valor_unitario).toFixed(2),
-        igv: parseFloat(igv).toFixed(2),
-        igv_unitario: igv_unitario.toFixed(2),
-        precio_unitario: precio_unitario.toFixed(2),
-        valor_venta: valor_venta.toFixed(2),
-        igv_total: igv_total.toFixed(2),
-        precio_venta: precio_venta.toFixed(2)
-    }
-    if (!cant || !valor_unitario) {
-        alert("Los campos cantidad y valor unitario no deben estar vacios");
-        return false;
-    } else {
-        $("#importes-unitarios-salida input[name=valor-unitario]").val(valor_unitario.toFixed(2))
-        $("#importes-unitarios-salida input[name=igv-unitario]").val(igv_unitario.toFixed(2));
-        $("#importes-unitarios-salida input[name=precio-unitario]").val(precio_unitario.toFixed(2));
-        $(" #importes-totales-salida input[name=valor-venta]").val(valor_venta.toFixed(2));
-        $("#importes-totales-salida input[name=igv-total]").val(igv_total.toFixed(2));
-        $("#importes-totales-salida input[name=precio-venta]").val(precio_venta.toFixed(2));
-        return true;
-    }
-}
-
-detalle_venta_list = {};
-var addDetalleVenta = function () {
-    no_error = llenarDatosImportesVenta();
-    if (no_error && detalle_venta_actual) {
-        var prod_id = $("#datos-producto-salida [name=codigo]").val();
-        var codigo = $("#datos-producto-salida [name=codigo] option[value=" + prod_id + "]").html();
-        var producto = $("#datos-producto-salida [name=producto] option[value=" + prod_id + "]").html();
-        detalle_venta_list[prod_id] = detalle_venta_actual;
-        var det = '<tr>' +
-            '<td name="codigo">' + codigo + '</td>' +
-            '<td name="producto">' + producto + '</td>' +
-            '<td name="cantidad">' + detalle_venta_actual.cant + '</td>' +
-            '<td name="valor_unitario">' + detalle_venta_actual.valor_unitario + '</td>' +
-            '<td name="valor_venta">' + detalle_venta_actual.valor_venta + '</td>' +
-            '<td name="igv_total">' + detalle_venta_actual.igv_total + '</td>' +
-            '<td name="precio_venta">' + detalle_venta_actual.precio_venta + '</td>' +
-            '</tr>'
-        $("#tabla-detalle-venta").removeClass("hidden");
-        $(det).appendTo("#tabla-detalle-venta>tbody").click(function (ev) {
-            cleanData("table", "tabla-detalle-venta");
-            $(this).addClass("active");
-            $("#del-detalle-venta").removeClass("disabled");
-        });
-        limpiarCamposAddDet("salida");
-    }
-}
-
-var eliminarDetalleVenta = function () {
-    $("#tabla-detalle-venta>tbody>tr.active").remove();
-}
-
-var addSalidaMercancia = function () {
-    var fecha = $("#datos-comprobante-salida [name=fecha]").val();
-    datos_venta = {
-        tipo_comprobante: $("#datos-comprobante-salida [name=tipo-comprobante]").val(),
-        fecha: fecha,
-        serie: $("#datos-comprobante-salida [name=serie]").val(),
-        numero: $("#datos-comprobante-salida [name=numero]").val(),
-        cliente: $("#datos-comprobante-salida [name=identificador]").val(),
-    }
-    token = $("input[name=csrfmiddlewaretoken]").attr("value");
-    $.ajax({
-        url: "add",
-        method: "post",
-        dataType: 'json',
-        async: true,
-        data: {
-            csrfmiddlewaretoken: token,
-            detalle_venta_list: JSON.stringify(detalle_venta_list),
-            datos_venta: JSON.stringify(datos_venta)
-        },
-        success: function (data) {
-            $(location).attr("href", "/salida");
-        }
-    })
-}
-
-var verDetallesVenta = function () {
-    var venta = getRecord("tabla-ventas");
-    token = $("input[name=csrfmiddlewaretoken]").attr("value");
-    $.ajax({
-        url: "detalles",
-        method: "post",
-        dataType: 'json',
-        async: true,
-        data: {
-            csrfmiddlewaretoken: token,
-            id_venta: venta.id,
-        },
-        success: function (data) {
-            $("#tabla-d-venta-modal>tbody>tr").each(function (index, th) {
-                $(th).remove();
-            })
-            detalle_list = data["d_list"]
-            for (var i in detalle_list) {
-                var detalle = detalle_list[i];
-                var det = '<tr>' +
-                    '<td name="codigo">' + detalle['codigo'] + '</td>' +
-                    '<td name="descripcion">' + detalle['descripcion'] + '</td>' +
-                    '<td name="cantidad">' + detalle['cantidad'] + '</td>' +
-                    '<td name="valor_unitario">' + parseFloat(detalle['valor_unitario']).toFixed(2) + '</td>' +
-                    '<td name="valor_venta">' + parseFloat(detalle['valor_venta']).toFixed(2) + '</td>' +
-                    '<td name="igv">' + parseFloat(detalle['igv']).toFixed(2) + '</td>' +
-                    '<td name="importe">' + parseFloat(detalle['importe']).toFixed(2) + '</td>' +
-                    '</tr>';
-                $(det).appendTo("#tabla-d-venta-modal>tbody")
-            }
-            $("#modal-detalles-venta").modal();
-        }
-    })
-}
 
 //--------- Entrada de mercancia ---------
 var llenarDatosImportesCompra = function () {
