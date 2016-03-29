@@ -1,9 +1,7 @@
 /*!
  * Events v1.1 Stylesheet
- * VideoVigilancia - XETID
  * (c) 2014 Danny Almeida Perez
  */
-
 
 /*.container {*/
     /*margin: auto;*/
@@ -16,7 +14,7 @@
 /*}*/
 .evt-container-top {
     margin: auto;
-    position: absolute;
+    position: fixed;
     /*background: gray;*/
     width: 300px;
     height: 10px;
