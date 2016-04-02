@@ -154,7 +154,8 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {
 }
 
 /*cambiar pointer a los iconos de tab*/
-a[href='#detalles_comprobante_venta'] i[action='add-venta']:hover {
+a[href='#detalles_comprobante_venta'] i[action='add-venta']:hover,
+a[href='#detalles_comprobante_compra'] i[action='add-compra']:hover{
     border-bottom: 2px solid white;
     border-left: 2px solid white;
     cursor: pointer;

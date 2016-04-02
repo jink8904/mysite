@@ -1,14 +1,17 @@
 /**
  * Created by Julio on 09-Mar-16.
  */
+
 function keyDownEvt(e) {
     var keyCode = e.which;
-    //console.log(e.which);
-    if (keyCode == 46)
-        delCategoria();
+    console.log(e.which);
     if (keyCode == 65 && e.ctrlKey) {
+        addCompra()
         e.preventDefault();
-        addCategoria();
+    }
+    if (keyCode == 68 && e.ctrlKey) {
+        e.preventDefault();
+        verDetallesCompra()
     }
 }
 
@@ -30,6 +33,7 @@ var showErrors = function (selector, msg) {
     return false;
 }
 //---------------------------------------------------------------------
+
 function updateProductsData(th) {
     var selected = $(th).find("option:selected").val();
     var stock = $(th).children("[value=" + selected + "]").attr("stock")
@@ -51,13 +55,11 @@ function addCompra() {
     $("a[href=#detalles_comprobante_compra]").parent().addClass("active")
 }
 
-
 var llenarDatosImportesCompra = function (prod_id) {
     var result = true;
     var igv = $("#datos-producto-entrada input[name=igv]").val();
     if ($("#datos-producto-entrada [name=igv-checkbox]").val() == 'off')
         igv = 0
-
     var cant = $("#datos-producto-entrada input[name=cantidad]").val(),
         valor_unitario = parseFloat($("#importes-unitarios-entrada input[name=valor-unitario]").val()),
         igv_unitario = igv / 100 * valor_unitario,
@@ -68,13 +70,13 @@ var llenarDatosImportesCompra = function (prod_id) {
 
     detalle_compra_actual = {
         cant: parseInt(cant),
-        valor_unitario: parseFloat(valor_unitario).toFixed(2),
-        igv: parseFloat(igv).toFixed(2),
-        igv_unitario: igv_unitario.toFixed(2),
-        precio_unitario: precio_unitario.toFixed(2),
-        valor_compra: valor_compra.toFixed(2),
-        igv_total: igv_total.toFixed(2),
-        precio_compra: precio_compra.toFixed(2)
+        valor_unitario: parseFloat(valor_unitario),
+        igv: parseFloat(igv),
+        igv_unitario: igv_unitario,
+        precio_unitario: precio_unitario,
+        valor_compra: valor_compra,
+        igv_total: igv_total,
+        precio_compra: precio_compra
     }
     if (prod_id == 0 || !cant || !valor_unitario) {
         result = false
@@ -129,16 +131,16 @@ var addDetalleCompra = function () {
         detalle_compra_list[prod_id] = detalle_compra_actual;
         var det = '<tr>' +
             '<td name="id" class="hidden">' + prod_id + '</td>' +
-            '<td name="codigo">' + codigo + '</td>' +
-            '<td name="producto">' + producto + '</td>' +
+            '<td name="producto">' + codigo + '</td>' +
+            '<td name="codigo">' + producto + '</td>' +
             '<td name="cantidad">' + detalle_compra_actual.cant + '</td>' +
-            '<td name="valor_unitario">' + detalle_compra_actual.valor_unitario + '</td>' +
-            '<td name="valor_compra">' + detalle_compra_actual.valor_compra + '</td>' +
-            '<td name="igv_total">' + detalle_compra_actual.igv_total + '</td>' +
-            '<td name="precio_compra">' + detalle_compra_actual.precio_compra + '</td>' +
+            '<td name="valor_unitario">' + detalle_compra_actual.valor_unitario.toFixed(2) + '</td>' +
+            '<td name="valor_compra">' + detalle_compra_actual.valor_compra.toFixed(2) + '</td>' +
+            '<td name="igv_total">' + detalle_compra_actual.igv_total.toFixed(2) + '</td>' +
+            '<td name="precio_compra">' + detalle_compra_actual.precio_compra.toFixed(2) + '</td>' +
             '</tr>'
         $("#tabla-detalle-compra").removeClass("hidden");
-        $(det).appendTo("#tabla-detalle-compra>tbody").click(function (ev) {
+        $(det).appendTo("#tabla-detalle-compra>tbody").click(function () {
             cleanData("table", "tabla-detalle-compra");
             $(this).addClass("active");
             $("#del-detalle-compra").removeClass("disabled");
@@ -147,14 +149,7 @@ var addDetalleCompra = function () {
     }
 }
 
-var eliminarDetalleCompra = function () {
-    var record = getRecord("tabla-detalle-compra");
-    delete detalle_compra_list[record.id]
-    console.log(detalle_compra_list);
-    $("#tabla-detalle-compra>tbody>tr.active").remove();
-}
-
-var validateSalidaMercancia = function () {
+var validateEntradaMercancia = function () {
     var result = true;
     var tipo_comprobante = "#datos-comprobante-entrada [name=tipo-comprobante]"
     var identificador = "#datos-comprobante-entrada [name=identificador]"
@@ -208,25 +203,22 @@ var validateSalidaMercancia = function () {
     }
     if ($.isEmptyObject(detalle_compra_list)) {
         var msg = "No existen detalles de compra.";
-        showMsg(msg, "error", {
-            duration: 100
-        });
+        showMsg(msg, "error");
         result = false
     }
     return result;
 }
 
-var addSalidaMercancia = function () {
-    var fecha = $("#datos-comprobante-entrada [name=fecha]").val();
+var addEntradaMercancia = function () {
     datos_compra = {
         tipo_comprobante: $("#datos-comprobante-entrada [name=tipo-comprobante]").val(),
-        fecha: fecha,
+        fecha: $("#datos-comprobante-entrada [name=fecha]").val(),
         serie: $("#datos-comprobante-entrada [name=serie]").val(),
         numero: $("#datos-comprobante-entrada [name=numero]").val(),
-        cliente: $("#datos-comprobante-entrada [name=identificador]").val(),
+        proveedor: $("#datos-comprobante-entrada [name=identificador]").val(),
     }
     token = $("input[name=csrfmiddlewaretoken]").attr("value");
-    if (validateSalidaMercancia())
+    if (validateEntradaMercancia())
         $.ajax({
             url: "add",
             method: "post",
@@ -243,37 +235,48 @@ var addSalidaMercancia = function () {
         })
 }
 
+
+var eliminarDetalleCompra = function () {
+    var record = getRecord("tabla-detalle-compra");
+    $("#tabla-detalle-compra>tbody>tr.active").remove();
+    delete detalle_compra_list[record.id]
+}
+
 var verDetallesCompra = function () {
     var compra = getRecord("tabla-compras");
     token = $("input[name=csrfmiddlewaretoken]").attr("value");
-    $.ajax({
-        url: "detalles",
-        method: "post",
-        dataType: 'json',
-        async: true,
-        data: {
-            csrfmiddlewaretoken: token,
-            id_compra: compra.id,
-        },
-        success: function (data) {
-            $("#tabla-d-compra-modal>tbody>tr").each(function (index, th) {
-                $(th).remove();
-            })
-            detalle_list = data["d_list"]
-            for (var i in detalle_list) {
-                var detalle = detalle_list[i];
-                var det = '<tr>' +
-                    '<td name="codigo">' + detalle['codigo'] + '</td>' +
-                    '<td name="descripcion">' + detalle['descripcion'] + '</td>' +
-                    '<td name="cantidad">' + detalle['cantidad'] + '</td>' +
-                    '<td name="valor_unitario">' + parseFloat(detalle['valor_unitario']).toFixed(2) + '</td>' +
-                    '<td name="valor_compra">' + parseFloat(detalle['valor_compra']).toFixed(2) + '</td>' +
-                    '<td name="igv">' + parseFloat(detalle['igv']).toFixed(2) + '</td>' +
-                    '<td name="importe">' + parseFloat(detalle['importe']).toFixed(2) + '</td>' +
-                    '</tr>';
-                $(det).appendTo("#tabla-d-compra-modal>tbody")
+    if (!$('li a[action=det-compra]').parent().hasClass("disabled"))
+        $.ajax({
+            url: "detalles",
+            method: "post",
+            dataType: 'json',
+            async: true,
+            data: {
+                csrfmiddlewaretoken: token,
+                id_compra: compra.id,
+            },
+            success: function (data) {
+                $("#tabla-d-compra-modal>tbody>tr").each(function (index, th) {
+                    $(th).remove();
+                })
+                detalle_list = data["d_list"]
+                for (var i in detalle_list) {
+                    var detalle = detalle_list[i];
+                    console.log(detalle);
+                    var det = '<tr>' +
+                        '<td name="codigo">' + detalle['codigo'] + '</td>' +
+                        '<td name="descripcion">' + detalle['descripcion'] + '</td>' +
+                        '<td name="cantidad">' + detalle['cantidad'] + '</td>' +
+                        '<td name="valor_unitario">' + parseFloat(detalle['valor_unitario']).toFixed(2) + '</td>' +
+                        '<td name="valor_venta">' + parseFloat(detalle['valor_venta']).toFixed(2) + '</td>' +
+                        '<td name="igv">' + parseFloat(detalle['igv']).toFixed(2) + '</td>' +
+                        '<td name="importe">' + parseFloat(detalle['importe']).toFixed(2) + '</td>' +
+                        '</tr>';
+                    $(det).appendTo("#tabla-d-compra-modal>tbody")
+                }
+                $("#modal-detalles-compra").modal();
             }
-            $("#modal-detalles-compra").modal();
-        }
-    })
+        })
+    else
+        showMsg("No hay ninguna compra seleccionada", "warning");
 }

@@ -272,12 +272,34 @@ $(document).ready(function () {
         eliminarDetalleVenta()
     })
 
-    //ver detalle de venta
-    $("#ver-detalle-venta").click(function () {
-        verDetallesVenta();
+    //------------- Entrada de mercancia ---------------------
+
+    $('li a[action=add-compra]').on('click', function () {
+        addCompra();
+    });
+
+    $("#add-detalle-compra").click(function () {
+        addDetalleCompra()
     })
 
-    //------------- Entrada de mercancia ---------------------
+    $("#datos-producto-entrada [name=codigo]," +
+        "#datos-producto-entrada [name=producto]").change(function(){
+        updateProductsData(this)
+    })
+
+    $("#datos-comprobante-entrada [name=identificador]," +
+        "#datos-comprobante-entrada [name=nombre]").change(function(){
+        updateComprobantData(this)
+    })
+
+    $('a[href=#detalles_comprobante_compra] i[action=add-compra]').on('click', function () {
+        addEntradaMercancia();
+    });
+
+    $("#del-detalle-compra").click(function () {
+        $(this).addClass("disabled");
+        eliminarDetalleCompra()
+    })
 
     $("#datos-producto-entrada select[name=codigo]>option," +
         "#datos-producto-entrada select[name=producto]>option").click(function () {
@@ -293,33 +315,10 @@ $(document).ready(function () {
             llenarDatosImportesCompra()
     })
 
-    $("#add-detalle-compra").click(function () {
-        addDetalleCompra()
-    })
-
-    $("#add-entrada-merc").click(function () {
-        addEntradaMercancia();
-    })
-
-    $("#datos-comprobante-entrada [name=identificador]>option").click(function () {
-        var value = $(this).val();
-        $("#datos-comprobante-entrada [name=nombre]").val(value);
-    })
-
-    $("#datos-comprobante-entrada [name=nombre]>option").click(function () {
-        var value = $(this).val();
-        $("#datos-comprobante-entrada [name=identificador]").val(value);
-    })
-
     //ver detalle de compra
-    $("#ver-detalle-compra").click(function () {
+    $('li a[action=det-compra]').on('click', function () {
         verDetallesCompra();
-    })
-
-    $("#del-detalle-compra").click(function () {
-        $(this).addClass("disabled");
-        eliminarDetalleCompra()
-    })
+    });
 
     //------------------------ Stock disponible ----------------------------
 

@@ -8,9 +8,9 @@ function keyDownEvt(e) {
         e.preventDefault();
         addVenta();
     }
-    if (keyCode == 77 && e.ctrlKey) {
+    if (keyCode == 68 && e.ctrlKey) {
         e.preventDefault();
-        modCategoria();
+        verDetallesVenta()
     }
 }
 
@@ -152,7 +152,6 @@ var addDetalleVenta = function () {
 var eliminarDetalleVenta = function () {
     var record = getRecord("tabla-detalle-venta");
     delete detalle_venta_list[record.id]
-    console.log(detalle_venta_list);
     $("#tabla-detalle-venta>tbody>tr.active").remove();
 }
 
@@ -210,9 +209,7 @@ var validateSalidaMercancia = function () {
     }
     if ($.isEmptyObject(detalle_venta_list)) {
         var msg = "No existen detalles de venta.";
-        showMsg(msg, "error", {
-            duration: 100
-        });
+        showMsg(msg, "error");
         result = false
     }
     return result;
@@ -248,34 +245,37 @@ var addSalidaMercancia = function () {
 var verDetallesVenta = function () {
     var venta = getRecord("tabla-ventas");
     token = $("input[name=csrfmiddlewaretoken]").attr("value");
-    $.ajax({
-        url: "detalles",
-        method: "post",
-        dataType: 'json',
-        async: true,
-        data: {
-            csrfmiddlewaretoken: token,
-            id_venta: venta.id,
-        },
-        success: function (data) {
-            $("#tabla-d-venta-modal>tbody>tr").each(function (index, th) {
-                $(th).remove();
-            })
-            detalle_list = data["d_list"]
-            for (var i in detalle_list) {
-                var detalle = detalle_list[i];
-                var det = '<tr>' +
-                    '<td name="codigo">' + detalle['codigo'] + '</td>' +
-                    '<td name="descripcion">' + detalle['descripcion'] + '</td>' +
-                    '<td name="cantidad">' + detalle['cantidad'] + '</td>' +
-                    '<td name="valor_unitario">' + parseFloat(detalle['valor_unitario']).toFixed(2) + '</td>' +
-                    '<td name="valor_venta">' + parseFloat(detalle['valor_venta']).toFixed(2) + '</td>' +
-                    '<td name="igv">' + parseFloat(detalle['igv']).toFixed(2) + '</td>' +
-                    '<td name="importe">' + parseFloat(detalle['importe']).toFixed(2) + '</td>' +
-                    '</tr>';
-                $(det).appendTo("#tabla-d-venta-modal>tbody")
+    if (!$('li a[action=det-venta]').parent().hasClass("disabled"))
+        $.ajax({
+            url: "detalles",
+            method: "post",
+            dataType: 'json',
+            async: true,
+            data: {
+                csrfmiddlewaretoken: token,
+                id_venta: venta.id,
+            },
+            success: function (data) {
+                $("#tabla-d-venta-modal>tbody>tr").each(function (index, th) {
+                    $(th).remove();
+                })
+                detalle_list = data["d_list"]
+                for (var i in detalle_list) {
+                    var detalle = detalle_list[i];
+                    var det = '<tr>' +
+                        '<td name="codigo">' + detalle['codigo'] + '</td>' +
+                        '<td name="descripcion">' + detalle['descripcion'] + '</td>' +
+                        '<td name="cantidad">' + detalle['cantidad'] + '</td>' +
+                        '<td name="valor_unitario">' + parseFloat(detalle['valor_unitario']).toFixed(2) + '</td>' +
+                        '<td name="valor_venta">' + parseFloat(detalle['valor_venta']).toFixed(2) + '</td>' +
+                        '<td name="igv">' + parseFloat(detalle['igv']).toFixed(2) + '</td>' +
+                        '<td name="importe">' + parseFloat(detalle['importe']).toFixed(2) + '</td>' +
+                        '</tr>';
+                    $(det).appendTo("#tabla-d-venta-modal>tbody")
+                }
+                $("#modal-detalles-venta").modal();
             }
-            $("#modal-detalles-venta").modal();
-        }
-    })
+        })
+    else
+        showMsg("No hay ninguna venta seleccionada", "warning");
 }

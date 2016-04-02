@@ -1,0 +1,43 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h6 class="panel-title">Entrada de mercadería - Ventas (Normal)</h6>
+
+        {#        <div class="heading-elements">#}
+        {#            <ul class="icons-list">#}
+        {#                <li><a data-action="collapse"></a></li>#}
+        {#                <li><a data-action="reload"></a></li>#}
+        {#                <li><a data-action="close"></a></li>#}
+        {#            </ul>#}
+        {#        </div>#}
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+
+    <div class="panel-body">
+        <div class="tabbable">
+            <ul class="nav nav-tabs nav-justified nav-tabs-highlight">
+                <li class="active">
+                    <a data-toggle="tab" href="#registro_entradas" aria-expanded="true">
+                        Registro de entradas
+                    </a>
+                </li>
+                <li class="">
+                    <a data-toggle="tab" href="#detalles_comprobante_compra" aria-expanded="false">
+                        Detalles del comprobante
+                        <i class="icon-floppy-disk position-right" action="add-compra" title="Registrar compra"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="registro_entradas" class="tab-pane active">
+                    {% include "entrada_mercancia/table-compra.html" %}
+                </div>
+
+                <div id="detalles_comprobante_compra" class="tab-pane">
+                    {% include "entrada_mercancia/form-entrada.html" %}
+                    {% include "entrada_mercancia/table_detalle_compra.html" %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

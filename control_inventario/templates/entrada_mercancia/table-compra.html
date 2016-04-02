@@ -1,14 +1,18 @@
-<div class="panel panel-flat">
+<div class="panel panel-primary">
     <div class="panel-heading">
-        <h5 class="panel-title" id="producto-form-title">Lista de compras</h5>
+        <h6 class="panel-title">Lista de compras</h6>
 
         <div class="heading-elements">
             <ul class="icons-list">
-                <li><a data-action="collapse"></a></li>
+                <li><a title="Adicionar compra(CTR+A)" action="add-compra"><i class=" icon-plus-circle2"></i></a></li>
+                <li class="disabled" table="tabla-compras">
+                    <a title="Ver detalles de la compra seleccionada (CTR+D)" action="det-compra">
+                        <i class="icon-info3"></i>
+                    </a></li>
             </ul>
         </div>
-        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
-    </div>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+
     <div class="panel-body">
         <div class="table-responsive">
             <table class="table table-hover table-bordered" id="tabla-compras" select="true">
