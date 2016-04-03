@@ -43,7 +43,8 @@ function loadMask(options) {
             backgroundColor: '#000000',
             opacity: .5,
             cursor: 'wait',
-            zIndex: 1040
+            position: "fixed",
+            zIndex: 1040,
         },
         css: {
             border: 0,
@@ -51,6 +52,7 @@ function loadMask(options) {
             color: '#fff',
             backgroundColor: 'transparent',
             zIndex: 1041,
+            position: "fixed",
             fontFamily: 'cursive',
             font: 'initial',
         }
@@ -182,6 +184,7 @@ var updateRecords = function (table_id) {
 }
 
 var updateButtons = function (table_id) {
+    //console.log(table_id);
     var sel_btns = "button[table=" + table_id + "][accion!=add]";
     if (!$(sel_btns).length)
         sel_btns = "li[table=" + table_id + "]";

@@ -1,26 +1,23 @@
-<div class="panel panel-flat">
+<div class="panel panel-primary">
     <div class="panel-heading">
-        <h5 class="panel-title">Stock disponible por productos</h5>
+        <h6 class="panel-title">Stock disponible por productos</h6>
 
         <div class="heading-elements">
             <ul class="icons-list">
-                <li><a data-action="collapse"></a></li>
+                <li>
+                    <a title="Exportar PDF (CTR+P)" action="export-pdf">
+                        <i class="icon-file-pdf"></i>
+                    </a>
+                </li>
+                <li>
+                    <a title="Exportar EXCEL (CTR+E)" action="export-excel">
+                        <i class="icon-file-excel"></i>
+                    </a></li>
             </ul>
         </div>
-        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
-    </div>
-        
-    <div class="nav-table" id="navtb-stock-disp">
-        <!-- Button trigger modal -->
-        <button class="btn btn-primary" accion="export_excel">
-            Exportar EXCEL
-        </button>
-        <button class="btn btn-primary" accion="pdf">
-            Exportar PDF
-        </button>
-    </div>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
 
-    <div class="panel-body" style="display: block;">
+    <div class="panel-body">
         <div class="table-responsive">
             <table class="table table-hover table-bordered" id="tabla-stock-disp" select="true">
                 <thead class="bg-primary-600">

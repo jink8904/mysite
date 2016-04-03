@@ -2,8 +2,8 @@ from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from control_inventario import models
-from control_inventario.app.export.pdf import PdfPrint
 from django.contrib.auth.decorators import login_required
+from control_inventario.app.export.pdf import PdfPrint
 from XlsxWriter import xlsxwriter
 import io
 

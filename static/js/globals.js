@@ -58,6 +58,12 @@ $(document).ready(function () {
             records: "productos"
         }
     }).bind('dynatable:afterProcess', fixTableSelect);
+
+    $("#tabla-inventario").dynatable({
+        params: {
+            records: "productos"
+        }
+    }).bind('dynatable:afterProcess', fixTableSelect);
     //------- Manejo global ---------
     //select table
     $("table[select]>tbody>tr").click(function (evt) {
@@ -201,10 +207,21 @@ $(document).ready(function () {
 
     //----------------------------- Inventario ---------------------------
 
-    $("#tabla-producto-inv>tbody>tr").click(function () {
-        updateRecords("tabla-producto-inv");
+    $("#tabla-inventario>tbody>tr").click(function () {
+        updateRecords("tabla-inventario");
     });
 
+    $("#tabla-inventario>tbody>tr").dblclick(function(){
+        addInventario();
+    })
+
+    $("#form-inventario [name=costo_unitario]").blur(function () {
+        updateInventarioFormData();
+    })
+
+     $("li a[action=add-inventario]").click(function () {
+        addInventario();
+    })
     //----------------------- Proveedor ------------------------------------
 
      $("li a[action=add-proveedor]").click(function () {
@@ -320,13 +337,19 @@ $(document).ready(function () {
         verDetallesCompra();
     });
 
-    //------------------------ Stock disponible ----------------------------
+    //------------------------ Exports ----------------------------
 
-    $("#navtb-stock-disp button[accion=export_excel]").click(function () {
+    $('li a[action=export-excel]').on('click', function () {
         exportarExcel();
-    })
-    $("#navtb-stock-disp button[accion=pdf]").click(function () {
+    });
+    $('li a[action=export-pdf]').on('click', function () {
         exportarPDF();
-    })
+    });
+
+    //------------------------------ Resumen de movimientos ------------------
+
+    $('li a[action=mod-periodo]').on('click', function () {
+        modPeriodo();
+    });
 
 })

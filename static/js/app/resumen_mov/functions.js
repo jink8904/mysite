@@ -3,7 +3,7 @@
  */
 function keyDownEvt(e) {
     var keyCode = e.which;
-    //console.log(e.which);
+    console.log(e.which);
     if (keyCode == 80 && e.ctrlKey) {
         e.preventDefault();
         exportarPDF()
@@ -12,13 +12,22 @@ function keyDownEvt(e) {
         e.preventDefault();
         exportarExcel()
     }
+    if (keyCode == 68 && e.ctrlKey) {
+        e.preventDefault();
+        modPeriodo()
+    }
 }
 
 
 function exportarExcel() {
-    $(location).attr("href", "/stock-disponible/export-excel");
+    $(location).attr("href", "/resumen-movimientos/export-excel");
 }
 
 function exportarPDF() {
-    $(location).attr("href", "/stock-disponible/export-pdf");
+    $(location).attr("href", "/resumen-movimientos/export-pdf");
 }
+
+function modPeriodo() {
+    $(location).attr("href", "/resumen-movimientos");
+}
+

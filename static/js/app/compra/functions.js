@@ -4,7 +4,7 @@
 
 function keyDownEvt(e) {
     var keyCode = e.which;
-    console.log(e.which);
+    //console.log(e.which);
     if (keyCode == 65 && e.ctrlKey) {
         addCompra()
         e.preventDefault();
@@ -262,7 +262,6 @@ var verDetallesCompra = function () {
                 detalle_list = data["d_list"]
                 for (var i in detalle_list) {
                     var detalle = detalle_list[i];
-                    console.log(detalle);
                     var det = '<tr>' +
                         '<td name="codigo">' + detalle['codigo'] + '</td>' +
                         '<td name="descripcion">' + detalle['descripcion'] + '</td>' +

@@ -1,52 +1,72 @@
-<div class="panel panel-flat">
+<div class="panel panel-primary">
     <div class="panel-heading">
-        <h5 class="panel-title" id="producto-form-title">Resumen de ventas</h5>
+        <h6 class="panel-title">Resumen de ventas</h6>
 
         <div class="heading-elements">
             <ul class="icons-list">
-                <li><a data-action="collapse"></a></li>
+                <li class="disabled" table="tabla-ventas">
+                    <a title="Ver detalles de la venta seleccionada (CTR+D)" action="det-venta">
+                        <i class="icon-info3"></i>
+                    </a></li>
             </ul>
         </div>
-        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
-    </div>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+
     <div class="panel-body">
-        <div class="nav-panel col-md-12">
-            {% csrf_token %}
-            {#        <button class="btn btn-primary" type="submit" id="add-salida-merc">Guardar</button>#}
-            {#        <button class="btn btn-primary" type="submit">Eliminar</button>#}
-            <button class="btn btn-primary" id="ver-detalle-venta">Ver detalles</button>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered" id="tabla-ventas" select="true">
-                <thead class="bg-primary-600">
+        <table class="table table-hover table-bordered" id="tabla-ventas" select="true">
+            <thead class="bg-primary-600">
+            <tr>
+                <th class="hidden">ID</th>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Serie</th>
+                <th>N&uacute;mero</th>
+                <th>Cliente</th>
+                <th>Subtotal</th>
+                <th>IGV</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for venta in venta_list %}
                 <tr>
-                    <th class="hidden">ID</th>
-                    <th>Fecha</th>
-                    <th>Tipo</th>
-                    <th>Serie</th>
-                    <th>N&uacute;mero</th>
-                    <th>Cliente</th>
-                    <th>Subtotal</th>
-                    <th>IGV</th>
-                    <th>Total</th>
+                    <td class="hidden" name="id">{{ venta.id }}</td>
+                    <td name="fecha">{{ venta.fecha|date:"j/n/Y" }}</td>
+                    <td name="tipo">{{ venta.tipo_comprobante }}</td>
+                    <td name="serie">{{ venta.serie }}</td>
+                    <td name="numero">{{ venta.numero }}</td>
+                    <td name="denominacion">{{ venta.cliente }}</td>
+                    <td name="subtotal">{{ venta.subtotal }}</td>
+                    <td name="igv">{{ venta.igv }}</td>
+                    <td name="total">{{ venta.total }}</td>
                 </tr>
-                </thead>
-                <tbody>
-                {% for venta in venta_list %}
-                    <tr>
-                        <td class="hidden" name="id">{{ venta.id }}</td>
-                        <td name="fecha">{{ venta.fecha|date:"j/n/Y" }}</td>
-                        <td name="tipo">{{ venta.tipo_comprobante }}</td>
-                        <td name="serie">{{ venta.serie }}</td>
-                        <td name="numero">{{ venta.numero }}</td>
-                        <td name="denominacion">{{ venta.cliente }}</td>
-                        <td name="subtotal">{{ venta.subtotal }}</td>
-                        <td name="igv">{{ venta.igv }}</td>
-                        <td name="total">{{ venta.total }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
+
+
+{#<div class="panel panel-flat">#}
+{#    <div class="panel-heading">#}
+{#        <h5 class="panel-title" id="producto-form-title"></h5>#}
+{##}
+{#        <div class="heading-elements">#}
+{#            <ul class="icons-list">#}
+{#                <li><a data-action="collapse"></a></li>#}
+{#            </ul>#}
+{#        </div>#}
+{#        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>#}
+{#    </div>#}
+{#    <div class="panel-body">#}
+{#        <div class="nav-panel col-md-12">#}
+{#            {% csrf_token %}#}
+            {#        <button class="btn btn-primary" type="submit" id="add-salida-merc">Guardar</button>#}
+            {#        <button class="btn btn-primary" type="submit">Eliminar</button>#}
+{#            <button class="btn btn-primary" id="ver-detalle-venta">Ver detalles</button>#}
+{#        </div>#}
+{#        <div class="table-responsive">#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}

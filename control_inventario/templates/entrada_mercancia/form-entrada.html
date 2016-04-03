@@ -80,7 +80,7 @@
             <label>Codigo</label>
 
             <div>
-                <select name="codigo" class="bootstrap-select-search" data-width="100%" data-size="8" required>
+                <select name="codigo" class="bootstrap-select-search" data-width="100%" data-size="5" required>
                     <option value="0">Seleccionar c&oacute;digo</option>
                     {% for producto in producto_list %}
                         <option value="{{ producto.id }}" stock="{{ producto.stock }}">{{ producto.codigo }}</option>
@@ -101,7 +101,7 @@
             <label>Producto</label>
 
             <div>
-                <select name="producto" class="bootstrap-select-search" data-width="100%" data-size="8" required>
+                <select name="producto" class="bootstrap-select-search" data-width="100%" data-size="5" required>
                     <option value="0">Seleccionar producto</option>
                     {% for producto in producto_list %}
                         <option value="{{ producto.id }}" stock="{{ producto.stock }}">{{ producto.nombre }}</option>

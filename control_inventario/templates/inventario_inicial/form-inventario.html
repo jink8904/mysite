@@ -1,0 +1,49 @@
+<div class="modal fade in" id="form-inventario">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h6 class="modal-title" id="inventario-form-title">Declarar inventario</h6>
+            </div>
+
+            <form method="post" action="" novalidate table="tabla-inventario">
+                <div class="modal-body">
+                    {% csrf_token %}
+
+                    <input type="text" name="id" value="" class="hidden">
+
+                    <div class="form-group col-md-4">
+                        {#Cantidad#}
+                        <label>Cantidad:</label>
+
+                        <div>
+                            <input type="text" name="cantidad" class="form-control" required numberfield>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        {#Costo unitario#}
+                        <label>Costo unitario:</label>
+
+                        <div>
+                            <input type="text" name="costo_unitario" class="form-control" required numberfield>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        {#Costo total#}
+                        <label>Costo total:</label>
+
+                        <div>
+                            <input type="text" name="costo_total" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">
+                        Cerrar
+                    </button>
+                    <button class="btn btn-primary" type="submit">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

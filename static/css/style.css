@@ -160,3 +160,8 @@ a[href='#detalles_comprobante_compra'] i[action='add-compra']:hover{
     border-left: 2px solid white;
     cursor: pointer;
 }
+
+/*arreglando tabla resumen de movimientos*/
+#tabla-resumen-mov td{
+    padding: 12px 8px;
+}

@@ -25,8 +25,9 @@ urlpatterns = patterns('control_inventario.app',
    # urls-proveedor
     url(r'^cliente/$', 'cliente.views.cliente', name='cliente'),
     url(r'^cliente/del$', 'cliente.views.del_cliente', name='del_cliente'),
-   # urls-inventario inicial
+   # urls-inventario
     url(r'^inventario/$', 'inventario.views.inventario_inicial', name='inventario'),
+    url(r'^inventario-inicial/$', 'inventario.views.inventario_inicial_consulta', name='inventario'),
    # urls-salida de mercancia
     url(r'^salida/$', 'salida_mercancia.views.salida_mercancia', name='salida_mercancia'),
     url(r'^salida/add$', 'salida_mercancia.views.add_salida_mercancia', name='add_salida_mercancia'),
@@ -39,6 +40,8 @@ urlpatterns = patterns('control_inventario.app',
     url(r'^registro-ventas/$', 'registro_venta.views.registro_ventas', name='registro_ventas'),
    # urls-resumen de movimientos
     url(r'^resumen-movimientos/$', 'resumen_movimientos.views.resumen_mov', name='resumen_mov'),
+    url(r'^resumen-movimientos/export-excel$', 'resumen_movimientos.views.export_excel'),
+    url(r'^resumen-movimientos/export-pdf$', 'resumen_movimientos.views.export_pdf'),
    # urls-stock disponible
     url(r'^stock-disponible/$', 'stock_disponible.views.stock_disponible', name='stock_disponible'),
     url(r'^stock-disponible/export-excel$', 'stock_disponible.views.export_excel'),
