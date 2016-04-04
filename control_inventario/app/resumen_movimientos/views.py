@@ -6,6 +6,7 @@ from control_inventario import models
 from django.contrib.auth.decorators import login_required
 
 from control_inventario.app.export.pdf import PdfPrint
+from reportlab.lib import colors
 from XlsxWriter import xlsxwriter
 import io
 
@@ -97,7 +98,7 @@ def get_hist_prod_mes(id_prod, mes, emp, year):
         date = str(year) + "-" + str(mes) + "-1"
         hist_list_after = hist_list.filter(fecha_operacion__lt=date)
         # hist_list_after = hist_list_after.order_by("-id")
-        if(hist_list_after):
+        if (hist_list_after):
             print(id_prod)
             print(mes)
             print(hist_list_after.values())
@@ -225,23 +226,55 @@ def export_excel(request):
     return response
 
 
-def loadDataPDF(emp):
+def loadDataPDF(emp, datos):
     producto_list = emp.producto_set.values()
+
+    meses = datos.get("meses")
+    mov_list = datos.get("mov_list")
+    year = datos.get("year")
+    titulo = "Resumen de saldos y movimientos desde el mes de " + meses[0] + " hasta " + meses[2] + " del año " + year
+
     data_pdf = {
-        "headings": [("Codigo", "Nombre", "Categoria", "Tipo", "Unidad", "Stock disponible")],
+        "headings": [("Codigo", "Nombre", meses[0],"","","", meses[1],"","","", meses[2],"","",""),
+                     ("", "", "Sal. Ini.","Entradas","Salidas","Saldo", "Sal. Ini.","Entradas","Salidas","Saldo", "Sal. Ini.","Entradas","Salidas","Saldo")],
         "data": [],
-        "title": "Reporte de stock disponible",
+        "title": titulo,
         "ruc": "<b>RUC: </b>",
         "empresa": "<b>Denominacion: </b>",
     }
-    for prod in producto_list:
+
+    table_style = [
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
+        ('BOX', (0, 0), (-1, -1), 0.75, colors.black),
+        ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN',(0,0),(-1,0),'CENTER'),
+        ('FONTSIZE', (0, 0), (-1, -1), 7),
+        ('SPAN', (0, 0), (0, 1)),
+        ('SPAN', (1, 0), (1, 1)),
+        ('SPAN', (2, 0), (5, 0)),
+        ('SPAN', (6, 0), (9, 0)),
+        ('SPAN', (10, 0), (13, 0)),
+    ]
+    data_pdf["table_style"] = table_style
+
+    for prod in mov_list:
+        fila = mov_list[prod]
         aux = [
-            prod.get("codigo"),
-            prod.get("nombre"),
-            prod.get("categoria"),
-            prod.get("tipo"),
-            prod.get("unidad"),
-            prod.get("stock_disp"),
+            fila.get("codigo"),
+            fila.get("nombre"),
+            fila.get("0").get("saldo_inicial"),
+            fila.get("0").get("entradas"),
+            fila.get("0").get("salidas"),
+            fila.get("0").get("saldo_final"),
+            fila.get("1").get("saldo_inicial"),
+            fila.get("1").get("entradas"),
+            fila.get("1").get("salidas"),
+            fila.get("1").get("saldo_final"),
+            fila.get("2").get("saldo_inicial"),
+            fila.get("2").get("entradas"),
+            fila.get("2").get("salidas"),
+            fila.get("2").get("saldo_final"),
         ]
         data_pdf["data"].append(aux)
     return data_pdf
@@ -250,7 +283,10 @@ def loadDataPDF(emp):
 def export_pdf(request):
     id_empresa = request.session['empresa']["id"]
     emp = models.Empresa.objects.get(id=id_empresa)
-    data = loadDataPDF(emp)
+
+    datos = request.session["movimientos"]
+
+    data = loadDataPDF(emp, datos)
     data["ruc"] += str(emp.ruc)
     data["empresa"] += emp.nombre
 
