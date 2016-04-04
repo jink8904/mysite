@@ -1,6 +1,9 @@
 {% extends "layout/base.html" %}
-
 {% load staticfiles %}
+
+{% block script %}
+
+{% endblock %}
 
 {% block title %}
     Login
@@ -8,52 +11,49 @@
 
 {% block content %}
     {% if error %}
-        {#        <div class="col-md-8 col-md-offset-2">#}
-        {#            <div class="alert alert-danger alert-styled-left alert-bordered">#}
-        {#                <button data-dismiss="alert" class="close" type="button">#}
-        {#                    <span>x</span>#}
-        {#                    <span class="sr-only">Close</span>#}
-        {#                </button>#}
-        {#                {{ error }}#}
-        {#            </div>#}
-        {#        </div>#}
         <script type="text/javascript">
             $(document).ready(function () {
-                $("form[role=login]").addClass("has-error");
-                $("form[role=login] input").focus(function () {
-                    $("form[role=login]").removeClass("has-error");
-                })
+                showMsg("Usuario o contrase&nacute;a incorrectos", "error");
             })
         </script>
     {% endif %}
-    <div class="row" id="pwd-container">
-        <div class="col-md-4 col-md-offset-4">
-            <section class="login-form">
-                <form method="post" action="" role="login">
-                    {% csrf_token %}
-                    {#                    <img src="{% static "images/index1.jpg"%}" class="img-responsive" alt=""/>#}
-                    <input type="text" name="username" placeholder="Usuario" required class="form-control input-lg"/>
-
-                    <input type="password" class="form-control input-lg" name="password" placeholder="Password"
-                           name="id_password" required=""/>
-
-
-                    <div class="pwstrength_viewport_progress"></div>
-
-
-                    <button type="submit" name="sign-in" class="btn btn-lg btn-primary btn-block">Entrar</button>
-                    {#                    <div>#}
-                    {#                        <a href="#">Create account</a> or <a href="#">reset password</a>#}
-                    {#                    </div>#}
-
-                </form>
-
-                <div class="form-links">
-                    {#                    <a href="#">www.website.com</a>#}
+    <div class="login-container">
+        <form method="post" action="" role="login">
+            {% csrf_token %}
+            <div class="panel panel-body login-form">
+                <div class="text-center">
+                    <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
+                    <h5 class="content-group">Acceda a su cuenta
+                        <small class="display-block">Entre sus datos</small>
+                    </h5>
                 </div>
-            </section>
-        </div>
-        <div class="col-md-4"></div>
+
+                <div class="form-group has-feedback has-feedback-left">
+                    <input type="text" placeholder="Usuario" class="form-control" name="username">
+
+                    <div class="form-control-feedback">
+                        <i class="icon-user text-muted"></i>
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback has-feedback-left">
+                    <input type="password" placeholder="Contrase&nacute;a" class="form-control" name="password">
+
+                    <div class="form-control-feedback">
+                        <i class="icon-lock2 text-muted"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit">Entrar <i
+                            class="icon-circle-right2 position-right"></i></button>
+                </div>
+
+                {#                <div class="text-center">#}
+                {#                    <a href="login_password_recover.html">olvido su contrase&nacute;a?</a>#}
+                {#                </div>#}
+            </div>
+        </form>
     </div>
 
 {% endblock %}
