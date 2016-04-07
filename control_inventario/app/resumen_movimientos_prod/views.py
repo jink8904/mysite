@@ -67,7 +67,7 @@ def resumen_mov(request):
         }
 
     args['form'] = form
-    return render_to_response('resumen_movimientos/main.html', args, context_instance=RequestContext(request))
+    return render_to_response('resumen_movimientos_prod/main.html', args, context_instance=RequestContext(request))
 
 
 def get_hist_prod_mes(id_prod, mes, emp, year):

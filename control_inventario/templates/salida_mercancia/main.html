@@ -13,6 +13,12 @@
 {% endblock %}
 
 {% block content %}
+    {% if action == "del" %}
+        <script type="text/javascript">
+            showMsg("La venta fue eliminada satisfactoriamente.")
+        </script>
+    {% endif %}
+
     <div class="modal fade col-md-12" id="modal-detalles-venta" tabindex="-1" role="dialog"
          aria-labelledby="form-productoLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">

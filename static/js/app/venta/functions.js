@@ -242,6 +242,37 @@ var addSalidaMercancia = function () {
         })
 }
 
+var delVenta = function(){
+    if (!$('li a[action=del-venta]').parent().hasClass("disabled")){
+        title = "Eliminar venta";
+        text = "Est&aacute; seguro que quiere eliminar la venta seleccionada.";
+        notificacion(title, text, {
+            ok: function () {
+                loadMask({
+                    msg: "Eliminando venta..."
+                })
+
+                var id = $("#tabla-ventas>tbody>tr.active>td[key=id]").html();
+                token = $("input[name=csrfmiddlewaretoken]").attr("value");
+                $.ajax({
+                    url: "del",
+                    method: "post",
+                    dataType: 'json',
+                    async: true,
+                    data: {
+                        csrfmiddlewaretoken: token,
+                        id: id,
+                    },
+                    success: function () {
+                        $(location).attr("href", "/salida");
+                    }
+                })
+            }
+        })
+
+    }
+}
+
 var verDetallesVenta = function () {
     var venta = getRecord("tabla-ventas");
     token = $("input[name=csrfmiddlewaretoken]").attr("value");

@@ -67,5 +67,6 @@ def del_empresa(request):
 
 
 def select_periodo(request):
+    print(request.POST.get("periodo"))
     request.session['mes'] = request.POST.get("periodo")
     return HttpResponseRedirect('/')

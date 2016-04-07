@@ -95,7 +95,6 @@ $(document).ready(function () {
             $("span input[type=radio][name=" + name + "]").parent().removeClass("checked");
         }
         $(this).parent().addClass("checked");
-
     })
 
     //campo fecha addClass pickadate
@@ -270,10 +269,14 @@ $(document).ready(function () {
 
     $("#add-detalle-venta").click(function () {
         addDetalleVenta()
-    })
+    });
 
     $('li a[action=add-venta]').on('click', function () {
         addVenta();
+    });
+
+    $('li a[action=del-venta]').on('click', function () {
+        delVenta();
     });
 
     $('li a[action=det-venta]').on('click', function () {
@@ -293,6 +296,10 @@ $(document).ready(function () {
 
     $('li a[action=add-compra]').on('click', function () {
         addCompra();
+    });
+
+    $('li a[action=del-compra]').on('click', function () {
+        delCompra();
     });
 
     $("#add-detalle-compra").click(function () {

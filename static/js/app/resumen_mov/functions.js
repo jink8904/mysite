@@ -20,14 +20,14 @@ function keyDownEvt(e) {
 
 
 function exportarExcel() {
-    $(location).attr("href", "/resumen-movimientos/export-excel");
+    $(location).attr("href", "/resumen-movimientos-productos/export-excel");
 }
 
 function exportarPDF() {
-    $(location).attr("href", "/resumen-movimientos/export-pdf");
+    $(location).attr("href", "/resumen-movimientos-productos/export-pdf");
 }
 
 function modPeriodo() {
-    $(location).attr("href", "/resumen-movimientos");
+    $(location).attr("href", "/resumen-movimientos-productos");
 }
 

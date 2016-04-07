@@ -236,6 +236,38 @@ var addEntradaMercancia = function () {
 }
 
 
+var delCompra = function () {
+    if (!$('li a[action=del-compra]').parent().hasClass("disabled")) {
+        title = "Eliminar compra";
+        text = "Est&aacute; seguro que quiere eliminar la compra seleccionada.";
+        notificacion(title, text, {
+            ok: function () {
+                loadMask({
+                    msg: "Eliminando compra..."
+                })
+
+                var id = $("#tabla-compras>tbody>tr.active>td[key=id]").html();
+                token = $("input[name=csrfmiddlewaretoken]").attr("value");
+                $.ajax({
+                    url: "del",
+                    method: "post",
+                    dataType: 'json',
+                    async: true,
+                    data: {
+                        csrfmiddlewaretoken: token,
+                        id: id,
+                    },
+                    success: function () {
+                        $(location).attr("href", "/entrada");
+                    }
+                })
+            }
+        })
+
+    }
+}
+
+
 var eliminarDetalleCompra = function () {
     var record = getRecord("tabla-detalle-compra");
     $("#tabla-detalle-compra>tbody>tr.active").remove();
