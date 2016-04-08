@@ -49,8 +49,8 @@ urlpatterns = patterns('control_inventario.app',
    # urls-resumen de compra
     url(r'^resumen-compras/$', 'resumen_compras.views.resumen_compra', name='resumen_compra'),
     url(r'^resumen-compras/detalles$', 'resumen_compras.views.detalle_compra', name='detalle_compra'),
-   # exportar a excel
-   #  url(r'^export/$', 'export_excel.export.generar_pdf', name='export'),
+   # reporte de clientes
+    url(r'^reporte-cliente-diario/', 'reportes_cliente.views.reporte_cliente', {"tipo":"diario"}),
 
 
 )

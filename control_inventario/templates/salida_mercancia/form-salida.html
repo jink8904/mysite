@@ -5,7 +5,7 @@
         <input type="text" name="id" value="" class="hidden">
         {#Tipo de comprobante#}
         <div class="form-group col-md-3">
-            <label>Tipo de comprobante:</label>
+            <label>Tipo de comprobante</label>
 
             <div>
                 <select name="tipo-comprobante" class="bootstrap-select-search" data-width="100%" data-size="8" required>
@@ -18,7 +18,7 @@
         </div>
         <div class="form-group col-md-3">
             {#Fecha#}
-            <label>Fecha:</label>
+            <label>Fecha</label>
 
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon-calendar3"></i></span>
@@ -27,7 +27,7 @@
         </div>
         {#Serie#}
         <div class="form-group col-md-3">
-            <label>Serie:</label>
+            <label>Serie</label>
 
             <div>
                 <input type="text" name="serie" class="form-control">
@@ -35,7 +35,7 @@
         </div>
         {#Numero#}
         <div class="form-group col-md-3">
-            <label>N&uacute;mero:</label>
+            <label>N&uacute;mero</label>
 
             <div>
                 <input type="text" name="numero" class="form-control">
@@ -43,7 +43,7 @@
         </div>
         {#Identificador#}
         <div class="form-group col-md-6">
-            <label>N&uacute;mero de identificaci&oacute;n del cliente:</label>
+            <label>N&uacute;mero de identificaci&oacute;n del cliente</label>
 
             <div>
                 <select name="identificador" class="bootstrap-select-search" data-size="8" data-width="100%" required>
@@ -56,7 +56,7 @@
         </div>
         {#Nombre#}
         <div class="form-group col-md-6">
-            <label>Nombre:</label>
+            <label>Nombre</label>
 
             <div>
                 <select name="nombre" class="bootstrap-select-search" data-size="8" data-width="100%" required>
@@ -76,10 +76,10 @@
         <input type="text" name="id" value="" class="hidden">
         {#Codigo#}
         <div class="form-group col-md-8">
-            <label>Codigo:</label>
+            <label>Codigo</label>
 
             <div>
-                <select name="codigo" class="bootstrap-select-search" data-size="8" data-width="100%" required>
+                <select name="codigo" class="bootstrap-select-search" data-size="5" data-width="100%" required>
                     <option value="0">Seleccionar c&oacute;digo</option>
                     {% for producto in producto_list %}
                         <option value="{{ producto.id }}" stock="{{ producto.stock }}">{{ producto.codigo }}</option>
@@ -89,7 +89,7 @@
         </div>
         <div class="form-group col-md-4">
             {#Stock#}
-            <label>Stock:</label>
+            <label>Stock</label>
 
             <div>
                 <input type="text" name="stock" class="form-control" readonly>
@@ -97,10 +97,10 @@
         </div>
         {#Producto#}
         <div class="form-group col-md-8">
-            <label>Producto:</label>
+            <label>Producto</label>
 
             <div>
-                <select name="producto" class="bootstrap-select-search" data-size="8" data-width="100%" required>
+                <select name="producto" class="bootstrap-select-search" data-size="5" data-width="100%" required>
                     <option value="0">Seleccionar producto</option>
                     {% for producto in producto_list %}
                         <option value="{{ producto.id }}" stock="{{ producto.stock }}">{{ producto.nombre }}</option>
@@ -110,7 +110,7 @@
         </div>
         {#IGV#}
         <div class="form-group col-md-4">
-            <label>IGV:</label>
+            <label>IGV</label>
 
             <div class="input-group col-md-12">
                 <span class="input-group-addon">
@@ -126,7 +126,7 @@
         </div>
         {#Tipo de opreacion#}
         <div class="form-group col-md-8">
-            <label>Tipo de operaci&oacute;n:</label>
+            <label>Tipo de operaci&oacute;n</label>
 
             <div>
                 <select name="tipo-operacion" class="bootstrap-select-search" data-size="8" data-width="100%" required>
@@ -139,7 +139,7 @@
         </div>
         {#Cantidad#}
         <div class="form-group col-md-4">
-            <label>Cantidad:</label>
+            <label>Cantidad</label>
 
             <div>
                 <input type="text" name="cantidad" class="form-control">
@@ -155,7 +155,7 @@
         <input type="text" name="id" value="" class="hidden">
         {#Valor unitario#}
         <div class="form-group col-md-7">
-            <label>Valor unitario:</label>
+            <label>Valor unitario</label>
 
             <div>
                 <input type="text" name="valor-unitario" class="form-control">
@@ -163,7 +163,7 @@
         </div>
         <div class="form-group col-md-5">
             {#IGV#}
-            <label>IGV:</label>
+            <label>IGV</label>
 
             <div>
                 <input type="text" name="igv-unitario" class="form-control" readonly>
@@ -171,7 +171,7 @@
         </div>
         {#Precio unitario#}
         <div class="form-group col-md-12">
-            <label>Precio unitario:</label>
+            <label>Precio unitario</label>
 
             <div>
                 <input type="text" name="precio-unitario" class="form-control" readonly>
@@ -188,7 +188,7 @@
         <input type="text" name="id" value="" class="hidden">
         {#Valor de venta#}
         <div class="form-group col-md-7">
-            <label>Valor de venta:</label>
+            <label>Valor de venta</label>
 
             <div>
                 <input type="text" name="valor-venta" class="form-control" readonly>
@@ -196,7 +196,7 @@
         </div>
         <div class="form-group col-md-5">
             {#IGV#}
-            <label>IGV:</label>
+            <label>IGV</label>
 
             <div>
                 <input type="text" name="igv-total" class="form-control" readonly>
@@ -204,7 +204,7 @@
         </div>
         {#Precio venta#}
         <div class="form-group col-md-12">
-            <label>Precio de venta:</label>
+            <label>Precio de venta</label>
 
             <div>
                 <input type="text" name="precio-venta" id="precio-venta-id" class="form-control" readonly>

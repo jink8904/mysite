@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+
+{% block script %}
+    <script src="{% static 'js/app/cliente/functions.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block title %}
+    Cliente
+{% endblock %}
+
+
+{% block content %}
+    {% if form %}
+        {% if tipo == "diario" %}
+            <div class=" col-md-10 col-md-offset-1">
+                {% include "reportes_cliente/form-cliente-diario.html" %}
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

@@ -1,4 +1,9 @@
 {% extends "index.html" %}
+{% load staticfiles %}
+
+{% block script %}
+    <script src="{% static 'js/app/inventario/functions.js' %}" type="text/javascript"></script>
+{% endblock %}
 
 {% block title %}
     Inventario inicial
@@ -6,6 +11,12 @@
 
 
 {% block content %}
-    {% include "inventario_inicial/form-producto_inv.html" %}
+    {% if error %}
+        <script type="text/javascript">
+            showMsg("Ya se ha declarado el inventario inicial para el producto seleccionado", "error");
+        </script>
+    {% endif %}
+    {% include "inventario_inicial/form-inventario.html" %}
+{#    {% include "inventario_inicial/form-producto_inv.html" %}#}
     {% include "inventario_inicial/table-producto.html" %}
 {% endblock %}

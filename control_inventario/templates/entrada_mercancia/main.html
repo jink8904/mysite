@@ -1,4 +1,12 @@
 {% extends "index.html" %}
+{% load staticfiles %}
+
+{% block script %}
+    <script src="{% static 'js/limitless/plugins/notifications/bootbox.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/limitless/plugins/notifications/sweet_alert.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/limitless/core/app.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/app/compra/functions.js' %}" type="text/javascript"></script>
+{% endblock %}
 
 {% block title %}
     Entrada mercader&iacute;a
@@ -6,6 +14,11 @@
 
 
 {% block content %}
+    {% if action == "del" %}
+        <script type="text/javascript">
+            showMsg("La compra fue eliminada satisfactoriamente.")
+        </script>
+    {% endif %}
     <div class="modal fade col-md-12" id="modal-detalles-compra" tabindex="-1" role="dialog"
          aria-labelledby="form-productoLabel"
          aria-hidden="true">
@@ -25,46 +38,5 @@
     </div>
     <span productos='{{ producto_list }}'></span>
     {% csrf_token %}
-    <div class="col-md-12">
-        <div class="panel panel-flat">
-            <div class="panel-heading">
-                <h4 class="panel-title">Entrada de mercader&iacute;a - Compras (Normal)</h4>
-
-                <div class="heading-elements">
-                    <ul class="icons-list">
-                        <li><a data-action="collapse"></a></li>
-                        {#                        <li><a data-action="reload"></a></li>#}
-                        {#                        <li><a data-action="close"></a></li>#}
-                    </ul>
-                </div>
-                <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
-
-            <div class="panel-body">
-                <div class="nav-panel col-md-12">
-                    <button class="btn btn-primary" type="submit" id="add-entrada-merc">Guardar</button>
-                    <button class="btn btn-primary" type="submit">Eliminar</button>
-                    <button class="btn btn-primary" type="submit" id="ver-detalle-compra">Ver detalles</button>
-                </div>
-                <div class="tabbable">
-                    <ul class="nav nav-tabs nav-justified">
-                        <li class="active"><a data-toggle="tab" href="#registro_entradas"
-                                              aria-expanded="true">Registro de entradas</a></li>
-                        <li class=""><a data-toggle="tab" href="#detalles_comprobante_compra"
-                                        aria-expanded="false">Detalles del comprobante</a></li>
-                    </ul>
-
-                    <div class="tab-content">
-                        <div id="registro_entradas" class="tab-pane active">
-                            {% include "entrada_mercancia/table-compra.html" %}
-                        </div>
-
-                        <div id="detalles_comprobante_compra" class="tab-pane">
-                            {% include "entrada_mercancia/form-entrada.html" %}
-                            {% include "entrada_mercancia/table_detalle_compra.html" %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include "entrada_mercancia/tab-panel-compras.html" %}
 {% endblock %}

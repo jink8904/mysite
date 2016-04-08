@@ -1,16 +1,24 @@
 <div class="panel panel-primary panel-bordered">
     <div class="panel-heading">
-        <h6 class="panel-title">Lista de productos</h6>
+        <h6 class="panel-title">Inventario inicial</h6>
 
         <div class="heading-elements">
             <ul class="icons-list">
-                <li class="disabled" table="tabla-inventario"><a title="Declarar inventario inicial (CTRL+I)" action="add-inventario"><i class="icon-quill4"></i></a></li>
+                <li>
+                    <a title="Exportar PDF (CTR+P)" action="export-pdf">
+                        <i class="icon-file-pdf"></i>
+                    </a>
+                </li>
+                <li>
+                    <a title="Exportar EXCEL (CTR+E)" action="export-excel">
+                        <i class="icon-file-excel"></i>
+                    </a></li>
             </ul>
         </div>
         <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
 
     <div class="panel-body">
-        <table class="table table-hover table-bordered" id="tabla-inventario" select="true">
+        <table class="table table-hover table-bordered" id="tabla-producto-inv" select="true">
             <thead class="bg-primary-600">
             <tr>
                 <th class="hidden">Id</th>
@@ -27,7 +35,7 @@
                 <th>Categoria</th>
                 <th>Tipo</th>
                 <th>Unidad</th>
-                <th>Invetario inicial</th>
+                <th>Inventario inicial</th>
             </tr>
             </thead>
             <tbody>

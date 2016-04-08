@@ -5,11 +5,12 @@
         <input type="text" name="id" value="" class="hidden">
         {#Tipo de comprobante#}
         <div class="form-group col-md-3">
-            <label>Tipo de comprobante:</label>
+            <label>Tipo de comprobante</label>
 
             <div>
-                <select name="tipo-comprobante">
-                    <option></option>
+                <select name="tipo-comprobante" class="bootstrap-select-search" data-width="100%" data-size="8"
+                        required>
+                    <option value="">Seleccionar tipo de comprobante</option>
                     {% for tipo_comprobante in comprobante_list %}
                         <option value="{{ tipo_comprobante.id }}">{{ tipo_comprobante.denominacion }}</option>
                     {% endfor %}
@@ -18,7 +19,7 @@
         </div>
         <div class="form-group col-md-3">
             {#Fecha#}
-            <label>Fecha:</label>
+            <label>Fecha</label>
 
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon-calendar3"></i></span>
@@ -27,7 +28,7 @@
         </div>
         {#Serie#}
         <div class="form-group col-md-3">
-            <label>Serie:</label>
+            <label>Serie</label>
 
             <div>
                 <input type="text" name="serie" class="form-control">
@@ -35,7 +36,7 @@
         </div>
         {#Numero#}
         <div class="form-group col-md-3">
-            <label>N&uacute;mero:</label>
+            <label>N&uacute;mero</label>
 
             <div>
                 <input type="text" name="numero" class="form-control">
@@ -43,11 +44,11 @@
         </div>
         {#Identificador#}
         <div class="form-group col-md-6">
-            <label>N&uacute;mero de identificaci&oacute;n del proveedor:</label>
+            <label>N&uacute;mero de identificaci&oacute;n del proveedor</label>
 
             <div>
-                <select name="identificador">
-                    <option></option>
+                <select name="identificador" class="bootstrap-select-search" data-width="100%" data-size="8" required>
+                    <option value="0">Seleccionar n&uacute;mero de identicaci&oacute;n</option>
                     {% for proveedor in proveedor_list %}
                         <option value="{{ proveedor.id }}">{{ proveedor.identificador }}</option>
                     {% endfor %}
@@ -56,11 +57,11 @@
         </div>
         {#Nombre#}
         <div class="form-group col-md-6">
-            <label>Nombre:</label>
+            <label>Nombre</label>
 
             <div>
-                <select name="nombre" maxlength="30">
-                    <option></option>
+                <select name="nombre" class="bootstrap-select-search" data-width="100%" data-size="8" required>
+                    <option value="0">Seleccionar proveedor</option>
                     {% for proveedor in proveedor_list %}
                         <option value="{{ proveedor.id }}">{{ proveedor.nombre }}</option>
                     {% endfor %}
@@ -76,11 +77,11 @@
         <input type="text" name="id" value="" class="hidden">
         {#Codigo#}
         <div class="form-group col-md-8">
-            <label>Codigo:</label>
+            <label>Codigo</label>
 
             <div>
-                <select name="codigo">
-                    <option></option>
+                <select name="codigo" class="bootstrap-select-search" data-width="100%" data-size="5" required>
+                    <option value="0">Seleccionar c&oacute;digo</option>
                     {% for producto in producto_list %}
                         <option value="{{ producto.id }}" stock="{{ producto.stock }}">{{ producto.codigo }}</option>
                     {% endfor %}
@@ -89,7 +90,7 @@
         </div>
         <div class="form-group col-md-4">
             {#Stock#}
-            <label>Stock:</label>
+            <label>Stock</label>
 
             <div>
                 <input type="text" name="stock" class="form-control" readonly>
@@ -97,11 +98,11 @@
         </div>
         {#Producto#}
         <div class="form-group col-md-8">
-            <label>Producto:</label>
+            <label>Producto</label>
 
             <div>
-                <select name="producto">
-                    <option value="0"></option>
+                <select name="producto" class="bootstrap-select-search" data-width="100%" data-size="5" required>
+                    <option value="0">Seleccionar producto</option>
                     {% for producto in producto_list %}
                         <option value="{{ producto.id }}" stock="{{ producto.stock }}">{{ producto.nombre }}</option>
                     {% endfor %}
@@ -110,7 +111,7 @@
         </div>
         {#IGV#}
         <div class="form-group col-md-4">
-            <label>IGV:</label>
+            <label>IGV</label>
 
             <div class="input-group col-md-12">
                 <span class="input-group-addon">
@@ -126,11 +127,11 @@
         </div>
         {#Tipo de opreacion#}
         <div class="form-group col-md-8">
-            <label>Tipo de operaci&oacute;n:</label>
+            <label>Tipo de operaci&oacute;n</label>
 
             <div>
-                <select name="tipo-operacion">
-                    <option value="0"></option>
+                <select name="tipo-operacion" class="bootstrap-select-search" data-width="100%" data-size="8" required>
+                    <option value="0">Seleccionar tipo de operaci&oacute;n</option>
                     {% for operacion in tipo_operacion_list %}
                         <option value="{{ operacion.id }}">{{ operacion.denominacion }}</option>
                     {% endfor %}
@@ -140,7 +141,7 @@
         </div>
         {#Cantidad#}
         <div class="form-group col-md-4">
-            <label>Cantidad:</label>
+            <label>Cantidad</label>
 
             <div>
                 <input type="text" name="cantidad" class="form-control">
@@ -156,7 +157,7 @@
         <input type="text" name="id" value="" class="hidden">
         {#Valor unitario#}
         <div class="form-group col-md-7">
-            <label>Valor unitario:</label>
+            <label>Valor unitario</label>
 
             <div>
                 <input type="text" name="valor-unitario" class="form-control">
@@ -164,7 +165,7 @@
         </div>
         <div class="form-group col-md-5">
             {#IGV#}
-            <label>IGV:</label>
+            <label>IGV</label>
 
             <div>
                 <input type="text" name="igv-unitario" class="form-control" readonly>
@@ -172,7 +173,7 @@
         </div>
         {#Precio unitario#}
         <div class="form-group col-md-12">
-            <label>Precio unitario:</label>
+            <label>Precio unitario</label>
 
             <div>
                 <input type="text" name="precio-unitario" class="form-control" readonly>
@@ -189,7 +190,7 @@
         <input type="text" name="id" value="" class="hidden">
         {#Valor de compra#}
         <div class="form-group col-md-7">
-            <label>Valor de compra:</label>
+            <label>Valor de compra</label>
 
             <div>
                 <input type="text" name="valor-compra" class="form-control" readonly>
@@ -197,7 +198,7 @@
         </div>
         <div class="form-group col-md-5">
             {#IGV#}
-            <label>IGV:</label>
+            <label>IGV</label>
 
             <div>
                 <input type="text" name="igv-total" class="form-control" readonly>
@@ -205,7 +206,7 @@
         </div>
         {#Precio compra#}
         <div class="form-group col-md-12">
-            <label>Precio de compra:</label>
+            <label>Precio de compra</label>
 
             <div>
                 <input type="text" name="precio-compra" class="form-control" readonly>

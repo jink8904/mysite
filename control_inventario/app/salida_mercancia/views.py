@@ -32,6 +32,7 @@ def salida_mercancia(request):
     id_empresa = request.session['empresa']["id"]
     mes = request.session["mes"]
     emp = models.Empresa.objects.get(id=id_empresa)
+    args = {}
 
     comprobante_list = models.TipoComprobante.objects.values()
     cliente_list = emp.cliente_set.values()
@@ -39,12 +40,17 @@ def salida_mercancia(request):
     venta_list = update_venta_list(emp, mes)
     tipo_operacion_list = models.TipoOperacion.objects.values()
 
-    args = {}
+    if request.session.has_key("del-venta") == 1:
+        if (request.session["del-venta"]):
+            args["action"] = "del"
+            request.session["del-venta"]=False
+
     args["comprobante_list"] = comprobante_list
     args["cliente_list"] = cliente_list
     args["producto_list"] = producto_list
     args["venta_list"] = venta_list
     args["tipo_operacion_list"] = tipo_operacion_list
+
     return render_to_response('salida_mercancia/main.html', args, context_instance=RequestContext(request))
 
 
@@ -110,6 +116,18 @@ def add_salida_mercancia(request):
 
         json_data = json.dumps({"success": True})
         return HttpResponse(json_data, mimetype="application/json")
+
+
+@login_required(login_url='/ingresar')
+def del_venta(request):
+    venta = models.Venta.objects.get(id=request.POST.get("id"))
+    venta.delete()
+    request.session['del-venta'] = True
+
+    args = {}
+    args['success'] = True
+    json_data = json.dumps(args)
+    return HttpResponse(json_data, mimetype="application/json")
 
 
 def detalle_venta(request):

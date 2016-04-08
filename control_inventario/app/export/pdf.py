@@ -41,7 +41,8 @@ class PdfPrint:
         title = options.get("title")
         ruc = options.get("ruc")
         empresa = options.get("empresa")
-        top_title = ruc + "&nbsp;&nbsp;&nbsp;&nbsp;" + empresa
+        table_style = options.get("table_style")
+        top_title = ruc + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + empresa
         buff = io.BytesIO()
         doc = SimpleDocTemplate(
             buff,
@@ -56,7 +57,7 @@ class PdfPrint:
 
         styles.add(ParagraphStyle(
             name="titulo", alignment=TA_CENTER, fontName='Times-Roman', spaceAfter=15,
-        spaceBefore=6, fontSize=18))
+        spaceBefore=6, fontSize=12))
 
         top_title = Paragraph(top_title, styles['Normal'])
         header = Paragraph(title, styles['titulo'])
@@ -73,6 +74,8 @@ class PdfPrint:
                 ('BACKGROUND', (0, 0), (-1, 0), colors.whitesmoke)
             ]
         ))
+        if(table_style):
+            t.setStyle(TableStyle(table_style))
         template.append(t)
         doc.build(template)
         pdf = buff.getvalue()

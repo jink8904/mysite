@@ -961,7 +961,7 @@
 *
 * ---------------------------------------------------------------------------- */
 .layout-boxed {
-  background: url(../images/backgrounds/boxed_bg.png) repeat;
+  /*background: url(../images/backgrounds/boxed_bg.png) repeat;*/
 }
 .layout-boxed > .navbar {
   margin-left: auto;

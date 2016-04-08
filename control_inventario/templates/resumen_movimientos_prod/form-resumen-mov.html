@@ -1,0 +1,37 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h6 class="panel-title">Resumen de movimientos y saldos de productos</h6>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+
+    <form action="" method="post">
+        <div class="panel-body">
+            {% csrf_token %}
+            {#    Año #}
+            <div class="form-group col-md-6">
+                <label class="control-label">A&ntilde;o:</label>
+
+                <div>
+                    <select class="selectpicker" name="year" data-width="100%" required>
+                        <option>2016</option>
+                        <option>2015</option>
+                        <option>2014</option>
+                    </select>
+                </div>
+            </div>
+            {# Periodo #}
+            <div class="form-group col-md-6">
+                <label class="control-label">Per&iacute;odo:</label>
+
+                <div>
+                    <select name="periodo" class="selectpicker" data-width="100%" required>
+                        <option value="1">Enero - Marzo</option>
+                        <option value="2">Abril - Junio</option>
+                        <option value="3">Julio - Septiembre</option>
+                        <option value="4">Octubre - Diciembre</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit" style="float: right">Aceptar</button>
+        </div>
+    </form>
+</div>

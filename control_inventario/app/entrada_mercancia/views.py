@@ -31,6 +31,7 @@ def entrada_mercancia(request):
     id_empresa = request.session['empresa']["id"]
     emp = models.Empresa.objects.get(id=id_empresa)
     mes = request.session['mes']
+    args = {}
 
     comprobante_list = models.TipoComprobante.objects.values()
     proveedor_list = emp.proveedor_set.values()
@@ -38,7 +39,11 @@ def entrada_mercancia(request):
     compra_list = update_compra_list(emp, mes)
     tipo_operacion_list = models.TipoOperacion.objects.values()
 
-    args = {}
+    if request.session.has_key("del-compra") == 1:
+        if (request.session["del-compra"]):
+            args["action"] = "del"
+            request.session["del-compra"]=False
+
     args["comprobante_list"] = comprobante_list
     args["proveedor_list"] = proveedor_list
     args["producto_list"] = producto_list
@@ -112,6 +117,18 @@ def add_entrada_mercancia(request):
 
         json_data = json.dumps({"success": True})
         return HttpResponse(json_data, mimetype="application/json")
+
+
+@login_required(login_url='/ingresar')
+def del_compra(request):
+    compra = models.Compra.objects.get(id=request.POST.get("id"))
+    compra.delete()
+    request.session['del-compra'] = True
+
+    args = {}
+    args['success'] = True
+    json_data = json.dumps(args)
+    return HttpResponse(json_data, mimetype="application/json")
 
 
 def detalle_compra(request):
