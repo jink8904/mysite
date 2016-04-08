@@ -42,11 +42,7 @@ class PdfPrint:
         ruc = options.get("ruc")
         empresa = options.get("empresa")
         table_style = options.get("table_style")
-<<<<<<< HEAD
         top_title = ruc + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + empresa
-=======
-        top_title = ruc + "&nbsp;&nbsp;&nbsp;&nbsp;" + empresa
->>>>>>> 19963be61e4b66cdb143618b604b34587699eb34
         buff = io.BytesIO()
         doc = SimpleDocTemplate(
             buff,
