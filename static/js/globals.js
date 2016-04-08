@@ -58,6 +58,12 @@ $(document).ready(function () {
             records: "productos"
         }
     }).bind('dynatable:afterProcess', fixTableSelect);
+
+    $("#tabla-inventario").dynatable({
+        params: {
+            records: "productos"
+        }
+    }).bind('dynatable:afterProcess', fixTableSelect);
     //------- Manejo global ---------
     //select table
     $("table[select]>tbody>tr").click(function (evt) {
@@ -89,7 +95,6 @@ $(document).ready(function () {
             $("span input[type=radio][name=" + name + "]").parent().removeClass("checked");
         }
         $(this).parent().addClass("checked");
-
     })
 
     //campo fecha addClass pickadate
@@ -201,10 +206,21 @@ $(document).ready(function () {
 
     //----------------------------- Inventario ---------------------------
 
-    $("#tabla-producto-inv>tbody>tr").click(function () {
-        updateRecords("tabla-producto-inv");
+    $("#tabla-inventario>tbody>tr").click(function () {
+        updateRecords("tabla-inventario");
     });
 
+    $("#tabla-inventario>tbody>tr").dblclick(function(){
+        addInventario();
+    })
+
+    $("#form-inventario [name=costo_unitario]").blur(function () {
+        updateInventarioFormData();
+    })
+
+     $("li a[action=add-inventario]").click(function () {
+        addInventario();
+    })
     //----------------------- Proveedor ------------------------------------
 
      $("li a[action=add-proveedor]").click(function () {
@@ -253,10 +269,14 @@ $(document).ready(function () {
 
     $("#add-detalle-venta").click(function () {
         addDetalleVenta()
-    })
+    });
 
     $('li a[action=add-venta]').on('click', function () {
         addVenta();
+    });
+
+    $('li a[action=del-venta]').on('click', function () {
+        delVenta();
     });
 
     $('li a[action=det-venta]').on('click', function () {
@@ -272,12 +292,38 @@ $(document).ready(function () {
         eliminarDetalleVenta()
     })
 
-    //ver detalle de venta
-    $("#ver-detalle-venta").click(function () {
-        verDetallesVenta();
+    //------------- Entrada de mercancia ---------------------
+
+    $('li a[action=add-compra]').on('click', function () {
+        addCompra();
+    });
+
+    $('li a[action=del-compra]').on('click', function () {
+        delCompra();
+    });
+
+    $("#add-detalle-compra").click(function () {
+        addDetalleCompra()
     })
 
-    //------------- Entrada de mercancia ---------------------
+    $("#datos-producto-entrada [name=codigo]," +
+        "#datos-producto-entrada [name=producto]").change(function(){
+        updateProductsData(this)
+    })
+
+    $("#datos-comprobante-entrada [name=identificador]," +
+        "#datos-comprobante-entrada [name=nombre]").change(function(){
+        updateComprobantData(this)
+    })
+
+    $('a[href=#detalles_comprobante_compra] i[action=add-compra]').on('click', function () {
+        addEntradaMercancia();
+    });
+
+    $("#del-detalle-compra").click(function () {
+        $(this).addClass("disabled");
+        eliminarDetalleCompra()
+    })
 
     $("#datos-producto-entrada select[name=codigo]>option," +
         "#datos-producto-entrada select[name=producto]>option").click(function () {
@@ -293,41 +339,24 @@ $(document).ready(function () {
             llenarDatosImportesCompra()
     })
 
-    $("#add-detalle-compra").click(function () {
-        addDetalleCompra()
-    })
-
-    $("#add-entrada-merc").click(function () {
-        addEntradaMercancia();
-    })
-
-    $("#datos-comprobante-entrada [name=identificador]>option").click(function () {
-        var value = $(this).val();
-        $("#datos-comprobante-entrada [name=nombre]").val(value);
-    })
-
-    $("#datos-comprobante-entrada [name=nombre]>option").click(function () {
-        var value = $(this).val();
-        $("#datos-comprobante-entrada [name=identificador]").val(value);
-    })
-
     //ver detalle de compra
-    $("#ver-detalle-compra").click(function () {
+    $('li a[action=det-compra]').on('click', function () {
         verDetallesCompra();
-    })
+    });
 
-    $("#del-detalle-compra").click(function () {
-        $(this).addClass("disabled");
-        eliminarDetalleCompra()
-    })
+    //------------------------ Exports ----------------------------
 
-    //------------------------ Stock disponible ----------------------------
-
-    $("#navtb-stock-disp button[accion=export_excel]").click(function () {
+    $('li a[action=export-excel]').on('click', function () {
         exportarExcel();
-    })
-    $("#navtb-stock-disp button[accion=pdf]").click(function () {
+    });
+    $('li a[action=export-pdf]').on('click', function () {
         exportarPDF();
-    })
+    });
+
+    //------------------------------ Resumen de movimientos ------------------
+
+    $('li a[action=mod-periodo]').on('click', function () {
+        modPeriodo();
+    });
 
 })

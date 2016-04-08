@@ -1,14 +1,46 @@
 {% extends "index.html" %}
 {% load staticfiles %}
+<<<<<<< HEAD
 
 {% block script %}
     <script src="{% static 'js/app/resumen_mov/functions.js' %}" type="text/javascript"></script>
 {% endblock %}
+=======
+>>>>>>> 19963be61e4b66cdb143618b604b34587699eb34
 
+{% block script %}
+    <script src="{% static 'js/app/compra/functions.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+<<<<<<< HEAD
+{% block content %}
+    {% include "resumen_movimientos/table-resumen-mov.html" %}
+=======
 {% block title %}
-    Resumen de movimientos
+    Resumen de compras
 {% endblock %}
 
 {% block content %}
-    {% include "resumen_movimientos/table-resumen-mov.html" %}
+    <div class="modal fade col-md-12" id="modal-detalles-compra" tabindex="-1" role="dialog"
+         aria-labelledby="form-productoLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="form-producto-label">Detalles de compra</h4>
+                </div>
+                <div class="modal-body">
+                    {% include "resumen_compras/table_d_compra_modal.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        {% include "resumen_compras/table-compra.html" %}
+    </div>
+>>>>>>> 19963be61e4b66cdb143618b604b34587699eb34
 {% endblock %}

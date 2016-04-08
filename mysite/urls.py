@@ -25,20 +25,26 @@ urlpatterns = patterns('control_inventario.app',
    # urls-proveedor
     url(r'^cliente/$', 'cliente.views.cliente', name='cliente'),
     url(r'^cliente/del$', 'cliente.views.del_cliente', name='del_cliente'),
-   # urls-inventario inicial
+   # urls-inventario
     url(r'^inventario/$', 'inventario.views.inventario_inicial', name='inventario'),
+    url(r'^inventario-inicial/$', 'inventario.views.inventario_inicial_consulta', name='inventario'),
    # urls-salida de mercancia
     url(r'^salida/$', 'salida_mercancia.views.salida_mercancia', name='salida_mercancia'),
+    url(r'^salida/del$', 'salida_mercancia.views.del_venta', name='del_venta'),
     url(r'^salida/add$', 'salida_mercancia.views.add_salida_mercancia', name='add_salida_mercancia'),
     url(r'^salida/detalles$', 'salida_mercancia.views.detalle_venta', name='detalle_venta'),
    # urls-entrada de mercancia
     url(r'^entrada/$', 'entrada_mercancia.views.entrada_mercancia', name='entrada_mercancia'),
     url(r'^entrada/add$', 'entrada_mercancia.views.add_entrada_mercancia', name='add_entrada_mercancia'),
+    url(r'^entrada/del$', 'entrada_mercancia.views.del_compra', name='del_venta'),
     url(r'^entrada/detalles$', 'entrada_mercancia.views.detalle_compra', name='detalle_compra'),
    # urls-registo de ventas
     url(r'^registro-ventas/$', 'registro_venta.views.registro_ventas', name='registro_ventas'),
    # urls-resumen de movimientos
-    url(r'^resumen-movimientos/$', 'resumen_movimientos.views.resumen_mov', name='resumen_mov'),
+   #  url(r'^resumen-mov/$', 'resumen_movimientos.views.resumen_mov', name='resumen_mov'),
+    url(r'^resumen-movimientos-productos/$', 'resumen_movimientos_prod.views.resumen_mov', name='resumen_mov'),
+    url(r'^resumen-movimientos-productos/export-excel$', 'resumen_movimientos_prod.views.export_excel'),
+    url(r'^resumen-movimientos-productos/export-pdf$', 'resumen_movimientos_prod.views.export_pdf'),
    # urls-stock disponible
     url(r'^stock-disponible/$', 'stock_disponible.views.stock_disponible', name='stock_disponible'),
     url(r'^stock-disponible/export-excel$', 'stock_disponible.views.export_excel'),

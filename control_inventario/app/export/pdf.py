@@ -42,7 +42,11 @@ class PdfPrint:
         ruc = options.get("ruc")
         empresa = options.get("empresa")
         table_style = options.get("table_style")
+<<<<<<< HEAD
         top_title = ruc + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + empresa
+=======
+        top_title = ruc + "&nbsp;&nbsp;&nbsp;&nbsp;" + empresa
+>>>>>>> 19963be61e4b66cdb143618b604b34587699eb34
         buff = io.BytesIO()
         doc = SimpleDocTemplate(
             buff,
@@ -71,7 +75,7 @@ class PdfPrint:
                 ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
                 ('BOX', (0, 0), (-1, -1), 0.75, colors.black),
                 ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
-                ('BACKGROUND', (0, 0), (-1, 0), colors.whitesmoke)
+                ('BACKGROUND', (0, 0), (-1, 1), colors.whitesmoke)
             ]
         ))
         if(table_style):

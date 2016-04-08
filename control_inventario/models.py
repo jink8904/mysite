@@ -8,9 +8,6 @@ class Empresa(models.Model):
     anno_inicio = models.IntegerField()
     ruc = models.IntegerField(unique=TRUE)
 
-    def __str__(self):
-        return self.nombre
-
 
 class Categoria(models.Model):
     codigo = models.IntegerField(unique=TRUE)
