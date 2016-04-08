@@ -12,14 +12,22 @@ function keyDownEvt(e) {
         e.preventDefault();
         exportarExcel()
     }
+    if (keyCode == 68 && e.ctrlKey) {
+        e.preventDefault();
+        modPeriodo()
+    }
 }
 
 
 function exportarExcel() {
-    $(location).attr("href", "/resumen-movimientos/export-excel");
+    $(location).attr("href", "/reporte-movimientos-productos/export-excel");
 }
 
 function exportarPDF() {
-    $(location).attr("href", "/resumen-movimientos/export-pdf");
+    $(location).attr("href", "/reporte-movimientos-productos/export-pdf");
+}
+
+function modPeriodo() {
+    $(location).attr("href", "/reporte-movimientos-productos");
 }
 

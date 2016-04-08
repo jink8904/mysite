@@ -40,11 +40,14 @@ urlpatterns = patterns('control_inventario.app',
     url(r'^entrada/detalles$', 'entrada_mercancia.views.detalle_compra', name='detalle_compra'),
    # urls-registo de ventas
     url(r'^registro-ventas/$', 'registro_venta.views.registro_ventas', name='registro_ventas'),
+   # urls-resumen de movimientos-productos
+    url(r'^resumen-movimientos/$', 'resumen_movimientos.views.resumen_mov'),
+    url(r'^resumen-movimientos-productos/export-excel$', 'resumen_movimientos.views.export_excel'),
+    url(r'^resumen-movimientos-productos/export-pdf$', 'resumen_movimientos.views.export_pdf'),
    # urls-resumen de movimientos
-   #  url(r'^resumen-mov/$', 'resumen_movimientos.views.resumen_mov', name='resumen_mov'),
-    url(r'^resumen-movimientos-productos/$', 'resumen_movimientos_prod.views.resumen_mov', name='resumen_mov'),
-    url(r'^resumen-movimientos-productos/export-excel$', 'resumen_movimientos_prod.views.export_excel'),
-    url(r'^resumen-movimientos-productos/export-pdf$', 'resumen_movimientos_prod.views.export_pdf'),
+    url(r'^reporte-movimientos-productos/$', 'resumen_movimientos_prod.views.resumen_mov', name='resumen_mov'),
+    url(r'^reporte-movimientos-productos/export-excel$', 'resumen_movimientos_prod.views.export_excel'),
+    url(r'^reporte-movimientos-productos/export-pdf$', 'resumen_movimientos_prod.views.export_pdf'),
    # urls-stock disponible
     url(r'^stock-disponible/$', 'stock_disponible.views.stock_disponible', name='stock_disponible'),
     url(r'^stock-disponible/export-excel$', 'stock_disponible.views.export_excel'),

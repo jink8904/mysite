@@ -1,3 +1,4 @@
+# _*_ coding: utf-8
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse
@@ -118,16 +119,16 @@ def add_salida_mercancia(request):
         return HttpResponse(json_data, mimetype="application/json")
 
 
-@login_required(login_url='/ingresar')
-def del_venta(request):
-    venta = models.Venta.objects.get(id=request.POST.get("id"))
-    venta.delete()
-    request.session['del-venta'] = True
-
-    args = {}
-    args['success'] = True
-    json_data = json.dumps(args)
-    return HttpResponse(json_data, mimetype="application/json")
+# @login_required(login_url='/ingresar')
+# def del_venta(request):
+    # venta = models.Venta.objects.get(id=request.POST.get("id"))
+    # venta.delete()
+    # request.session['del-venta'] = True
+    #
+    # args = {}
+    # args['success'] = True
+    # json_data = json.dumps(args)
+    # return HttpResponse(json_data, mimetype="application/json")
 
 
 def detalle_venta(request):

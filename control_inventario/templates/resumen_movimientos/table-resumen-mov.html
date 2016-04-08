@@ -1,0 +1,49 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h6 class="panel-title">Resumen de saldos y movimientos del mes de {{ mes }}</h6>
+
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li>
+                    <a title="Exportar PDF (CTR+P)" action="export-pdf">
+                        <i class="icon-file-pdf"></i>
+                    </a>
+                </li>
+                <li>
+                    <a title="Exportar EXCEL (CTR+E)" action="export-excel">
+                        <i class="icon-file-excel"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered" id="tabla-resumen_mov" select="true">
+                <thead class="bg-primary-600">
+                <tr>
+                    <th>C&oacute;digo</th>
+                    <th>Producto</th>
+                    <th>Saldo inicial</th>
+                    <th>Entradas</th>
+                    <th>Salidas</th>
+                    <th>Saldos</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for mov in mov_list %}
+                    <tr>
+                        <td name="fecha">{{ mov.codigo }}</td>
+                        <td name="tipo">{{ mov.nombre }}</td>
+                        <td name="serie">{{ mov.saldo_inicial }}</td>
+                        <td name="numero">{{ mov.entradas }}</td>
+                        <td name="denominacion">{{ mov.salidas }}</td>
+                        <td name="subtotal">{{ mov.saldo_final }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

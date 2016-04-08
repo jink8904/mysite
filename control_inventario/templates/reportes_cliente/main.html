@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block title %}
-    Cliente
+    Reportes cliente
 {% endblock %}
 
 
@@ -17,5 +17,7 @@
                 {% include "reportes_cliente/form-cliente-diario.html" %}
             </div>
         {% endif %}
+    {% else %}
+        {% include "reportes_cliente/table-reportes-cliente.html" %}
     {% endif %}
 {% endblock %}
