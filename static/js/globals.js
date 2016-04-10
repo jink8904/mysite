@@ -359,4 +359,10 @@ $(document).ready(function () {
         modPeriodo();
     });
 
+    //-------------------------- Repotes cliente -----------------------------
+
+    $("#form-reporte-cliente [name=identificador]," +
+        "#form-reporte-cliente [name=nombre]").change(function(){
+        updateClientData(this)
+    })
 })

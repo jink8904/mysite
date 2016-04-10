@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+
+{% block script %}
+    <script src="{% static 'js/app/reportes_cliente/functions.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block title %}
+    Reportes cliente
+{% endblock %}
+
+
+{% block content %}
+    {% if form %}
+        <div class=" col-md-10 col-md-offset-1">
+            {% include "reportes_cliente/form-reporte-cliente.html" %}
+        </div>
+    {% elif empty %}
+        <script type="text/javascript">
+            var msg = "No hay resultados que coincidan con el criterio de busqueda especificado";
+            showMsg(msg, "information");
+        </script>
+        <div class=" col-md-10 col-md-offset-1">
+            {% include "reportes_cliente/form-reporte-cliente.html" %}
+        </div>
+    {% else %}
+        {% include "reportes_cliente/table-reportes-cliente.html" %}
+    {% endif %}
+{% endblock %}

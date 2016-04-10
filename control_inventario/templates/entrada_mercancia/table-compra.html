@@ -39,7 +39,7 @@
                 {% for compra in compra_list %}
                     <tr>
                         <td class="hidden" name="id">{{ compra.id }}</td>
-                        <td name="fecha">{{ compra.fecha|date:"j/n/Y" }}</td>
+                        <td name="fecha">{{ compra.fecha|date:"d / m / Y" }}</td>
                         <td name="tipo">{{ compra.tipo_comprobante }}</td>
                         <td name="serie">{{ compra.serie }}</td>
                         <td name="numero">{{ compra.numero }}</td>

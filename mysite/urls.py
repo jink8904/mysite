@@ -41,10 +41,13 @@ urlpatterns = patterns('control_inventario.app',
    # urls-registo de ventas
     url(r'^registro-ventas/$', 'registro_venta.views.registro_ventas', name='registro_ventas'),
    # urls-resumen de movimientos
-   #  url(r'^resumen-mov/$', 'resumen_movimientos.views.resumen_mov', name='resumen_mov'),
-    url(r'^resumen-movimientos-productos/$', 'resumen_movimientos_prod.views.resumen_mov', name='resumen_mov'),
-    url(r'^resumen-movimientos-productos/export-excel$', 'resumen_movimientos_prod.views.export_excel'),
-    url(r'^resumen-movimientos-productos/export-pdf$', 'resumen_movimientos_prod.views.export_pdf'),
+    url(r'^resumen-movimientos/$', 'resumen_movimientos.views.resumen_mov', name='resumen_mov'),
+    url(r'^resumen-movimientos/export-excel$', 'resumen_movimientos.views.export_excel'),
+    url(r'^resumen-movimientos/export-pdf$', 'resumen_movimientos.views.export_pdf'),
+   # urls-reporte de movimientos de productos
+    url(r'^reporte-movimientos-productos/$', 'resumen_movimientos_prod.views.resumen_mov', name='resumen_mov'),
+    url(r'^reporte-movimientos-productos/export-excel$', 'resumen_movimientos_prod.views.export_excel'),
+    url(r'^reporte-movimientos-productos/export-pdf$', 'resumen_movimientos_prod.views.export_pdf'),
    # urls-stock disponible
     url(r'^stock-disponible/$', 'stock_disponible.views.stock_disponible', name='stock_disponible'),
     url(r'^stock-disponible/export-excel$', 'stock_disponible.views.export_excel'),
@@ -55,10 +58,18 @@ urlpatterns = patterns('control_inventario.app',
    # urls-resumen de compra
     url(r'^resumen-compras/$', 'resumen_compras.views.resumen_compra', name='resumen_compra'),
     url(r'^resumen-compras/detalles$', 'resumen_compras.views.detalle_compra', name='detalle_compra'),
-   # exportar a excel
-   #  url(r'^export/$', 'export_excel.export.generar_pdf', name='export'),
-
-
+   # urls-reportes cliente
+    url(r'^reporte-cliente-diario/$', 'reportes_cliente.views.reporte_cliente', {"tipo": "diario"}),
+    url(r'^reporte-cliente-mensual/$', 'reportes_cliente.views.reporte_cliente', {"tipo": "mensual"}),
+    url(r'^reporte-cliente-anual/$', 'reportes_cliente.views.reporte_cliente', {"tipo": "anual"}),
+    url(r'^reporte-cliente/export-excel$', 'reportes_cliente.views.export_excel'),
+    url(r'^reporte-cliente/export-pdf$', 'reportes_cliente.views.export_pdf'),
+   # urls-reportes proveedor
+    url(r'^reporte-proveedor-diario/$', 'reportes_proveedor.views.reporte_proveedor', {"tipo": "diario"}),
+    url(r'^reporte-proveedor-mensual/$', 'reportes_proveedor.views.reporte_proveedor', {"tipo": "mensual"}),
+    url(r'^reporte-proveedor-anual/$', 'reportes_proveedor.views.reporte_proveedor', {"tipo": "anual"}),
+    url(r'^reporte-proveedor/export-excel$', 'reportes_proveedor.views.export_excel'),
+    url(r'^reporte-proveedor/export-pdf$', 'reportes_proveedor.views.export_pdf'),
 )
 
 urlpatterns += patterns('',

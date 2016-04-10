@@ -12,6 +12,7 @@ function showMsg(msg, tipo, opt) {
     var event = new Events();
     var defaults = {
         type: (tipo) ? tipo : 'success',
+        duration: 4
     }
     var settings = $.extend({}, defaults, opt);
     if (msg) {

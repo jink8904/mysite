@@ -38,7 +38,7 @@
             {% for venta in venta_list %}
                 <tr>
                     <td class="hidden" name="id">{{ venta.id }}</td>
-                    <td name="fecha">{{ venta.fecha|date:"j/n/Y" }}</td>
+                    <td name="fecha">{{ venta.fecha|date:"d / m / Y" }}</td>
                     <td name="tipo">{{ venta.tipo_comprobante }}</td>
                     <td name="serie">{{ venta.serie }}</td>
                     <td name="numero">{{ venta.numero }}</td>
