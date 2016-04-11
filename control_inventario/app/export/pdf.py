@@ -41,8 +41,11 @@ class PdfPrint:
         title = options.get("title")
         ruc = options.get("ruc")
         empresa = options.get("empresa")
-        table_style = options.get("table_style")
         top_title = ruc + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + empresa
+
+        table_style = options.get("table_style")
+        more_text = options.get("more_text")
+
         buff = io.BytesIO()
         doc = SimpleDocTemplate(
             buff,
@@ -56,14 +59,20 @@ class PdfPrint:
         styles = getSampleStyleSheet()
 
         styles.add(ParagraphStyle(
-            name="titulo", alignment=TA_CENTER, fontName='Times-Roman', spaceAfter=15,
-        spaceBefore=6, fontSize=12))
+            name="titulo", alignment=TA_CENTER, fontName='Times-Roman', spaceAfter=6,
+            spaceBefore=6, fontSize=12))
+
+        styles.add(ParagraphStyle(name="separador", spaceAfter=6, spaceBefore=6))
 
         top_title = Paragraph(top_title, styles['Normal'])
         header = Paragraph(title, styles['titulo'])
 
         template.append(top_title)
         template.append(header)
+        if more_text:
+            for text in more_text:
+                template.append(Paragraph(text, styles['Normal']))
+            template.append(Paragraph("", styles['separador']))
 
         t = Table(heading + data)
         t.setStyle(TableStyle(
@@ -71,10 +80,11 @@ class PdfPrint:
                 ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
                 ('BOX', (0, 0), (-1, -1), 0.75, colors.black),
                 ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
-                ('BACKGROUND', (0, 0), (-1, 1), colors.whitesmoke)
+                ('BACKGROUND', (0, 0), (-1, 0), colors.whitesmoke),
+                ('SIZE', (0, 0), (-1, -1), 9),
             ]
         ))
-        if(table_style):
+        if table_style:
             t.setStyle(TableStyle(table_style))
         template.append(t)
         doc.build(template)

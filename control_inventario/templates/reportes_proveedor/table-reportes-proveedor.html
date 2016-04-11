@@ -19,11 +19,11 @@
     </div>
 
     <div class="panel-body">
-        <h6><b>Detalle de ventas al cliente:</b></h6>
-        <h6><span><b>R.U.C / D.N.I:</b> {{ cliente.id }}</span>
-            <span style="margin-left: 60px"><b>Cliente:</b> {{ cliente.nombre }}</span>
+        <h6><b>Detalle de compras al proveedor:</b></h6>
+        <h6><span><b>R.U.C / D.N.I:</b> {{ proveedor.id }}</span>
+            <span style="margin-left: 60px"><b>Proveedor:</b> {{ proveedor.nombre }}</span>
         </h6>
-        <table class="table table-hover table-bordered" id="tabla-detalle-ventas">
+        <table class="table table-hover table-bordered" id="tabla-detalle-compras">
             <thead class="bg-primary-600">
             <tr>
                 <th>Fecha</th>
@@ -34,25 +34,25 @@
                 <th>Descripci&oacute;n</th>
                 <th>Cantidad</th>
                 <th>Valor unitario</th>
-                <th>Valor venta</th>
+                <th>Valor compra</th>
                 <th>IGV</th>
-                <th>Precio venta</th>
+                <th>Precio compra</th>
             </tr>
             </thead>
             <tbody>
-            {% for det_venta in det_venta_list %}
+            {% for det_compra in det_compra_list %}
                 <tr>
-                    <td name="id">{{ det_venta.fecha|date:"Y-m-d" }}</td>
-                    <td name="tipo_id_id">{{ det_venta.tipo }}</td>
-                    <td name="nombre">{{ det_venta.serie }}</td>
-                    <td name="direccion">{{ det_venta.numero }}</td>
-                    <td name="tipo_id">{{ det_venta.codigo }}</td>
-                    <td name="identificador">{{ det_venta.producto }}</td>
-                    <td name="identificador">{{ det_venta.cantidad }}</td>
-                    <td name="identificador">{{ det_venta.valor_unitario }}</td>
-                    <td name="identificador">{{ det_venta.valor_venta }}</td>
-                    <td name="identificador">{{ det_venta.igv }}</td>
-                    <td name="identificador">{{ det_venta.importe }}</td>
+                    <td name="id">{{ det_compra.fecha|date:"Y-m-d" }}</td>
+                    <td name="tipo_id_id">{{ det_compra.tipo }}</td>
+                    <td name="nombre">{{ det_compra.serie }}</td>
+                    <td name="direccion">{{ det_compra.numero }}</td>
+                    <td name="tipo_id">{{ det_compra.codigo }}</td>
+                    <td name="identificador">{{ det_compra.producto }}</td>
+                    <td name="identificador">{{ det_compra.cantidad }}</td>
+                    <td name="identificador">{{ det_compra.valor_unitario }}</td>
+                    <td name="identificador">{{ det_compra.valor_venta }}</td>
+                    <td name="identificador">{{ det_compra.igv }}</td>
+                    <td name="identificador">{{ det_compra.importe }}</td>
                 </tr>
             {% endfor %}
             </tbody>

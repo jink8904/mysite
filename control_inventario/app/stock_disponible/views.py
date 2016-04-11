@@ -1,8 +1,10 @@
+# _*_ coding: utf-8
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from control_inventario import models
 from django.contrib.auth.decorators import login_required
+
 from control_inventario.app.export.pdf import PdfPrint
 from XlsxWriter import xlsxwriter
 import io
@@ -66,15 +68,15 @@ def loadDataExcel(emp):
     })
 
     ruc = "RUC: " + str(emp.ruc)
-    empresa = "Denominacion: " + emp.nombre
+    empresa = "Denominación: " + emp.nombre
     worksheet.merge_range('A1:D1', ruc, top_title)
     worksheet.merge_range('E1:G1', empresa, top_title)
     worksheet.merge_range('B3:G3', "Reporte de stock disponible", title)
     # encabezados
     worksheet.write(4, 0, "#", header)
-    worksheet.write(4, 1, "Codigo", header)
+    worksheet.write(4, 1, "Código", header)
     worksheet.write(4, 2, "Nombre", header)
-    worksheet.write(4, 3, "Categoria", header)
+    worksheet.write(4, 3, "Categoría", header)
     worksheet.write(4, 4, "Tipo", header)
     worksheet.write(4, 5, "Unidad", header)
     worksheet.write(4, 6, "Stock disponible", header)
@@ -120,11 +122,11 @@ def export_excel(request):
 def loadDataPDF(emp):
     producto_list = productos_list_updated(emp)
     data_pdf = {
-        "headings": [("Codigo", "Nombre", "Categoria", "Tipo", "Unidad", "Stock disponible")],
+        "headings": [("Código", "Nombre", "Categoría", "Tipo", "Unidad", "Stock disponible")],
         "data": [],
         "title": "Reporte de stock disponible",
         "ruc": "<b>RUC: </b>",
-        "empresa": "<b>Denominacion: </b>",
+        "empresa": "<b>Denominación: </b>",
     }
     for prod in producto_list:
         aux = [

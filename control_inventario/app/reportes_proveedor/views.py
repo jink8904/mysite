@@ -11,10 +11,10 @@ from reportlab.lib import colors
 import io
 
 
-def list_cliente(cliente_list):
-    for cliente in cliente_list:
-        cliente["tipo_id"] = models.TipoId.objects.get(id=cliente.get("tipo_id_id"))
-    return cliente_list
+def list_proveedor(proveedor_list):
+    for proveedor in proveedor_list:
+        proveedor["tipo_id"] = models.TipoId.objects.get(id=proveedor.get("tipo_id_id"))
+    return proveedor_list
 
 
 def getMonth(mes):
@@ -24,26 +24,26 @@ def getMonth(mes):
 
 
 @login_required(login_url='/ingresar')
-def reporte_cliente(request, tipo):
+def reporte_proveedor(request, tipo):
     id_empresa = request.session['empresa']["id"]
     emp = models.Empresa.objects.get(id=id_empresa)
     args = {}
     args["tipo"] = tipo
 
-    cliente_list = emp.cliente_set.values()
-    cliente_list = list_cliente(cliente_list)
+    proveedor_list = emp.proveedor_set.values()
+    proveedor_list = list_proveedor(proveedor_list)
 
     args["form"] = True
-    args["cliente_list"] = cliente_list
+    args["proveedor_list"] = proveedor_list
     datos = request.POST
-    det_venta_list = []
+    det_compra_list = []
     if (datos):
         args["form"] = False
         id = datos.get("identificador")
-        request.session["reporte_cliente"] = {"cliente_id": id}
-        cliente = emp.cliente_set.get(id=id)
-        args["cliente"] = {"nombre": cliente.nombre, "id": cliente.identificador}
-        report_title = "Reporte de ventas "
+        request.session["reporte_proveedor"] = {"proveedor_id": id}
+        proveedor = emp.proveedor_set.get(id=id)
+        args["proveedor"] = {  "nombre": proveedor.nombre, "id": proveedor.identificador}
+        report_title = "Reporte de compras "
 
         if (tipo == "diario"):
             fecha = datos.get("fecha")
@@ -51,60 +51,61 @@ def reporte_cliente(request, tipo):
             dia = int(date[2])
             mes = getMonth(int(date[1]))
             report_title += "del dia " + str(dia) + " de " + mes.lower() + " del año " + date[0]
-            request.session["reporte_cliente"]["tipo"] = "diario"
-            request.session["reporte_cliente"]["fecha"] = fecha
+            request.session["reporte_proveedor"]["tipo"] = "diario"
+            request.session["reporte_proveedor"]["fecha"] = fecha
 
-            venta_list = emp.venta_set.filter(fecha=fecha)
-            venta_list = venta_list.filter(cliente_id=id)
+            compra_list = emp.compra_set.filter(fecha=fecha)
+            compra_list = compra_list.filter(proveedor_id=id)
         elif (tipo == "mensual"):
             mes = int(datos.get("mes"))
             year = request.session['empresa']["anno_inicio"]
             report_title += "de " + getMonth(mes).lower() + " del " + str(year)
 
-            request.session["reporte_cliente"]["tipo"] = "mensual"
-            request.session["reporte_cliente"]["mes"] = mes
-            request.session["reporte_cliente"]["year"] = year
+            request.session["reporte_proveedor"]["tipo"] = "mensual"
+            request.session["reporte_proveedor"]["mes"] = mes
+            request.session["reporte_proveedor"]["year"] = year
 
-            venta_list = emp.venta_set.filter(fecha__month=mes)
-            venta_list = venta_list.filter(fecha__year=year)
-            venta_list = venta_list.filter(cliente_id=id)
+            compra_list = emp.compra_set.filter(fecha__month=mes)
+            compra_list = compra_list.filter(fecha__year=year)
+            compra_list = compra_list.filter(proveedor_id=id)
         elif (tipo == "anual"):
             year = datos.get("year")
-            request.session["reporte_cliente"]["tipo"] = "anual"
-            request.session["reporte_cliente"]["year"] = year
+            request.session["reporte_proveedor"]["tipo"] = "anual"
+            request.session["reporte_proveedor"]["year"] = year
             report_title += "del año " + year
-            venta_list = emp.venta_set.filter(fecha__year=year)
-            venta_list = venta_list.filter(cliente_id=id)
+            compra_list = emp.compra_set.filter(fecha__year=year)
+            compra_list = compra_list.filter(proveedor_id=id)
 
-        for venta in venta_list.values():
-            comp_id = venta.get("tipo_comprobante_id")
-            venta["comprobante"] = models.TipoComprobante.objects.get(id=comp_id).denominacion
-            det_list = get_detalle_venta(venta)
-            det_venta_list += det_list
-    if det_venta_list.__len__() == 0:
+        for compra in compra_list.values():
+            comp_id = compra.get("tipo_comprobante_id")
+            compra["comprobante"] = models.TipoComprobante.objects.get(id=comp_id).denominacion
+            det_list = get_detalle_compra(compra)
+            det_compra_list += det_list
+    if det_compra_list.__len__() == 0:
         args["empty"] = True
     else:
-        args["det_venta_list"] = det_venta_list
-        args["total"] = get_total(det_venta_list)
+        args["det_compra_list"] = det_compra_list
+        args["total"] = get_total(det_compra_list)
         args["report_title"] = report_title
-    return render_to_response('reportes_cliente/main.html', args, context_instance=RequestContext(request))
+
+    return render_to_response('reportes_proveedor/main.html', args, context_instance=RequestContext(request))
 
 
-def reporte_cliente_local(datos):
+def reporte_proveedor_local(datos):
     emp = datos.get("emp")
     args = {}
     args["tipo"] = datos.get("tipo")
 
-    id = datos.get("cliente_id")
-    cliente = emp.cliente_set.get(id=id)
-    args["cliente"] = {"nombre": cliente.nombre, "id": cliente.identificador}
+    id = datos.get("proveedor_id")
+    proveedor = emp.proveedor_set.get(id=id)
+    args["proveedor"] = {"nombre": proveedor.nombre, "id": proveedor.identificador}
 
-    det_venta_list = []
+    det_compra_list = []
     if (datos):
         tipo = datos.get("tipo")
-        cliente = emp.cliente_set.get(id=id)
-        args["cliente"] = {"nombre": cliente.nombre, "id": cliente.identificador}
-        report_title = "Reporte de ventas "
+        proveedor = emp.proveedor_set.get(id=id)
+        args["proveedor"] = {"nombre": proveedor.nombre, "id": proveedor.identificador}
+        report_title = "Reporte de compras "
         if (tipo == "diario"):
             fecha = datos.get("fecha")
             date = fecha.split("-")
@@ -112,42 +113,42 @@ def reporte_cliente_local(datos):
             mes = getMonth(int(date[1]))
             report_title += "del dia " + str(dia) + " de " + mes.lower() + " del año " + date[0]
 
-            venta_list = emp.venta_set.filter(fecha=fecha)
-            venta_list = venta_list.filter(cliente_id=id)
+            compra_list = emp.compra_set.filter(fecha=fecha)
+            compra_list = compra_list.filter(proveedor_id=id)
         elif (tipo == "mensual"):
             mes = datos.get("mes")
             year = datos.get("year")
             report_title += "de " + getMonth(mes).lower() + " del " + str(year)
 
-            venta_list = emp.venta_set.filter(fecha__month=mes)
-            venta_list = venta_list.filter(fecha__year=year)
-            venta_list = venta_list.filter(cliente_id=id)
+            compra_list = emp.compra_set.filter(fecha__month=mes)
+            compra_list = compra_list.filter(fecha__year=year)
+            compra_list = compra_list.filter(proveedor_id=id)
         elif (tipo == "anual"):
             year = datos.get("year")
             report_title += "del año " + year
-            venta_list = emp.venta_set.filter(fecha__year=year)
-            venta_list = venta_list.filter(cliente_id=id)
+            compra_list = emp.compra_set.filter(fecha__year=year)
+            compra_list = compra_list.filter(proveedor_id=id)
 
-        for venta in venta_list.values():
-            comp_id = venta.get("tipo_comprobante_id")
-            venta["comprobante"] = models.TipoComprobante.objects.get(id=comp_id).denominacion
-            det_list = get_detalle_venta(venta)
-            det_venta_list += det_list
+        for compra in compra_list.values():
+            comp_id = compra.get("tipo_comprobante_id")
+            compra["comprobante"] = models.TipoComprobante.objects.get(id=comp_id).denominacion
+            det_list = get_detalle_compra(compra)
+            det_compra_list += det_list
 
-    args["det_venta_list"] = det_venta_list
-    args["total"] = get_total(det_venta_list)
+    args["det_compra_list"] = det_compra_list
+    args["total"] = get_total(det_compra_list)
     args["report_title"] = report_title
     return args
 
 
-def get_detalle_venta(venta):
-    id = venta.get("id")
-    det_list = models.DetalleVenta.objects.filter(venta_id=id).values()
+def get_detalle_compra(compra):
+    id = compra.get("id")
+    det_list = models.DetalleCompra.objects.filter(compra_id=id).values()
     for det in det_list:
-        det["serie"] = venta.get("serie")
-        det["numero"] = venta.get("numero")
-        det["fecha"] = venta.get("fecha")
-        det["tipo"] = venta.get("comprobante")
+        det["serie"] = compra.get("serie")
+        det["numero"] = compra.get("numero")
+        det["fecha"] = compra.get("fecha")
+        det["tipo"] = compra.get("comprobante")
 
         prod = models.Producto.objects.get(id=det.get("producto_id"))
         det["codigo"] = prod.codigo
@@ -177,11 +178,11 @@ def loadDataExcel(emp, datos):
     output = io.BytesIO()
     workbook = xlsxwriter.Workbook(output, {'in_memory': True})
     datos["emp"] = emp
-    args = reporte_cliente_local(datos)
-    detalles_list = args.get("det_venta_list")
+    args = reporte_proveedor_local(datos)
+    detalles_list = args.get("det_compra_list")
     total = args.get("total")
     # Here we will adding the code to add data
-    worksheet = workbook.add_worksheet("Reporte de cliente")
+    worksheet = workbook.add_worksheet("Reporte de proveedor")
     # formatos
     title = workbook.add_format({
         'bold': True,
@@ -223,10 +224,10 @@ def loadDataExcel(emp, datos):
     ruc = "RUC: " + str(emp.ruc)
     empresa = "Denominación: " + emp.nombre
     report_title = args.get("report_title")
-    report_subtitle = "Detalles de venta al cliente:"
-    cliente = args.get("cliente")
-    client_dni = "R.U.C / D.N.I: " + str(cliente.get("id"))
-    client_name = "Nombre o razón social: " + cliente.get("nombre")
+    report_subtitle = "Detalles de compra al proveedor:"
+    proveedor = args.get("proveedor")
+    client_dni = "R.U.C / D.N.I: " + str(proveedor.get("id"))
+    client_name = "Nombre o razón social: " + proveedor.get("nombre")
 
     worksheet.merge_range('B1:F1', ruc, top_title)
     worksheet.merge_range('G1:L1', empresa, top_title)
@@ -245,9 +246,9 @@ def loadDataExcel(emp, datos):
     worksheet.write(5, 6, "Descripción", header)
     worksheet.write(5, 7, "Cantidad", header)
     worksheet.write(5, 8, "Valor unitario", header)
-    worksheet.write(5, 9, "Valor venta", header)
+    worksheet.write(5, 9, "Valor compra", header)
     worksheet.write(5, 10, "IGV", header)
-    worksheet.write(5, 11, "Precio venta", header)
+    worksheet.write(5, 11, "Precio compra", header)
     # datos
     idx = 1
     row = 6
@@ -293,7 +294,7 @@ def loadDataExcel(emp, datos):
 def export_excel(request):
     id_empresa = request.session['empresa']["id"]
     emp = models.Empresa.objects.get(id=id_empresa)
-    datos = request.session["reporte_cliente"]
+    datos = request.session["reporte_proveedor"]
     response = HttpResponse(content_type='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachment; filename=Report'
 
@@ -304,16 +305,16 @@ def export_excel(request):
 
 
 def loadDataPDF(datos):
-    args = reporte_cliente_local(datos)
-    detalles_list = args.get("det_venta_list")
+    args = reporte_proveedor_local(datos)
     title = args["report_title"]
+    detalles_list = args.get("det_compra_list")
     total = args["total"]
-    total = ["Total", "", "", "", "", "", total.get("cantidad"), total.get("valor_unitario"),
-             total.get("valor_venta"), total.get("igv"), total.get("importe")]
+    total = ["Total", "", "", "", "", "",total.get("cantidad"), total.get("valor_unitario"),
+             total.get("valor_venta"), total.get("igv"), total.get("importe"),]
 
     data_pdf = {
-        "headings": [("Fecha", "Tipo", "Serie", "Número", "Código", "Descripcion", "Cantidad",
-                      "Valor unitario", "Valor venta", "IGV", "Precio venta")],
+        "headings": [("Fecha", "Tipo", "Serie", "Número", "Código", "Descripción", "Cantidad",
+                      "Valor unitario", "Valor compra", "IGV", "Precio compra")],
         "data": [],
         "title": title,
         "ruc": "<b>RUC: </b>",
@@ -345,15 +346,15 @@ def loadDataPDF(datos):
         ('RIGHTPADDING', (0, 0), (-1, -1), 4),
         ('SIZE', (0, 0), (-1, -1), 7),
         ('SPAN', (0, -1), (5, -1)),
-        ('ALIGN', (0, -1), (5, -1), 'RIGHT'),
+        ('ALIGN',(0, -1), (5, -1),'RIGHT'),
     ]
 
-    id = args.get("cliente").get("id")
-    nombre = args.get("cliente").get("nombre")
-    datos_cliente = "<b>R.U.C / D.N.I:</b> " + str(id)
-    datos_cliente += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-    datos_cliente += "<b>Cliente:</b> " + nombre
-    data_pdf["more_text"] = ["<b>Detalles de venta al cliente:</b>", datos_cliente]
+    id = args.get("proveedor").get("id")
+    nombre = args.get("proveedor").get("nombre")
+    datos_proveedor = "<b>R.U.C / D.N.I:</b> " + str(id)
+    datos_proveedor += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+    datos_proveedor += "<b>Proveedor:</b> " + nombre
+    data_pdf["more_text"] = ["<b>Detalles de compra al proveedor:</b>", datos_proveedor]
 
     return data_pdf
 
@@ -361,7 +362,7 @@ def loadDataPDF(datos):
 def export_pdf(request):
     id_empresa = request.session['empresa']["id"]
     emp = models.Empresa.objects.get(id=id_empresa)
-    datos = request.session["reporte_cliente"]
+    datos = request.session["reporte_proveedor"]
     datos["emp"] = emp
 
     data = loadDataPDF(datos)

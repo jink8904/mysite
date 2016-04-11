@@ -127,12 +127,14 @@ def loadDataExcel(emp, data):
         'align': 'center',
         'valign': 'vcenter'
     })
+
     top_title = workbook.add_format({
         'bold': True,
         'font_size': 12,
         'align': 'left',
         'valign': 'vleft'
     })
+
     header = workbook.add_format({
         'bg_color': '#F7F7F7',
         'color': 'black',
@@ -247,7 +249,7 @@ def loadDataPDF(emp, datos):
         ('GRID', (0, 0), (-1, -1), 0.5, colors.black),
         ('BOX', (0, 0), (-1, -1), 0.75, colors.black),
         ('VALIGN', (0, 0), (-1, 0), 'MIDDLE'),
-        ('BACKGROUND', (0, 0), (-1, 0), colors.whitesmoke),
+        ('BACKGROUND', (0, 0), (-1, 1), colors.whitesmoke),
         ('ALIGN',(0,0),(-1,0),'CENTER'),
         ('FONTSIZE', (0, 0), (-1, -1), 7),
         ('SPAN', (0, 0), (0, 1)),

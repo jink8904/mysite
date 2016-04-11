@@ -1,0 +1,84 @@
+<div class="panel panel-primary" id="form-reporte-cliente">
+    <div class="panel-heading">
+        <h6 class="panel-title">Datos de b&uacute;squeda</h6>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a></div>
+
+    <form action="" method="post" novalidate>
+        <div class="panel-body">
+            {% csrf_token %}
+            {#Identificador#}
+            <div class="form-group col-md-4">
+                <label>N&uacute;mero de identificaci&oacute;n del cliente</label>
+
+                <div>
+                    <select name="identificador" class="bootstrap-select-search" data-size="8" data-width="100%">
+                        {% for cliente in cliente_list %}
+                            <option value="{{ cliente.id }}">{{ cliente.identificador }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {#Nombre#}
+            <div class="form-group col-md-4">
+                <label>Nombre</label>
+
+                <div>
+                    <select name="nombre" class="bootstrap-select-search" data-size="8" data-width="100%" required>
+                        {% for cliente in cliente_list %}
+                            <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% if tipo == "diario" %}
+                <div class="form-group col-md-4">
+                    {#Fecha#}
+                    <label>Fecha</label>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" name="fecha" class="form-control pickadate">
+                    </div>
+                </div>
+            {% endif %}
+            {% if tipo == "mensual" %}
+                <div class="form-group col-md-4">
+                    {#Fecha#}
+                    <label>Mes</label>
+
+                    <div>
+                        <select class="form-control bootstrap-select" name="mes" data-size="8">
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+                </div>
+            {% endif %}
+            {% if tipo == "anual" %}
+                <div class="form-group col-md-4">
+                    {#Anno#}
+                    <label class="control-label col-md-2">A&ntilde;o</label>
+
+                    <div>
+                        <select class=" form-control bootstrap-select" name="year" data-width="100%" required>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                        </select>
+                    </div>
+                </div>
+            {% endif %}
+            <button class="btn btn-primary pull-right" type="submit">Aceptar</button>
+        </div>
+    </form>
+</div>
