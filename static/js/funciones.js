@@ -136,7 +136,8 @@ var cleanData = function (tipo, id, callback) {
         case "form":
             var sel = "form[table=" + id + "] input[type!=hidden], form[table=" + id + "] select";
             $(sel).each(function (index, th) {
-                $(this).val("");
+                if ($(this).attr("type") != "checkbox")
+                    $(this).val("");
                 $(this).find("option:selected").val("")
                 $(this).selectpicker("refresh")
             })
@@ -159,6 +160,9 @@ var checkKey = function (key) {
             break;
         case "tipo_de_identificacion":
             return "tipo_id"
+            break;
+        case "direccion_de_correo":
+            return "correo"
             break;
     }
     return key;

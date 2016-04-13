@@ -2,15 +2,10 @@ from builtins import print
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
-from django.core.context_processors import csrf
-from control_inventario import forms, models
-import json
-# from XlsxWriter import xlsxwriter
-# users
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import models
 
 
 def ingresar(request):
@@ -32,6 +27,11 @@ def ingresar(request):
                 args['error'] = "Error en la autenticacion."
     return render_to_response("login/login-form.html", args, context_instance=RequestContext(request))
 
+def registrar(request):
+    users_list = models.User.objects.values()
+    args = {}
+    args['users_list'] = users_list
+    return render_to_response("login/login-form.html", args, context_instance=RequestContext(request))
 
 @login_required(login_url='/ingresar')
 def cerrar_session(request):

@@ -1,0 +1,57 @@
+<div class="panel panel-primary panel-bordered">
+    <div class="panel-heading">
+        <h6 class="panel-title">Lista de usuarios</h6>
+
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><a title="Adicionar usuario(CTR+A)" action="add-usuario"><i class=" icon-plus-circle2"></i></a></li>
+                <li class="disabled" table="tabla-usuario">
+                    <a title="Editar usuario seleccionado (CTR+M)" action="mod-usuario">
+                        <i class="icon-pen6"></i>
+                    </a>
+                </li>
+                <li class="disabled" table="tabla-usuario">
+                    <a title="Eliminar usuario seleccionado (DEL)" action="del-usuario">
+                        <i class="icon-trash"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <a class="heading-elements-toggle"><i class="icon-menu"></i></a>
+    </div>
+
+    <div class="panel-body">
+        <table class="table table-hover table-bordered" id="tabla-usuario" select="true">
+            <thead class="bg-primary-600">
+            <tr>
+                <th class="hidden">id</th>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Direcci&oacute;n de correo</th>
+                <th>Activo</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for usuario in usuario_list %}
+                <tr>
+                    <td name="id" class="hidden">{{ usuario.id }}</td>
+                    <td name="username">{{ usuario.username }}</td>
+                    <td name="first_name">{{ usuario.first_name }}</td>
+                    <td name="last_name">{{ usuario.last_name }}</td>
+                    <td name="email">{{ usuario.email }}</td>
+                    <td name="is_active">
+                        {% if usuario.is_active %}
+                            <span class="label label-flat label-rounded label-icon border-green-600 text-green-800">
+                                <i class="icon-checkmark"></i></span>
+                        {% else %}
+                            <span class="label label-flat label-rounded label-icon border-danger-600 text-danger-800">
+                                <i class="icon-x"></i></span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

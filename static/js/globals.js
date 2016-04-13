@@ -41,6 +41,12 @@ $(document).ready(function () {
         }
     }).bind('dynatable:afterProcess', fixTableSelect);
 
+    $("#tabla-usuario").dynatable({
+        params: {
+            records: "usuarios"
+        }
+    }).bind('dynatable:afterProcess', fixTableSelect);
+
     $("#tabla-ventas").dynatable({
         params: {
             records: "ventas"
@@ -247,6 +253,20 @@ $(document).ready(function () {
 
     $('li a[action=del-cliente]').on('click', function () {
         delCliente();
+    });
+
+    //-------------------------------  Usuario ------------------------------
+
+     $("li a[action=add-usuario]").click(function () {
+        addUsuario();
+    })
+
+    $("li a[action=mod-usuario]").click(function () {
+        modUsuario();
+    })
+
+    $('li a[action=del-usuario]').on('click', function () {
+        delUsuario();
     });
 
     //---------------- Salida de mercancia -------------------------
