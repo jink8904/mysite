@@ -28,6 +28,7 @@ urlpatterns = patterns('control_inventario.app',
    # urls-usuario
     url(r'^usuario/$', 'usuario.views.usuario', name='usuario'),
     url(r'^usuario/del$', 'usuario.views.del_usuario', name='del_usuario'),
+    url(r'^datos-usuario$', 'usuario.views.datos_usuario', name='datos_usuario'),
    # urls-inventario
     url(r'^inventario/$', 'inventario.views.inventario_inicial', name='inventario'),
     url(r'^inventario-inicial/$', 'inventario.views.inventario_inicial_consulta', name='inventario'),

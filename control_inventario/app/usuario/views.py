@@ -30,7 +30,6 @@ def usuario(request):
             user = User(
                 id=datos.get("id"),
                 username=datos.get("usuario"),
-                password=datos.get("pass"),
                 first_name=datos.get("nombre"),
                 last_name=datos.get("apellidos"),
                 email=datos.get("correo"),
@@ -42,14 +41,14 @@ def usuario(request):
             if (User.objects.filter(username=datos.get("usuario")).__len__() > 0):
                 args['action'] = 'exist'
             else:
-                user = User(
+                user = User.objects.create_user(
                     username=datos.get("usuario"),
-                    password=datos.get("pass"),
+                    password=datos.get("usuario"),
                     first_name=datos.get("nombre"),
                     last_name=datos.get("apellidos"),
-                    email=datos.get("correo"),
-                    is_active=datos.get("activo")
+                    email=datos.get("correo")
                 )
+                user.is_active = datos.get("activo")
                 user.save()
                 args['action'] = 'add'
 
@@ -61,7 +60,6 @@ def usuario(request):
     usuario_list = User.objects.values()
     args.update(csrf(request))
     args['usuario_list'] = usuario_list
-    # args['tipoid_list'] = tipoid_list
     return render_to_response('usuario/main.html', args, context_instance=RequestContext(request))
 
 

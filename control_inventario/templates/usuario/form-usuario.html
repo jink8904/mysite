@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h6 class="modal-title">Adicionar usuario</h6>
+                <h6 class="modal-title" id="form-usuario-label">Adicionar usuario</h6>
             </div>
 
             <form class="form-horizontal" enctype="multipart/form-data" method="post" action="" novalidate
@@ -28,22 +28,22 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="row">
-                            {#Usuario#}
-                            <div class="col-md-6">
-                                <label>Contrase&ntilde;a</label>
-                                <input type="text" name="pass" class="form-control" required>
-                            </div>
-                            <div class="col-md-6">
-                                {#Nombre#}
-                                <div class="form-group">
-                                    <label>Repetir contrase&ntilde;a</label>
-                                    <input type="text" name="pass2" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {#                    <div class="form-group">#}
+                    {#                        <div class="row">#}
+                    {#Usuario#}
+                    {#                            <div class="col-md-6">#}
+                    {#                                <label>Contrase&ntilde;a</label>#}
+                    {#                                <input type="text" name="pass" class="form-control" required>#}
+                    {#                            </div>#}
+                    {#                            <div class="col-md-6">#}
+                    {#Nombre#}
+                    {#                                <div class="form-group">#}
+                    {#                                    <label>Repetir contrase&ntilde;a</label>#}
+                    {#                                    <input type="text" name="pass2" class="form-control" required>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
 
                     {#Apellidos#}
                     <div class="form-group">
@@ -63,7 +63,8 @@
                                     Activo
                                     <div class="checker">
                                         <span class="checked">
-                                            <input type="checkbox" checked="checked" class="styled" name="activo" value="on">
+                                            <input type="checkbox" checked="checked" class="styled" name="activo"
+                                                   value="on">
                                         </span>
                                     </div>
                                 </label>

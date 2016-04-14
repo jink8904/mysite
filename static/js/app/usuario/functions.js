@@ -70,6 +70,16 @@ function modUsuario() {
     if (!$('li a[action=del-usuario]').parent().hasClass("disabled")) {
         cleanData("form", "tabla-usuario");
         updateRecords("tabla-usuario");
+        activo = $("#tabla-usuario tr.active i").attr("class")
+        if (activo == "icon-x") {
+            $("#form-usuario input[name=activo]").val("off")
+            $("#form-usuario input[name=activo]").parent().removeClass("checked")
+        } else {
+            $("#form-usuario input[name=activo]").val("on")
+            $("#form-usuario input[name=activo]").parent().addClass("checked")
+        }
+
+
         panel_title = "Modificar usuario";
         load_msg = "Modificando usuario...";
 
