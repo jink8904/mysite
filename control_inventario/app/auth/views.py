@@ -33,7 +33,6 @@ def ingresar(request):
     return render_to_response("login/login-form.html", args, context_instance=RequestContext(request))
 
 
-@login_required(login_url='/ingresar')
 def cerrar_session(request):
     logout(request)
     return HttpResponseRedirect('/')

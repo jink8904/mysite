@@ -136,7 +136,8 @@ var cleanData = function (tipo, id, callback) {
         case "form":
             var sel = "form[table=" + id + "] input[type!=hidden], form[table=" + id + "] select";
             $(sel).each(function (index, th) {
-                $(this).val("");
+                if ($(this).attr("type") != "checkbox")
+                    $(this).val("");
                 $(this).find("option:selected").val("")
                 $(this).selectpicker("refresh")
             })
@@ -159,6 +160,9 @@ var checkKey = function (key) {
             break;
         case "tipo_de_identificacion":
             return "tipo_id"
+            break;
+        case "direccion_de_correo":
+            return "correo"
             break;
     }
     return key;
@@ -192,7 +196,7 @@ var updateButtons = function (table_id) {
     $(sel_btns).removeClass("disabled");
 }
 
-var updateFooter = function () {
+var initComponents = function () {
     var empresa = $.parseJSON(sessionStorage.getItem("empresa"));
     var usuario = sessionStorage.getItem("usuario");
     var anno = sessionStorage.getItem("anno");
@@ -204,8 +208,11 @@ var updateFooter = function () {
         $("#barra-menu>ul").addClass("hidden");
         $("#barra-menu>ul:first").removeClass("hidden");
     }
-    if (usuario)
-        $("#usuario a").html("   " + usuario);
+    if (usuario) {
+        //$("#usuario a").html("   " + usuario);
+        $("#span-user").html(usuario);
+    } else
+        $(location).attr("href", "/cerrar");
     if (mes)
         $("#periodo a").html("   " + mes + ", " + anno);
 }
