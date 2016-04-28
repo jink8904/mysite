@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.views import password_change
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import json
 
@@ -37,19 +37,18 @@ def cerrar_session(request):
 
 @login_required(login_url='/ingresar')
 def change_pass(request):
+    args = {}
     usuario = request.POST['user']
     clave = request.POST['old_passwd']
     nueva_clave = request.POST['new_passwd']
     acceso = authenticate(username=usuario, password=clave)
     if acceso is not None:
-
+        args['success'] = True
         acceso.set_password(nueva_clave)
-        print(acceso.set_password(nueva_clave))
-        # user = models.User.objects.create(acceso)
-        # user.save()
-
-    args = {}
-    args['success'] = True
+        acceso.save()
+    else:
+        args['success'] = False
+    print(args)
     json_data = json.dumps(args)
     return HttpResponse(json_data, mimetype="application/json")
 

@@ -275,8 +275,11 @@ function changePassword() {
                     old_passwd: old_passwd,
                     new_passwd: new_passwd,
                 },
-                success: function () {
-                    showMsg("Se ha cambiado la contraseña satisfactoriamente");
+                success: function (response) {
+                    if (response.success)
+                        showMsg("Se ha cambiado la contrase&ntilde;a satisfactoriamente");
+                    else
+                        showMsg("La contrase&ntilde;a est&aacute; incorrecta", "error");
                 }
             })
 
