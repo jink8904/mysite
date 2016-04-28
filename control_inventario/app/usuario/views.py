@@ -27,14 +27,12 @@ def usuario(request):
         else:
             datos["activo"] = False
         if datos.get("id"):
-            user = User(
-                id=datos.get("id"),
-                username=datos.get("usuario"),
-                first_name=datos.get("nombre"),
-                last_name=datos.get("apellidos"),
-                email=datos.get("correo"),
-                is_active=datos.get("activo")
-            )
+            user = User.objects.get(id=datos.get("id"))
+            user.username = datos.get("usuario")
+            user.first_name = datos.get("nombre")
+            user.last_name = datos.get("apellidos")
+            user.email = datos.get("correo")
+            user.is_active = datos.get("activo")
             user.save()
             args['action'] = 'mod'
         else:

@@ -1,5 +1,6 @@
 from pickle import TRUE
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Empresa(models.Model):
@@ -7,6 +8,7 @@ class Empresa(models.Model):
     direccion = models.CharField(max_length=50)
     anno_inicio = models.IntegerField()
     ruc = models.IntegerField(unique=TRUE)
+    user = models.ManyToManyField(User)
 
 
 class Categoria(models.Model):

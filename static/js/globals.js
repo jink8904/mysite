@@ -2,8 +2,13 @@
  * Created by Julio on 03-Feb-16.
  */
 $(document).ready(function () {
+    //------------- keyDownEvt es la funcion donde se declaran lso keyevents ----------
     document.addEventListener("keydown", keyDownEvt, false);
+
+    //------ inicializando los componentes generales, hora, empresa, fecha ...
     initComponents();
+    updateTime();
+
     //------------- Configuracion de las tablas -------------
     $("#tabla-empresa").dynatable({
         params: {
@@ -139,17 +144,13 @@ $(document).ready(function () {
     $('.bootstrap-select-search').selectpicker();
 
     //remove validations error classs from modals
-    $(".modal").on("show.bs.modal", function(){
-        $(this).find(".invalid").each(function(index, th){
+    $(".modal").on("show.bs.modal", function () {
+        $(this).find(".invalid").each(function (index, th) {
             $(th).removeClass("invalid");
         })
     })
 
     //--------------------------- Login ------------------------------
-    $("form[role=login] button[type=submit]").click(function () {
-        var usuario = $("form[role=login] input[name=username]").val();
-        sessionStorage.setItem("usuario", usuario)
-    })
 
     $("li[logout]").click(function () {
         sessionStorage.removeItem("empresa");
@@ -216,7 +217,7 @@ $(document).ready(function () {
         updateRecords("tabla-inventario");
     });
 
-    $("#tabla-inventario>tbody>tr").dblclick(function(){
+    $("#tabla-inventario>tbody>tr").dblclick(function () {
         addInventario();
     })
 
@@ -224,12 +225,12 @@ $(document).ready(function () {
         updateInventarioFormData();
     })
 
-     $("li a[action=add-inventario]").click(function () {
+    $("li a[action=add-inventario]").click(function () {
         addInventario();
     })
     //----------------------- Proveedor ------------------------------------
 
-     $("li a[action=add-proveedor]").click(function () {
+    $("li a[action=add-proveedor]").click(function () {
         addProveedor();
     })
 
@@ -243,7 +244,7 @@ $(document).ready(function () {
 
     //-------------------------------  Cliente ------------------------------
 
-     $("li a[action=add-cliente]").click(function () {
+    $("li a[action=add-cliente]").click(function () {
         addCliente();
     })
 
@@ -257,7 +258,7 @@ $(document).ready(function () {
 
     //-------------------------------  Usuario ------------------------------
 
-     $("li a[action=add-usuario]").click(function () {
+    $("li a[action=add-usuario]").click(function () {
         addUsuario();
     })
 
@@ -269,15 +270,20 @@ $(document).ready(function () {
         delUsuario();
     });
 
+    $('li a[action=ch-pass]').on('click', function () {
+        changePassword();
+    });
+
+
     //---------------- Salida de mercancia -------------------------
 
     $("#datos-producto-salida [name=codigo]," +
-        "#datos-producto-salida [name=producto]").change(function(){
+        "#datos-producto-salida [name=producto]").change(function () {
         updateProductsData(this)
     })
 
     $("#datos-comprobante-salida [name=identificador]," +
-        "#datos-comprobante-salida [name=nombre]").change(function(){
+        "#datos-comprobante-salida [name=nombre]").change(function () {
         updateComprobantData(this)
     })
 
@@ -327,12 +333,12 @@ $(document).ready(function () {
     })
 
     $("#datos-producto-entrada [name=codigo]," +
-        "#datos-producto-entrada [name=producto]").change(function(){
+        "#datos-producto-entrada [name=producto]").change(function () {
         updateProductsData(this)
     })
 
     $("#datos-comprobante-entrada [name=identificador]," +
-        "#datos-comprobante-entrada [name=nombre]").change(function(){
+        "#datos-comprobante-entrada [name=nombre]").change(function () {
         updateComprobantData(this)
     })
 
@@ -382,7 +388,7 @@ $(document).ready(function () {
     //-------------------------- Repotes cliente -----------------------------
 
     $("#form-reporte-cliente [name=identificador]," +
-        "#form-reporte-cliente [name=nombre]").change(function(){
+        "#form-reporte-cliente [name=nombre]").change(function () {
         updateClientData(this)
     })
 })

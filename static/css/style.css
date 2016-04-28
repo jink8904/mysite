@@ -85,8 +85,10 @@ table {
     padding-left: 0 !important;
 }
 
-#navbar-footer {
-
+.logo-text {
+    font-family: cursive;
+    font-size: 20px;
+    vertical-align: middle;
 }
 
 .footer {
@@ -150,19 +152,23 @@ legend.scheduler-border {
 }
 
 /*hacer que los menus del nav se desplieguen  en hover*/
-ul.nav li.dropdown:hover > ul.dropdown-menu {
-    display: block;
-}
+/*ul.nav li.dropdown:hover > ul.dropdown-menu {*/
+    /*display: block;*/
+/*}*/
 
 /*cambiar pointer a los iconos de tab*/
 a[href='#detalles_comprobante_venta'] i[action='add-venta']:hover,
-a[href='#detalles_comprobante_compra'] i[action='add-compra']:hover{
+a[href='#detalles_comprobante_compra'] i[action='add-compra']:hover {
     border-bottom: 2px solid white;
     border-left: 2px solid white;
     cursor: pointer;
 }
 
 /*arreglando tabla resumen de movimientos*/
-#tabla-resumen-mov td{
-    padding: 12px 8px;
+/*#tabla-resumen-mov td {*/
+    /*padding: 12px 8px;*/
+/*}*/
+
+.badge-admin {
+    padding: 0 !important;
 }

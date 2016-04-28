@@ -201,20 +201,90 @@ var initComponents = function () {
     var usuario = sessionStorage.getItem("usuario");
     var anno = sessionStorage.getItem("anno");
     var mes = sessionStorage.getItem("mes_mostrar");
+
+    fecha = new Date();
+    day = fecha.getDate();
+    day = (day < 10) ? "0" + day : day;
+    month = fecha.getMonth() + 1;
+    month = (month < 10) ? "0" + month : month;
+    year = fecha.getFullYear();
+    $("#li_fecha a span").html(day + "-" + month + "-" + year);
+
+    setInterval(function () {
+        updateTime();
+    }, 15000);
+
     if (empresa) {
-        $("#empresa a").html("   " + empresa.nombre);
+        //$("#empresa a").html("   " + empresa.nombre);
+        $("#li_empresa a span").html(empresa.nombre);
+        $("#li_empresa").removeClass("hidden");
+        $(".heading-elements").removeClass("hidden");
         $("#barra-menu>ul.hidden").removeClass("hidden");
     } else {
         $("#barra-menu>ul").addClass("hidden");
-        $("#barra-menu>ul:first").removeClass("hidden");
+        //$("#barra-menu>ul:first").removeClass("hidden");
     }
-    if (usuario) {
-        //$("#usuario a").html("   " + usuario);
-        $("#span-user").html(usuario);
-    } else
-        $(location).attr("href", "/cerrar");
-    if (mes)
-        $("#periodo a").html("   " + mes + ", " + anno);
+    if (mes) {
+        //$("#periodo a").html("   " + mes + ", " + anno);
+        $("#li_periodo a span").html(mes + ", " + anno);
+        $("#li_periodo").removeClass("hidden ");
+    }
+}
+
+var updateTime = function (date) {
+    var date = new Date();
+    var ampm = " AM";
+    var hora = date.getHours();
+    hora = (hora < 10) ? "0" + hora : hora;
+    if (hora > 12) {
+        hora -= 12;
+        ampm = " PM";
+    }
+    var min = date.getMinutes();
+    min = (min < 10) ? "0" + min : min;
+
+    $("#li_hora a span").html(hora + ":" + min + ampm);
+}
+
+
+function changePassword() {
+    $("#form-password").modal().on('shown.bs.modal', function () {
+        $("#form-password input[name=old_passwd]").focus();
+    });
+
+    $("#form-password button[type=submit]").click(function () {
+        var user = $("#form-password [name=usuario]").val();
+        var old_passwd = $("#form-password [name=old_passwd]").val();
+        var new_passwd = $("#form-password [name=new_passwd]").val();
+        var match_passwd = $("#form-password [name=match_passwd]").val();
+
+        if (!user || !old_passwd || !new_passwd || !match_passwd)
+            showMsg("No pueden haber campos vacios", "error");
+        else if (new_passwd != match_passwd)
+            showMsg("No coinciden las contrase&ntilde;as", "error");
+        else {
+            token = $("input[name=csrfmiddlewaretoken]").attr("value");
+            $.ajax({
+                url: "../usuario/change-pass",
+                method: "post",
+                dataType: 'json',
+                async: true,
+                data: {
+                    csrfmiddlewaretoken: token,
+                    user: user,
+                    old_passwd: old_passwd,
+                    new_passwd: new_passwd,
+                },
+                success: function () {
+                    showMsg("Se ha cambiado la contraseña satisfactoriamente");
+                }
+            })
+
+        }
+
+
+    });
+
 }
 
 

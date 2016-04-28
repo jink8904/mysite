@@ -34,10 +34,10 @@
     <script src="{% static 'js/limitless/plugins/pickers/anytime.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/limitless/plugins/pickers/pickadate/picker.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/limitless/plugins/pickers/pickadate/picker.date.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/limitless/plugins/forms/selects/bootstrap_select.min.js' %}"
-            type="text/javascript"></script>
+    <script src="{% static 'js/limitless/plugins/forms/selects/bootstrap_select.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/limitless/plugins/notifications/bootbox.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/limitless/plugins/notifications/sweet_alert.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/limitless/plugins/buttons/hover_dropdown.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/plugins/jquery.tooltipster.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/plugins/eventos/event.js' %}" type="text/javascript"></script>
     {#  views#}
@@ -50,11 +50,10 @@
 
 </head>
 
-<body style="padding-top: 93px;">
+<body>
 
 {% block header %}
 {% endblock %}
-
 
 <!-- Page header -->
 <div class="page-header">
@@ -62,16 +61,16 @@
         <div class="page-title">
             <h4>
                 <i class="icon-arrow-left52 position-left"></i>
-                <span class="text-semibold">Home</span> - Dashboard
-                <small class="display-block">Good morning, Victoria Baker!</small>
+                <span class="text-semibold">Control de inventario version 1.0</span> - Inicio
+                <small class="display-block">Buenos dias, {{ user.first_name }}!</small>
             </h4>
         </div>
 
-        <div class="heading-elements">
+        <div class="heading-elements hidden">
             <div class="heading-btn-group">
-                <a href="#" class="btn btn-link btn-float has-text"><i class="icon-bars-alt text-primary"></i><span>Statistics</span></a>
-                <a href="#" class="btn btn-link btn-float has-text"><i class="icon-calculator text-primary"></i> <span>Invoices</span></a>
-                <a href="#" class="btn btn-link btn-float has-text"><i class="icon-calendar5 text-primary"></i> <span>Schedule</span></a>
+                <a href="../entrada" class="btn btn-link btn-float has-text"><i class="icon-download7 text-primary"></i><span>Entrada de mercanc&iacute;a</span></a>
+                <a href="../salida" class="btn btn-link btn-float has-text"><i class="icon-upload7 text-primary"></i> <span>Salida de mercanc&iacute;a</span></a>
+                <a href="../resumen-movimientos" class="btn btn-link btn-float has-text"><i class="icon-calendar5 text-primary"></i> <span>Resumen de movimientos</span></a>
             </div>
         </div>
     </div>
@@ -87,6 +86,7 @@
 
         <!-- Main content -->
         <div class="content-wrapper">
+            {% include "usuario/form-chpassword.html" %}
             {% block content %}
 
             {% endblock %}
@@ -100,8 +100,8 @@
 
     <!-- Footer -->
     <div class="footer text-muted">
-        &copy; 2015. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov"
-                                                                 target="_blank">Eugene Kopyov</a>
+        &copy; 2016. <a href="http://juliocesarcsc.pythonanywhere.com/">Sistema de gesti&oacute;n de inventario en almacenes</a> por
+        <a href="http://facebook.com/juliocesarcsc/" target="_blank">Julio Cesar Cusc&oacute; Alema&ntilde;y</a>
     </div>
     <!-- /footer -->
 

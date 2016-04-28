@@ -4,10 +4,11 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('control_inventario.app',
-   url(r'^$', 'auth.views.index', name='index'),
+    url(r'^$', 'auth.views.index', name='index'),
+    url(r'^usuario/change-pass$', 'auth.views.change_pass', name='change_pass'),
    #login
-   url(r'^ingresar/$','auth.views.ingresar', name='ingresar'),
-   url(r'^cerrar/$','auth.views.cerrar_session', name='cerrar'),
+    url(r'^ingresar/$','auth.views.ingresar', name='ingresar'),
+    url(r'^cerrar/$','auth.views.cerrar_session', name='cerrar'),
    # urls-empresa
     url(r'^empresa/$', 'empresa.views.empresa', name='empresa'),
     url(r'^empresa/del$', 'empresa.views.del_empresa', name='del_empresa'),
